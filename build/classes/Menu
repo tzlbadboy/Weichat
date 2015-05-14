@@ -1,0 +1,34 @@
+{
+    "button": [
+        {
+            "type": "click", 
+            "name": "菜单一", 
+            "key": "menu_1"
+        }, 
+        {
+            "type": "click", 
+            "name": "菜单二", 
+            "key": "menu_2"
+        }, 
+        {
+            "name": "菜单三", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "搜索", 
+                    "url": "http://www.soso.com/"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "视频", 
+                    "url": "http://v.qq.com/"
+                }, 
+                {
+                    "type": "click", 
+                    "name": "赞一下我们", 
+                    "key": "menu_3_3"
+                }
+            ]
+        }
+    ]
+}

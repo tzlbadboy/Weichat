@@ -89,7 +89,18 @@ public class CoreService {
                 }  
                 // 自定义菜单点击事件  
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {  
-                    // TODO 自定义菜单权没有开放，暂不处理该类消息  
+                	// 事件KEY值，与创建自定义菜单时指定的KEY值对应  
+                    String eventKey = requestMap.get("EventKey"); 
+                    // 自定义菜单点击事件  
+                    if (eventKey.equals("menu_1")) {  
+                        respContent = "菜单一被点击！";  
+                    }
+                    else if (eventKey.equals("menu_2")) {  
+                        respContent = "菜单二被点击！";  
+                    }  
+                    else if(eventKey.equals("menu_3_3")) {
+                    	respContent = "菜单三点赞按钮被点击！"; 
+                    }
                 }  
             }  
   
