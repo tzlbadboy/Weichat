@@ -1,4 +1,4 @@
-﻿package nju.iip.dto;
+﻿package nju.iip.util;
 
 
 import java.io.InputStream;
@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import nju.iip.dto.TextMessage;
 
 import org.dom4j.Document;
 import org.dom4j.Element;

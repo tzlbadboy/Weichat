@@ -2,11 +2,9 @@
 
 import java.util.Date;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import nju.iip.dto.MessageUtil;
 import nju.iip.dto.TextMessage;
+import nju.iip.util.MessageUtil;
 
 /** 
  * 核心服务类 
