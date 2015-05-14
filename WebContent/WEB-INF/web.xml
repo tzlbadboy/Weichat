@@ -11,7 +11,7 @@
   </welcome-file-list>
   
    <servlet>  
-        <servlet-name>coreServlet</servlet-name>  
+        <servlet-name>CoreServlet</servlet-name>  
         <servlet-class>  
             nju.iip.servlet.CoreServlet  
         </servlet-class>  
@@ -19,8 +19,8 @@
     
     <!-- url-pattern中配置的/coreServlet用于指定该Servlet的访问路径 -->  
     <servlet-mapping>  
-        <servlet-name>coreServlet</servlet-name>  
-        <url-pattern>/coreServlet</url-pattern>  
+        <servlet-name>CoreServlet</servlet-name>  
+        <url-pattern>/CoreServlet</url-pattern>  
     </servlet-mapping>   
   
   
