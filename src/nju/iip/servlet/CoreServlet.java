@@ -11,6 +11,7 @@ import nju.iip.util.SignUtil;
 
 
 /**
+ * 
  * @author wangqiang
  */
 public class CoreServlet extends HttpServlet {
