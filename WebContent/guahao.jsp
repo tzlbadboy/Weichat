@@ -5,6 +5,6 @@
 <title>挂号页面</title>
 </head>
 <body>
-<h1>欢迎进入挂号页面！</h1>
+<h1 style="font-size:200%">欢迎进入挂号页面！</h1>
 </body>
 </html>

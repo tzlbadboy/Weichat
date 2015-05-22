@@ -2,7 +2,7 @@
 <%@ page import="nju.iip.dto.WeixinUser;"%>
 <html>
 <head>
-	<title>OAuth2.0网页授权</title>
+	<title>用户信息</title>
 	<meta name="viewport" content="width=device-width,user-scalable=0">
 	<style type="text/css">
 		*{margin:0; padding:0}
