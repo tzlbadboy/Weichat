@@ -3,7 +3,7 @@ package nju.iip.dto;
 /**
  * 网页授权信息
  * 
- * @author liufeng
+ * @author mrpod2g
  * @date 2013-11-09
  */
 public class WeixinOauth2Token {

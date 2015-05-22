@@ -15,7 +15,7 @@
 
 <body>
 <div class="wrap">
-<form  action="AddUserServlet" methed="post">
+<form  action="RegisterServlet" methed="post">
 	<div class="bgfff form ov">
 		<div class="fb">请填写认证资料：</div>
          <ul class="cb">

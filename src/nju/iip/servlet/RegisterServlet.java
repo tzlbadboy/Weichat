@@ -14,14 +14,14 @@ import nju.iip.dto.WeixinUser;
  * @author wangqiang
  *
  */
-@WebServlet(name = "AddUserServlet", urlPatterns = { "/AddUserServlet" })
-public class AddUserServlet extends HttpServlet {
+@WebServlet(name = "RegisterServlet", urlPatterns = { "/RegisterServlet" })
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddUserServlet() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

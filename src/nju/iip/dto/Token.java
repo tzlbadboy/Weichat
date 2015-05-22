@@ -4,7 +4,7 @@ package nju.iip.dto;
 /**
  * 凭证
  * 
- * @author liufeng
+ * @author mrpod2g
  * @date 2013-10-17
  */
 public class Token {

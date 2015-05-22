@@ -32,14 +32,14 @@
   </servlet-mapping>
   
   <servlet>
-    <servlet-name>AddUserServlet</servlet-name>
+    <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>  
-            nju.iip.servlet.AddUserServlet  
+            nju.iip.servlet.RegisterServlet  
         </servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddUserServlet</servlet-name>
-    <url-pattern>/AddUserServlet</url-pattern>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
   
 </web-app>
