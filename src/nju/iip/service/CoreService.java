@@ -2,7 +2,10 @@
 
 import java.util.Date;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
+import nju.iip.dao.impl.UserDaoImpl;
 import nju.iip.dto.TextMessage;
 import nju.iip.util.MessageUtil;
 
@@ -81,7 +84,7 @@ public class CoreService {
                 String eventType = requestMap.get("Event");  
                 // 订阅  
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {  
-                    respContent = "谢谢您的关注"+"/::)"+"\n"+"1.直接输入文字开始调戏我~\n2.发送一张清晰的照片，就能帮你分析出种族、年龄、性别等信息";  
+                    respContent = "谢谢您的关注"+"/::)"+"\n"+"1.直接输入文字与我对话~\n2.发送一张清晰的照片，就能帮你分析出种族、年龄、性别等信息";  
                 }  
                 // 取消订阅  
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {  
@@ -92,24 +95,22 @@ public class CoreService {
                 	// 事件KEY值，与创建自定义菜单时指定的KEY值对应  
                     String eventKey = requestMap.get("EventKey"); 
                     // 自定义菜单点击事件  
-                    if (eventKey.equals("menu_1")) {  
-                        respContent = "菜单一被点击！";  
-                    }
-                    else if (eventKey.equals("menu_2")) {  
-                        respContent = "菜单二被点击！";  
-                    }  
-                    else if(eventKey.equals("menu_3_3")) {
-                    	respContent = "菜单三点赞按钮被点击！"; 
+                    if(eventKey.equals("menu_3_3")) {
+                    	//fromUserName就是openid
+                    	if(UserDaoImpl.deleteUser(fromUserName)) {
+                    		respContent = "解绑成功！"; 
+                    	}
+                    	else {
+                    		respContent = "解绑失败！"; 
+                    	}
                     }
                 }  
             }  
-  
             textMessage.setContent(respContent);  
             respMessage = MessageUtil.textMessageToXml(textMessage);  
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
-  
         return respMessage;  
     }  
 }  

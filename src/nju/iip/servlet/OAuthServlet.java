@@ -1,21 +1,20 @@
 package nju.iip.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import nju.iip.dto.SNSUserInfo;
+import nju.iip.dao.impl.UserDaoImpl;
 import nju.iip.dto.WeixinOauth2Token;
+import nju.iip.dto.WeixinUser;
 import nju.iip.util.AdvancedUtil;
 
 
 /**
  * 授权后的回调请求处理
  * 
- * @author liufeng
+ * @author mrpod2g
  * @date 2013-11-12
  */
 public class OAuthServlet extends HttpServlet {
@@ -30,6 +29,14 @@ public class OAuthServlet extends HttpServlet {
 		String code = request.getParameter("code");
 		
 		System.out.println("code="+code);
+		
+		
+		// 用户同意授权后，能获取到state
+		String state = request.getParameter("state");
+				
+		System.out.println("state="+state);
+		
+		boolean flag = false;
 
 		// 用户同意授权
 		if (!"authdeny".equals(code)) {
@@ -42,13 +49,44 @@ public class OAuthServlet extends HttpServlet {
 			
 			System.out.println("openId="+openId);
 			
+			//检查用户是否已绑定
+			flag = UserDaoImpl.checkBind(openId);
+			
 			// 获取用户信息
-			SNSUserInfo snsUserInfo = AdvancedUtil.getSNSUserInfo(accessToken, openId);
+			WeixinUser snsUserInfo = AdvancedUtil.getWeixinUserInfo(accessToken, openId);
+			
+			WeixinUser user = UserDaoImpl.getUser(openId);
+			
+			snsUserInfo.setName(user.getName());
+			snsUserInfo.setCardID(user.getCardID());
+			snsUserInfo.setPhone(user.getPhone());
 
 			// 设置要传递的参数
 			request.setAttribute("snsUserInfo", snsUserInfo);
+			
+			request.getSession().setAttribute("openId", openId);
 		}
-		// 跳转到index.jsp
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		
+		if(flag) {
+			
+			if(state.equals("guahao")) {
+				request.getRequestDispatcher("guahao.jsp").forward(request, response);
+			}
+			
+			else if(state.equals("weixin")) {
+				// 跳转到index.jsp
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+			
+			else if(state.equals("liangbiao")) {
+				request.getRequestDispatcher("question.jsp").forward(request, response);
+			}
+			
+		}
+		
+		else {
+			request.getRequestDispatcher("register.jsp").forward(request, response);
+		}
+		
 	}
 }

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
-<title>jQuery在线问卷答题系统代码 </title>
+<title>在线量表评测 </title>
 
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 
@@ -33,7 +33,7 @@ $(function(){
 	<div id='quiz-container'></div>
 </div>
 
-<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<div style="text-align:center;margin:10px 0; font:normal 14px/24px 'MicroSoft YaHei';">
 
 </div>
 </body>

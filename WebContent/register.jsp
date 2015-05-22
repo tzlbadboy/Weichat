@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -15,23 +15,23 @@
 
 <body>
 <div class="wrap">
-<form>
+<form  action="AddUserServlet" methed="post">
 	<div class="bgfff form ov">
 		<div class="fb">请填写认证资料：</div>
          <ul class="cb">
                <li>
             	<div class="fl la_bg tc"><label for="name" class="lable">您的姓名</label></div>
-                <div class="fl l_r"><input type="text" required id="name" class="w_img95 i_bor"></div>
+                <div class="fl l_r"><input name="name" type="text" required id="name" class="w_img95 i_bor"></div>
                </li>
                
                <li>
             	<div class="fl la_bg tc"><label for="name" class="lable">病历号</label></div>
-                <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                <div class="fl l_r"><input name="cardId" type="text" id="name" required class="w_img95 i_bor"></div>
                </li>
                
                <li>
             	<div class="fl la_bg tc"><label for="name" class="lable">手机号码</label></div>
-                <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                <div class="fl l_r"><input name="phone" type="text" id="name" required class="w_img95 i_bor"></div>
                </li>
                <!--  
                <li>
