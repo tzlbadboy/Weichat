@@ -42,7 +42,6 @@
          </ul>
           <div class="cb pt20"><input type="submit" id="tijiao" value="提交信息"   class="but"></div>
     </div>
-    
 </form>  
 <!-- 
 <footer class="mt60">
