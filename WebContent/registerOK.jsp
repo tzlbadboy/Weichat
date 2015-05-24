@@ -5,6 +5,6 @@
 <title>注册成功！</title>
 </head>
 <body>
-<h1 style="font-size:200%">注册成功！</h1>
+<h1 style="font-size:400%">注册成功！</h1>
 </body>
 </html>

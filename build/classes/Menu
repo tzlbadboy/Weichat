@@ -8,6 +8,12 @@
                     "type": "view", 
                     "name": "预约挂号", 
                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=guahao#wechat_redirect"
+              },
+              
+              {
+                    "type": "view", 
+                    "name": "我的挂号", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=guahao#wechat_redirect"
               }
             
             
@@ -22,6 +28,21 @@
                     "type": "view", 
                     "name": "填写量表", 
                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=liangbiao#wechat_redirect"
+             },
+             {
+                    "type": "view", 
+                    "name": "我的账单", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=liangbiao#wechat_redirect"
+             },
+             {
+                    "type": "view", 
+                    "name": "我的病历", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=liangbiao#wechat_redirect"
+             },
+             {
+                    "type": "view", 
+                    "name": "我的住院", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=liangbiao#wechat_redirect"
              }
             
             
@@ -31,13 +52,7 @@
         {
             "name": "互动", 
             "sub_button": [
-                {
-                    "type": "view", 
-                    "name": "搜索", 
-                    "url": "http://www.soso.com/"
-                }, 
    
-                
                 {
                     "type": "view", 
                     "name": "我的信息", 
@@ -48,6 +63,12 @@
                     "type": "click", 
                     "name": "解除绑定", 
                     "key": "menu_3_3"
+                },
+                
+                 {
+                    "type": "view", 
+                    "name": "关于IIP", 
+                    "url": "http://iip.nju.edu.cn/"
                 }
             ]
         }
