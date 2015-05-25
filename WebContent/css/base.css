@@ -1,10 +1,9 @@
-﻿/* 
-底层结构样式表 base.css 
+/* 
+�ײ�ṹ��ʽ�� base.css 
 */
-/* reset 初始化 Based on work by Eric Meyer */
+/* reset ��ʼ�� Based on work by Eric Meyer */
 html, body, div, span, iframe,h1, h2, h3, h4, h5, h6,p,pre,a,del, em, font, ins, q, s, samp,dl, dt, dd, ol, ul, li, form, label, legend, caption,textarea, tbody{
 	border: 0;
-	margin: 0;
 	outline: 0;
 	padding: 0;
 
@@ -37,10 +36,10 @@ h1,h2,h3,h4,h5,h6{font-weight:700}
 strong{font-weight:700}
 cite,em{font-style:normal}
 i{font-style:italic}
-img{vertical-align:middle/* 此样式会控制前端图片属性所以去掉*/ }
+img{vertical-align:middle/* ����ʽ�����ǰ��ͼƬ��������ȥ��*/ }
 
 
-/* 文字排版 */
+/* �����Ű� */
 .f12{font-size:12px}
 .f13{font-size:13px}
 .f14{font-size:14px}
@@ -57,10 +56,10 @@ img{vertical-align:middle/* 此样式会控制前端图片属性所以去掉*/ }
 .unl{text-decoration:underline}
 .no_unl{text-decoration:none}
 .arial{font-family:arial}
-.simsun{font-family:'宋体'}
-.yahei{font-family:'微软雅黑'}
+.simsun{font-family:'����'}
+.yahei{font-family:'΢���ź�'}
 
-/* 字体颜色 */
+/* ������ɫ */
 .white{color:white}
 .red{color:red}
 .green{color:green}
@@ -81,7 +80,7 @@ img{vertical-align:middle/* 此样式会控制前端图片属性所以去掉*/ }
 .c_ee3{color:#ee3300}
 .c_70{color:#707070}
 .c_156{color:#15627e}
-/* 定位 */
+/* ��λ */
 .tl{text-align:left}
 .tc{text-align:center}
 .tr{text-align:right}
@@ -108,7 +107,7 @@ img{vertical-align:middle/* 此样式会控制前端图片属性所以去掉*/ }
 .none{display:none}
 .icon{ background:url(../images/bg/sprite.png) no-repeat; display:block;}
 
-/* 长度 */
+/* ���� */
 .w{width:100%}
 .w10{width:10px}
 .w20{width:20px}
@@ -135,7 +134,7 @@ img{vertical-align:middle/* 此样式会控制前端图片属性所以去掉*/ }
 
 
 
-/* 边距 5 10 15 20 25 30 */
+/* �߾� 5 10 15 20 25 30 */
 .m5{margin:5px}
 .m10{margin:10px}
 .m15{margin:15px}
