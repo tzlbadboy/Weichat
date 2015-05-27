@@ -5,6 +5,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import nju.iip.dao.impl.UserDaoImpl;
 import nju.iip.dto.WeixinOauth2Token;
 import nju.iip.dto.WeixinUser;
@@ -18,6 +22,8 @@ import nju.iip.util.AdvancedUtil;
  * @date 2013-11-12
  */
 public class OAuthServlet extends HttpServlet {
+	 private static final Logger logger = LoggerFactory.getLogger(OAuthServlet.class);
+	
 	private static final long serialVersionUID = -1847238807216447030L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,13 +34,13 @@ public class OAuthServlet extends HttpServlet {
 		// 用户同意授权后，能获取到code
 		String code = request.getParameter("code");
 		
-		System.out.println("code="+code);
+		logger.info("code="+code);
 		
 		
 		// 用户同意授权后，能获取到state
 		String state = request.getParameter("state");
 				
-		System.out.println("state="+state);
+		logger.info("state="+state);
 		
 		boolean flag = false;
 
@@ -47,7 +53,7 @@ public class OAuthServlet extends HttpServlet {
 			// 用户标识
 			String openId = weixinOauth2Token.getOpenId();
 			
-			System.out.println("openId="+openId);
+			logger.info("openId="+openId);
 			
 			//检查用户是否已绑定
 			flag = UserDaoImpl.checkBind(openId);

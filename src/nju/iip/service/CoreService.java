@@ -5,8 +5,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import nju.iip.dao.impl.UserDaoImpl;
 import nju.iip.dto.TextMessage;
+import nju.iip.servlet.OAuthServlet;
 import nju.iip.util.MessageUtil;
 
 /** 
@@ -15,6 +19,9 @@ import nju.iip.util.MessageUtil;
  * @author mrpod2g
  */  
 public class CoreService {  
+	
+	private static final Logger logger = LoggerFactory.getLogger(OAuthServlet.class);
+	
     /** 
      * 处理微信发来的请求 
      *  
@@ -32,15 +39,15 @@ public class CoreService {
   
             // 发送方帐号（open_id）  
             String fromUserName = requestMap.get("FromUserName");  
-            System.out.println("fromUserName="+fromUserName);
+            logger.info("fromUserName="+fromUserName);
             
             // 公众帐号  
             String toUserName = requestMap.get("ToUserName");  
-            System.out.println("toUserName="+toUserName);
+            logger.info("toUserName="+toUserName);
             
             // 消息类型  
             String msgType = requestMap.get("MsgType");  
-            System.out.println("msgType="+msgType);
+            logger.info("msgType="+msgType);
             
   
             // 回复文本消息  
@@ -54,14 +61,14 @@ public class CoreService {
             // 文本消息  
             if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {  
             	String Content = requestMap.get("Content");
-            	System.out.println("Content="+Content);
+            	logger.info("Content="+Content);
                 respContent = RobotService.getRobotReply(Content);
             }  
             // 图片消息  
             else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {  
             	// 取得图片地址  
                 String picUrl = requestMap.get("PicUrl");  
-                System.out.println("picUrl="+picUrl);
+                logger.info("picUrl="+picUrl);
                 // 人脸检测  
                 String detectResult = FaceService.detect(picUrl);  
                 respContent = detectResult; 

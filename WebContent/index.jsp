@@ -16,7 +16,7 @@
 		WeixinUser user = (WeixinUser)request.getAttribute("snsUserInfo"); 
 		if(null != user) {
 	%>
-	<table width="100%" cellspacing="0" cellpadding="0">
+	<table>
 		<tr><td width="20%">属性</td><td width="80%">值</td></tr>
 		<tr><td>OpenID</td><td><%=user.getOpenId()%></td></tr>
 		<tr><td>昵称</td><td><%=user.getNickname()%></td></tr>

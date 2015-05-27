@@ -159,7 +159,7 @@
             score,
             url;
             if (config.shortURL === null) {
-                config.shortURL = window.location
+                config.shortURL = window.location;
             };
             for (var i = 0,
             toLoopTill = results.length; i < toLoopTill; i++) {
