@@ -66,7 +66,7 @@ a:focus,a:active{color:inherit}
 
 .nobut{color:#a0a0a0; background:#ebebeb; width:100%; border:1px solid #bababa; height:34px; font-family:'微软雅黑'; border-radius:5px; text-align:center;}
 .but{color:#fff; background:#f19a16; width:100%; border:1px solid #e67c00; height:34px; font-family:'微软雅黑'; border-radius:5px; text-align:center;}
-
+.but2{color:#fff; background:#0a86ce; width:100%; border:1px solid #0a86ce; height:34px; font-family:'微软雅黑'; border-radius:5px; text-align:center;}
 .b_r1{border-radius:5px; padding:8px; border:1px dashed #60b1e1;}
 .fc1{color:#49ace6; font-size:12px;}
 .bort{border-top:1px solid #c3c3c3;}

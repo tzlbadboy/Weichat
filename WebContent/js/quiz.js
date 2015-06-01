@@ -57,7 +57,7 @@
         function checkAnswers() {
             var resultArr = [],
             flag = false;
-            for (i = 0; i < answers.length; i++) {
+            for (var i = 0; i < answers.length; i++) {
                 if (answers[i] == userAnswers[i]) {
                     flag = true;
                 } else {
@@ -72,7 +72,7 @@
             return result;
         }
         function judgeSkills(score) {
-            var returnString;
+            //var returnString;
             if (score === 100) return config.resultComments.perfect;
             else if (score > 90) return config.resultComments.excellent;
             else if (score > 70) return config.resultComments.good;
@@ -139,7 +139,7 @@
             });
             if (config.sendResultsURL !== null) {
                 var collate = [];
-                for (r = 0; r < userAnswers.length; r++) {
+                for (var r = 0; r < userAnswers.length; r++) {
                     collate.push('{"questionNumber":"' + parseInt(r + 1, 10) + '", "userAnswer":"' + userAnswers[r] + '"}');
                 }
                 $.ajax({
@@ -156,8 +156,7 @@
             resultSet = '',
             trueCount = 0,
             shareButton = '',
-            score,
-            url;
+            score;
             if (config.shortURL === null) {
                 config.shortURL = window.location;
             };
