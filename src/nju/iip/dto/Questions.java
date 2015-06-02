@@ -3,6 +3,11 @@ package nju.iip.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 量表题目对应的JavaBean
+ * @author wangqiang
+ *
+ */
 public class Questions {
 	
 	String question;

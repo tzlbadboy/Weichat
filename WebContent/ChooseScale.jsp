@@ -18,7 +18,7 @@
          <ul class="cb">
                <li>
                <form action="GetScaleServlet" method="GET">
-                <input name="totalScaleId" value="125" type="hidden" />
+                <input name="totalScaleId" value="115" type="hidden" />
             	<div class="cb pt20"><input  type="submit"  value="量表一"   class="but2" /></div>
                </form>
                </li>

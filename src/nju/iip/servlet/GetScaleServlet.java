@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import nju.iip.dao.impl.ScaleDaoImpl;
 import nju.iip.dto.Questions;
+import nju.iip.dto.Scale;
 
 /**
  * 
@@ -37,11 +38,12 @@ public class GetScaleServlet extends HttpServlet {
 		String totalScaleId = request.getParameter("totalScaleId");
 		System.out.println("totalScaleId="+totalScaleId);
 		String jsonStr = "";
-			
+		Scale scale = ScaleDaoImpl.getScale(Integer.valueOf(totalScaleId));	
 	    List<Questions> list = ScaleDaoImpl.getQuestions(ScaleDaoImpl.getQuestionId(Integer.valueOf(totalScaleId)));
 	    JSONObject json = new JSONObject();
 	    try {
 			json.put("questions", list);
+			json.put("scale", new JSONObject(scale));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

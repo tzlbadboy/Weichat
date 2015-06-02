@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
@@ -26,7 +26,7 @@
 var init = <%=str%>;
 $(function(){
 	$('#quiz-container').jquizzy({
-        questions: init.questions
+        questions: init.questions,name: init.scale.scaleDescription
     });
 });
 </script>

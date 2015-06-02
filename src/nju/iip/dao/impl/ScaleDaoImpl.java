@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nju.iip.dto.Questions;
+import nju.iip.dto.Scale;
 import nju.iip.util.DBConnection;
 
 /**
@@ -89,6 +90,31 @@ public class ScaleDaoImpl {
 		return question_list;
 	}
 	
+	/**
+	 * 根据totalScaleId 从parkinsontotalscale表中取出对应量表的信息
+	 * @param totalScaleId
+	 * @return scale
+	 */
+	public static Scale getScale(int totalScaleId) {
+		Scale scale = new Scale();
+		conn = DBConnection.getConn();
+		String sql = "select * from parkinsontotalscale where id='"+totalScaleId+"'";
+		try {
+			sm=conn.createStatement();
+			rs=sm.executeQuery(sql);
+			if(rs.next()) {
+				scale.setScaleName(rs.getString("scaleName"));
+				scale.setScaleDescription(rs.getString("scaleDescription"));
+				scale.setShortname(rs.getString("shortname"));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			closeDB();
+		}
+		return scale;
+	}
 	
 	
 	
@@ -128,7 +154,7 @@ public class ScaleDaoImpl {
 	
 	
 	public static void main(String[] args) {
-		System.out.println(getQuestions(getQuestionId(125)).size());
+		System.out.println(getScale(125).getScaleName());
 	}
 
 }
