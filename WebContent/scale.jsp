@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
-<title>量表评测</title>
+<title></title>
 
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 
@@ -24,6 +24,7 @@
   %>
 <script type="text/javascript">
 var init = <%=str%>;
+$("title").html(init.scale.scaleName); 
 $(function(){
 	$('#quiz-container').jquizzy({
         questions: init.questions,name: init.scale.scaleDescription
