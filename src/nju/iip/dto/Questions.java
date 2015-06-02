@@ -1,12 +1,13 @@
 package nju.iip.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Questions {
 	
 	String question;
 	
-	List<String> answers;
+	List<String> answers = new ArrayList<String>();
 	
 	int correctAnswer;
 
@@ -23,8 +24,8 @@ public class Questions {
 		return answers;
 	}
 
-	public void setAnswers(List<String> answers) {
-		this.answers = answers;
+	public void setAnswers(List<String> options) {
+		this.answers.addAll(options);
 	}
 
 	public int getCorrectAnswer() {

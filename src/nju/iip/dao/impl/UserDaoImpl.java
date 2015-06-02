@@ -11,7 +11,7 @@ import nju.iip.util.DBConnection;
 
 
 /**
- * 
+ * 与用户有关的数据库操作
  * @author wangqiang
  *
  */
@@ -69,7 +69,11 @@ public class UserDaoImpl {
 		}
 	}
 	
-	
+	/**
+	 * 根据openid获得用户的信息
+	 * @param openid
+	 * @return
+	 */
 	public static WeixinUser getUser(String openid) {
 		WeixinUser user = new WeixinUser();
 		String sql = "select * from weixin where openid='"+openid+"'";

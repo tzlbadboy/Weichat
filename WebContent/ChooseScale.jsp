@@ -17,22 +17,22 @@
      <div class="fb">请选择一张量表：</div>
          <ul class="cb">
                <li>
-               <form action="http://114.212.87.24:8080/Weichat/GetScaleServlet" method="GET">
-                <input name="id" value="1" type="hidden" />
-            	<div class="cb pt20"><input  type="submit" id="tijiao1" value="量表一"   class="but2" /></div>
+               <form action="GetScaleServlet" method="GET">
+                <input name="totalScaleId" value="125" type="hidden" />
+            	<div class="cb pt20"><input  type="submit"  value="量表一"   class="but2" /></div>
                </form>
                </li>
                <li>
-               <form action="http://114.212.87.24:8080/Weichat/GetScaleServlet" method="GET" />
-                <input name="id" value="2" type="hidden" />
-            	<div class="cb pt20"><input  type="submit" id="tijiao2" value="量表二"   class="but2"></div>
+               <form action="GetScaleServlet" method="GET">
+                <input name="totalScaleId" value="2" type="hidden" />
+            	<div class="cb pt20"><input  type="submit"  value="量表二"   class="but2"></div>
                </form>
                </li>
                
                <li>
-               <form action="http://114.212.87.24:8080/Weichat/GetScaleServlet" method="GET" >
-                <input name="id" value="3" type="hidden" />
-            	<div class="cb pt20"><input  type="submit" id="tijiao3" value="量表三"   class="but2"/></div>
+               <form action="GetScaleServlet" method="GET" >
+                <input name="totalScaleId" value="3" type="hidden" />
+            	<div class="cb pt20"><input  type="submit"  value="量表三"   class="but2"/></div>
                </form>
                </li>
                
