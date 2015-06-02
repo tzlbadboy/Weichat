@@ -19,7 +19,6 @@
     <servlet-name>CoreServlet</servlet-name>
     <url-pattern>/CoreServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>OAuthServlet</servlet-name>
     <servlet-class>  
@@ -30,7 +29,6 @@
     <servlet-name>OAuthServlet</servlet-name>
     <url-pattern>/OAuthServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>  
@@ -42,4 +40,14 @@
     <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>GetScaleServlet</servlet-name>
+    <servlet-class>  
+            nju.iip.servlet.GetScaleServlet  
+        </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetScaleServlet</servlet-name>
+    <url-pattern>/GetScaleServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

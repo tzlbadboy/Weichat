@@ -4,8 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.net.ConnectException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -84,5 +87,38 @@ public class CommonUtil {
 		}
 		return jsonObject;
 	}
+	
+	 /** 
+     * 将javaBean转换成Map 
+     * 
+     * @param javaBean javaBean 
+     * @return Map对象 
+     */ 
+    public static Map<String, String> toMap(Object javaBean) 
+    { 
+        Map<String, String> result = new HashMap<String, String>(); 
+        Method[] methods = javaBean.getClass().getDeclaredMethods(); 
+
+        for (Method method : methods) 
+        { 
+            try 
+            { 
+                if (method.getName().startsWith("get")) 
+                { 
+                    String field = method.getName(); 
+                    field = field.substring(field.indexOf("get") + 3); 
+                    field = field.toLowerCase().charAt(0) + field.substring(1); 
+
+                    Object value = method.invoke(javaBean, (Object[])null); 
+                    result.put(field, null == value ? "" : value.toString()); 
+                } 
+            } 
+            catch (Exception e) 
+            { 
+            } 
+        } 
+
+        return result; 
+    } 
 
 }

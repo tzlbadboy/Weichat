@@ -83,7 +83,7 @@
         }
         progressKeeper.hide();
         notice.hide();
-        slidesList.hide().first().fadeIn(500);
+        slidesList.hide().first().fadeIn(200);
         superContainer.find('li').click(function() {
             var thisLi = $(this);
             if (thisLi.hasClass('selected')) {
@@ -94,20 +94,20 @@
             }
         });
         superContainer.find('.nav-start').click(function() {
-            $(this).parents('.slide-container').fadeOut(500,
+            $(this).parents('.slide-container').fadeOut(200,
             function() {
-                $(this).next().fadeIn(500);
-                progressKeeper.fadeIn(500);
+                $(this).next().fadeIn(200);
+                progressKeeper.fadeIn(200);
             });
             return false;
         });
         superContainer.find('.next').click(function() {
             if ($(this).parents('.slide-container').find('li.selected').length === 0) {
-                notice.fadeIn(300);
+                notice.fadeIn(200);
                 return false;
             }
             notice.hide();
-            $(this).parents('.slide-container').fadeOut(500,
+            $(this).parents('.slide-container').fadeOut(200,
             function() {
                 $(this).next().fadeIn(500);
             });
@@ -119,9 +119,9 @@
         });
         superContainer.find('.prev').click(function() {
             notice.hide();
-            $(this).parents('.slide-container').fadeOut(500,
+            $(this).parents('.slide-container').fadeOut(200,
             function() {
-                $(this).prev().fadeIn(500);
+                $(this).prev().fadeIn(200);
             });
             progress.animate({
                 width: progress.width() - Math.round(progressWidth / questionLength)
@@ -131,7 +131,7 @@
         });
         superContainer.find('.final').click(function() {
             if ($(this).parents('.slide-container').find('li.selected').length === 0) {
-                notice.fadeIn(300);
+                notice.fadeIn(200);
                 return false;
             }
             superContainer.find('li.selected').each(function(index) {
@@ -192,9 +192,9 @@
             function() {
                 $(this).find('.resultsview-qhover').hide();
             });
-            $(this).parents('.slide-container').fadeOut(500,
+            $(this).parents('.slide-container').fadeOut(200,
             function() {
-                $(this).next().fadeIn(500);
+                $(this).next().fadeIn(200);
             });
             return false;
         });

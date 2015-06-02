@@ -1,3 +1,4 @@
+﻿<%@ page language="java" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -18,9 +19,11 @@
 <script type="text/javascript" src="js/quiz.js"></script>
 <link type="text/css" rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" type="text/css" href="css/common.css">
+  <% 
+		String str = (String)request.getAttribute("questions"); 
+  %>
 <script type="text/javascript">
-var init={'questions':[{'question':'1.焦虑心境：担心、担忧，感到有最坏的事情将要发生，容易激惹 ','answers':['无症状','轻','中等','严重'],'correctAnswer':1},{'question':'2.紧张：紧张感，易疲劳，不能放松，情绪反应，易哭、颤抖、感到不安 ','answers':['无症状','轻','中等','严重'],'correctAnswer':3},{'question':'3.害怕：害怕黑暗，陌生人，一人独处，动物，乘车或旅行及人多的场合 ','answers':['无症状','轻','中等','严重'],'correctAnswer':3},{'question':'4.失眠：难以入睡，易醒，多梦、梦魇，夜惊、醒后感疲倦 ','answers':['无症状','轻','中等','严重'],'correctAnswer':2}]};
-
+var init = <%=str%>;
 $(function(){
 	$('#quiz-container').jquizzy({
         questions: init.questions
@@ -28,9 +31,8 @@ $(function(){
 });
 </script>
 </head>
-
 <body>
-
+  
 <div class="demo">
 	<div id='quiz-container'></div>
 </div>

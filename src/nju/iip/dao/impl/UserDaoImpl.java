@@ -22,7 +22,6 @@ public class UserDaoImpl {
 	 static ResultSet rs = null;
 	 static PreparedStatement ps = null;
 	
-	
 	/**
 	 * 通过openid判断用户是否绑定微信
 	 * @param openid
@@ -40,29 +39,7 @@ public class UserDaoImpl {
 				e.printStackTrace();
 				}
 			finally {
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-
-				if (sm != null) {
-					try {
-						sm.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
+				closeDB();
 			}
 		 return flag;
 	}
@@ -82,27 +59,13 @@ public class UserDaoImpl {
 			ps.setString(2, user.getCardID());
 			ps.setString(3, user.getName());
 			ps.setString(4, user.getPhone());
-			
 			return ps.executeUpdate() == 1 ? true : false;
 		}catch (SQLException e) {
 
 			e.printStackTrace();
 			return false;
 		} finally {
-			if (ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
+			closeDB();
 		}
 	}
 	
@@ -126,30 +89,8 @@ public class UserDaoImpl {
 			e.printStackTrace();
 			}
 		finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (sm != null) {
-				try {
-					sm.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			closeDB();
 		}
-		
 		return user;
 	}
 	
@@ -171,19 +112,40 @@ public class UserDaoImpl {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if (ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			closeDB();
+		}
+	}
+	
+	/**
+	 * 关闭数据库
+	 */
+	public static void closeDB() {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+		}
+		if (sm != null) {
+			try {
+				sm.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (ps != null) {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 	}

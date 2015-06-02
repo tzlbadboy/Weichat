@@ -82,7 +82,7 @@ public class OAuthServlet extends HttpServlet {
 			}
 			
 			else if(state.equals("liangbiao")){
-				request.getRequestDispatcher("ChooseTable.html").forward(request, response);
+				request.getRequestDispatcher("ChooseScale.jsp").forward(request, response);
 			}
 			
 			else {
