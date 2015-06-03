@@ -28,11 +28,20 @@
 			for(Map<String, String> map:record_listList) {
 	%>
 	<div class="bgfff form ov">
-	<table>
-		<tr><td>量表名称</td><td><%=map.get("scaleName")%></td></tr>
-		<tr><td>得分</td><td><%=map.get("score")%></td></tr>
-		<tr><td>填写时间</td><td><%=map.get("time")%></td></tr>
-	</table>
+	 <ul class="cb">
+	<li>
+	<div class="fl la_bg tc"><label for="name" class="lable">量表名称</label></div>
+	<div class="fl l_r">&nbsp;&nbsp;<%=map.get("scaleName")%></div>
+	</li>
+	<li>
+	<div class="fl la_bg tc"><label for="name" class="lable">得分</label></div>
+	<div class="fl l_r">&nbsp;&nbsp;<%=map.get("score")%></div>
+	</li>
+	<li>
+	<div class="fl la_bg tc"><label for="name" class="lable">填写时间</label></div>
+	<div class="fl l_r" >&nbsp;&nbsp;<%=map.get("time")%></div>
+	</li>
+    </ul>
 	</div>
 	<%
 		     }

@@ -44,7 +44,7 @@ a:focus,a:active{color:inherit}
 .form ul{}
 .form ul li{clear:both; padding-top:20px;}
 .la_bg{background:#0a86ce;border-radius:5px 0 0 5px; width:29%; height:30px; line-height:28px;}
-.l_r{height:28px; line-height:27px; border-top:1px solid #cacaca; border-right:1px solid #cacaca; border-bottom:1px solid #cacaca; border-radius:0 5px 5px 0; width:70%;}
+.l_r{text-align: center;height:28px; line-height:27px; border-top:1px solid #cacaca; border-right:1px solid #cacaca; border-bottom:1px solid #cacaca; border-radius:0 5px 5px 0; width:70%;}
 .check{width:29%; height:30px; line-height:28px;}
 .check_r{height:28px; line-height:27px; border:1px solid #cacaca; border-radius:5px; width:50%;}
 .check_span{width:50px; height:35px; color:#ba7d00; border-radius:5px; background:#efd7a6; text-align:center; margin-top:-2px; font-size:12px; padding:2px; cursor:pointer; line-height:18px;}
