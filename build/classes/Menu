@@ -31,18 +31,18 @@
              },
              {
                     "type": "view", 
-                    "name": "我的账单", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=liangbiao#wechat_redirect"
+                    "name": "量表记录", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=jilu#wechat_redirect"
              },
              {
                     "type": "view", 
                     "name": "我的病历", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=liangbiao#wechat_redirect"
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=bingli#wechat_redirect"
              },
              {
                     "type": "view", 
                     "name": "我的住院", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=liangbiao#wechat_redirect"
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=zhuyuan#wechat_redirect"
              }
             
             

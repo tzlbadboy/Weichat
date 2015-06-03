@@ -17,7 +17,7 @@ import nju.iip.dto.WeixinUser;
  */
 public class RegisterServlet extends HttpServlet {
 	
-	private static final Logger logger = LoggerFactory.getLogger(OAuthServlet.class);
+	private static final Logger logger = LoggerFactory.getLogger(RegisterServlet.class);
 	
 	private static final long serialVersionUID = 1L;
        

@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GetAnswerServlet extends HttpServlet {
 	
-	 private static final Logger logger = LoggerFactory.getLogger(OAuthServlet.class);
+	 private static final Logger logger = LoggerFactory.getLogger(GetAnswerServlet.class);
 	
 	private static final long serialVersionUID = 1L;
        

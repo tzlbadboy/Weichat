@@ -86,6 +86,9 @@ public class OAuthServlet extends HttpServlet {
 				request.getRequestDispatcher("ChooseScale.jsp").forward(request, response);
 			}
 			
+			else if(state.equals("jilu")) {
+				request.getRequestDispatcher("ScaleRecordServlet").forward(request, response);
+			}
 			else {
 				request.getRequestDispatcher("sorry.jsp").forward(request, response);
 			}

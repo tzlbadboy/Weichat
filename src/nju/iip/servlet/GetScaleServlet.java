@@ -23,7 +23,7 @@ import nju.iip.dto.Scale;
  *
  */
 public class GetScaleServlet extends HttpServlet {
-	private static final Logger logger = LoggerFactory.getLogger(OAuthServlet.class);
+	private static final Logger logger = LoggerFactory.getLogger(GetScaleServlet.class);
 	
 	private static final long serialVersionUID = 1L;
        
