@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.iip.dto.Options;
 import nju.iip.dto.Questions;
 import nju.iip.dto.Scale;
 import nju.iip.util.DBConnection;
@@ -67,18 +68,22 @@ public class ScaleDaoImpl {
 				rs=sm.executeQuery(sql);
 				//取出题目的内容
 				if(rs.next()) {
-					question.setQuestion(rs.getString("questionContent"));
+					question.setQuestionContent(rs.getString("questionContent"));
+					question.setShowType(rs.getString("showType"));
 				}
-				List<String> options = new ArrayList<String>();
+				List<Options> options = new ArrayList<Options>();
 				sql = "select * from questionoption where questionId='"+questionId+"'";
 				sm=conn.createStatement();
 				rs=sm.executeQuery(sql);
 				//取出题目对应的选项
 				while(rs.next()) {
-					options.add(rs.getString("optionContent"));
+					Options option = new Options();
+					option.setOptionContent(rs.getString("optionContent"));
+					option.setOptionValue(rs.getString("optionValue"));
+					options.add(option);
 				}
 				question.setAnswers(options);
-				question.setCorrectAnswer(2);
+				question.setQuestionId(questionId);
 				question_list.add(question);
 			}
 		}catch(Exception e){

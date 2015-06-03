@@ -10,35 +10,45 @@ import java.util.List;
  */
 public class Questions {
 	
-	String question;
+	String questionContent;//题目内容
 	
-	List<String> answers = new ArrayList<String>();
+	String showType;//题目类型
 	
-	int correctAnswer;
-
-	public String getQuestion() {
-		return question;
+	int questionId;//题目id
+	
+	List<Options> answers = new ArrayList<Options>();//题目的选项
+	
+	public String getQuestionContent() {
+		return questionContent;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
 	}
 
+	public String getShowType() {
+		return showType;
+	}
 
-	public List<String> getAnswers() {
+	public void setShowType(String showType) {
+		this.showType = showType;
+	}
+
+	public List<Options> getAnswers() {
 		return answers;
 	}
 
-	public void setAnswers(List<String> options) {
+	public void setAnswers(List<Options> options) {
 		this.answers.addAll(options);
 	}
 
-	public int getCorrectAnswer() {
-		return correctAnswer;
+	public int getQuestionId() {
+		return questionId;
 	}
 
-	public void setCorrectAnswer(int correctAnswer) {
-		this.correctAnswer = correctAnswer;
+	public void setQuestionId(int questionId) {
+		this.questionId = questionId;
 	}
+	
 
 }

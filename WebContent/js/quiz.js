@@ -36,9 +36,9 @@
         superContainer.addClass('main-quiz-holder');
      
         for (questionsIteratorIndex = 0; questionsIteratorIndex < config.questions.length; questionsIteratorIndex++) {
-            contentFob += '<div class="slide-container"><div class="question-number">' + (questionsIteratorIndex + 1) + '/' + config.questions.length + '</div><div class="question">' + config.questions[questionsIteratorIndex].question + '</div><ul class="answers">';
+            contentFob += '<div class="slide-container"><div class="question-number">' + (questionsIteratorIndex + 1) + '/' + config.questions.length + '</div><div class="question">' + config.questions[questionsIteratorIndex].questionContent + '</div><ul class="answers">';
             for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[questionsIteratorIndex].answers.length; answersIteratorIndex++) {
-                contentFob += '<li>' + config.questions[questionsIteratorIndex].answers[answersIteratorIndex] + '</li>';
+                contentFob += '<li>' + config.questions[questionsIteratorIndex].answers[answersIteratorIndex].optionContent + '</li>';
             }
             contentFob += '</ul><div class="nav-container">';
             if (questionsIteratorIndex !== 0) {
@@ -63,6 +63,17 @@
         questionLength = config.questions.length,
         slidesList = superContainer.find('.slide-container');
        
+        
+        //获取用户最终得分
+        function getScore() {
+        	var score = 0;
+        	for(var i=0;i< userAnswers.length;i++) {
+        		score = score+Number(userAnswers[i]);
+        	}
+        	return score;
+        }
+        
+        
         
         function checkAnswers() {
             var resultArr = [],
@@ -159,7 +170,8 @@
                 return false;
             }
             superContainer.find('li.selected').each(function(index) {
-                userAnswers.push($(this).parents('.answers').children('li').index($(this).parents('.answers').find('li.selected')) + 1);
+            	var optionindex = $(this).parents('.answers').children('li').index($(this).parents('.answers').find('li.selected'));
+                userAnswers.push(config.questions[index].answers[optionindex].optionValue);
             });
             if (config.sendResultsURL !== null) {
                 var collate = [];
@@ -180,7 +192,7 @@
             resultSet = '',
             trueCount = 0,
             shareButton = '',
-            score;
+            score = getScore();
             if (config.shortURL === null) {
                 config.shortURL = window.location;
             };
@@ -204,7 +216,7 @@
                 }
                 resultSet += '</ul></div></div>';
             }
-            score = roundReloaded(trueCount / questionLength * 100, 2);
+        //    score = roundReloaded(trueCount / questionLength * 100, 2);
             
             resultSet = '<h2 class="qTitle">' + judgeSkills(score) + '<br/> 您的分数： ' + score + '</h2>' + shareButton + '<div class="jquizzy-clear"></div>' + resultSet + '<div class="jquizzy-clear"></div>';
             var $params="username="+"wq"+"&password="+"123";
