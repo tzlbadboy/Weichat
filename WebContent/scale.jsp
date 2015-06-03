@@ -17,18 +17,18 @@
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/quiz.js"></script>
-<link type="text/css" rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" type="text/css" href="css/base.css">
 <link rel="stylesheet" type="text/css" href="css/common.css">
   <% 
 		String str = (String)request.getAttribute("questions"); 
   %>
 <script type="text/javascript">
 var init = <%=str%>;
+if(init!=null) {
 $("title").html(init.scale.scaleName); 
+}
 $(function(){
-	$('#quiz-container').jquizzy({
-        questions: init.questions,name: init.scale.scaleDescription
-    });
+	$('#quiz-container').jquizzy(init);
 });
 </script>
 </head>

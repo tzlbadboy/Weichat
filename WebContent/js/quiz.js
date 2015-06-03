@@ -5,7 +5,7 @@
             startImg: 'images/start.gif',
             endText: '已结束!',
             shortURL: null,
-            sendResultsURL: null,
+            sendResultsURL: "GetAnswerServlet",
             resultComments: {
                 perfect: '你是爱因斯坦么?',
                 excellent: '非常优秀!',
@@ -16,19 +16,25 @@
                 worst: '悲痛欲绝！'
             }
         };
-        var config = $.extend(defaults, settings);
-        if (config.questions === null) {
+        
+        
+        
+        if (settings === null) {
             $(this).html('<div class="intro-container slide-container"><h2 class="qTitle">Failed to parse questions.</h2></div>');
             return;
         }
+        
+        var config = $.extend(defaults, settings);
+        
         var superContainer = $(this),
         answers = [],
-        introFob = '	<div class="intro-container slide-container"><a class="nav-start" href="#">'+config.name+'<br/><br/><span><img src="'+config.startImg+'"></span></a></div>	',
+        introFob = '<div class="intro-container slide-container"><a class="nav-start" href="#">'+config.scale.scaleDescription+'<br/><br/><span><img src="'+config.startImg+'"></span></a></div>	',
         exitFob = '<div class="results-container slide-container"><div class="question-number">' + config.endText + '</div><div class="result-keeper"></div></div><div class="notice">请选择一个选项！</div>',
         contentFob = '',
         questionsIteratorIndex,
         answersIteratorIndex;
         superContainer.addClass('main-quiz-holder');
+     
         for (questionsIteratorIndex = 0; questionsIteratorIndex < config.questions.length; questionsIteratorIndex++) {
             contentFob += '<div class="slide-container"><div class="question-number">' + (questionsIteratorIndex + 1) + '/' + config.questions.length + '</div><div class="question">' + config.questions[questionsIteratorIndex].question + '</div><ul class="answers">';
             for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[questionsIteratorIndex].answers.length; answersIteratorIndex++) {
@@ -46,6 +52,8 @@
             contentFob += '</div></div>';
             answers.push(config.questions[questionsIteratorIndex].correctAnswer);
         }
+        
+        
         superContainer.html(introFob + contentFob + exitFob);
         var progress = superContainer.find('.progress'),
         progressKeeper = superContainer.find('.progress-keeper'),
@@ -54,6 +62,8 @@
         userAnswers = [],
         questionLength = config.questions.length,
         slidesList = superContainer.find('.slide-container');
+       
+        
         function checkAnswers() {
             var resultArr = [],
             flag = false;
@@ -67,10 +77,14 @@
             }
             return resultArr;
         }
+        
+        
         function roundReloaded(num, dec) {
             var result = Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
             return result;
         }
+        
+        
         function judgeSkills(score) {
             //var returnString;
             if (score === 100) return config.resultComments.perfect;
@@ -81,9 +95,11 @@
             else if (score > 20) return config.resultComments.poor;
             else return config.resultComments.worst;
         }
+        
         progressKeeper.hide();
         notice.hide();
         slidesList.hide().first().fadeIn(200);
+       
         superContainer.find('li').click(function() {
             var thisLi = $(this);
             if (thisLi.hasClass('selected')) {
@@ -93,6 +109,7 @@
                 thisLi.addClass('selected');
             }
         });
+      
         superContainer.find('.nav-start').click(function() {
             $(this).parents('.slide-container').fadeOut(200,
             function() {
@@ -101,6 +118,8 @@
             });
             return false;
         });
+       
+        
         superContainer.find('.next').click(function() {
             if ($(this).parents('.slide-container').find('li.selected').length === 0) {
                 notice.fadeIn(200);
@@ -117,6 +136,9 @@
             500);
             return false;
         });
+    
+        
+        
         superContainer.find('.prev').click(function() {
             notice.hide();
             $(this).parents('.slide-container').fadeOut(200,
@@ -129,6 +151,8 @@
             500);
             return false;
         });
+      
+        
         superContainer.find('.final').click(function() {
             if ($(this).parents('.slide-container').find('li.selected').length === 0) {
                 notice.fadeIn(200);
@@ -145,9 +169,9 @@
                 $.ajax({
                     type: 'POST',
                     url: config.sendResultsURL,
-                    data: '{"answers": [' + collate.join(",") + ']}',
-                    complete: function() {
-                        console.log("OH HAI");
+                    data: {"answers":collate.join(",")},
+                    success: function(msg){
+                        alert(msg+"ok");
                     }
                 });
             }
@@ -160,8 +184,7 @@
             if (config.shortURL === null) {
                 config.shortURL = window.location;
             };
-            for (var i = 0,
-            toLoopTill = results.length; i < toLoopTill; i++) {
+            for (var i = 0, toLoopTill = results.length; i < toLoopTill; i++) {
                 if (results[i] === true) {
                     trueCount++;
                     isCorrect = true;
@@ -184,6 +207,16 @@
             score = roundReloaded(trueCount / questionLength * 100, 2);
             
             resultSet = '<h2 class="qTitle">' + judgeSkills(score) + '<br/> 您的分数： ' + score + '</h2>' + shareButton + '<div class="jquizzy-clear"></div>' + resultSet + '<div class="jquizzy-clear"></div>';
+            var $params="username="+"wq"+"&password="+"123";
+            /*$.ajax({
+            	 type : "POST",
+                 url: "GetAnswerServlet",
+                 data: {"score":score,"username":"wq","password":123},
+                 success: function(msg){
+                     alert(msg+"ok");
+                 }
+            });*/
+            
             superContainer.find('.result-keeper').html(resultSet).show(500);
             superContainer.find('.resultsview-qhover').hide();
             superContainer.find('.result-row').hover(function() {
@@ -192,11 +225,14 @@
             function() {
                 $(this).find('.resultsview-qhover').hide();
             });
+            
             $(this).parents('.slide-container').fadeOut(200,
             function() {
                 $(this).next().fadeIn(200);
             });
+            
             return false;
         });
+        
     };
 })(jQuery);

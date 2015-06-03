@@ -78,7 +78,7 @@ public class ScaleDaoImpl {
 					options.add(rs.getString("optionContent"));
 				}
 				question.setAnswers(options);
-				question.setCorrectAnswer(0);
+				question.setCorrectAnswer(2);
 				question_list.add(question);
 			}
 		}catch(Exception e){
