@@ -25,9 +25,11 @@
 		// 获取由OAuthServlet中传入的参数
 		List<Map<String, String>> record_listList = (List<Map<String, String>>)request.getAttribute("record_listList"); 
 		if(null != record_listList) {
+			int i = 1;
 			for(Map<String, String> map:record_listList) {
 	%>
 	<div class="bgfff form ov">
+	<div class="fb">NO.<%=i%></div>
 	 <ul class="cb">
 	<li>
 	<div class="fl la_bg tc"><label for="name" class="lable">量表名称</label></div>
@@ -44,6 +46,7 @@
     </ul>
 	</div>
 	<%
+	i++;
 		     }
 		}
 		else 
