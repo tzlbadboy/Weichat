@@ -111,6 +111,7 @@ public class ScaleDaoImpl {
 				scale.setScaleName(rs.getString("scaleName"));
 				scale.setScaleDescription(rs.getString("scaleDescription"));
 				scale.setShortname(rs.getString("shortname"));
+				scale.setId(totalScaleId+"");
 			}
 		}catch(Exception e){
 			e.printStackTrace();

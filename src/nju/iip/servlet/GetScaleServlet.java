@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import nju.iip.dao.impl.ScaleDaoImpl;
 import nju.iip.dto.Questions;
@@ -21,6 +23,8 @@ import nju.iip.dto.Scale;
  *
  */
 public class GetScaleServlet extends HttpServlet {
+	private static final Logger logger = LoggerFactory.getLogger(OAuthServlet.class);
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -36,7 +40,7 @@ public class GetScaleServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String totalScaleId = request.getParameter("totalScaleId");
-		System.out.println("totalScaleId="+totalScaleId);
+		logger.info("totalScaleId="+totalScaleId);
 		String jsonStr = "";
 		Scale scale = ScaleDaoImpl.getScale(Integer.valueOf(totalScaleId));	
 	    List<Questions> list = ScaleDaoImpl.getQuestions(ScaleDaoImpl.getQuestionId(Integer.valueOf(totalScaleId)));
@@ -49,10 +53,11 @@ public class GetScaleServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	    jsonStr = json.toString();
-	    System.out.println("jsonStr="+jsonStr);
+	   logger.info("jsonStr="+jsonStr);
 		request.setAttribute("questions", jsonStr);
+		request.getSession().setAttribute("scale", scale);
 		String openId = (String) request.getSession().getAttribute("openId");
-	    System.out.println("openId="+openId);
+	   logger.info("openId="+openId);
 		request.getRequestDispatcher("scale.jsp").forward(request, response);
 	}
 

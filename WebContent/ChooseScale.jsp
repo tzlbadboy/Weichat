@@ -24,14 +24,14 @@
                </li>
                <li>
                <form action="GetScaleServlet" method="GET">
-                <input name="totalScaleId" value="2" type="hidden" />
+                <input name="totalScaleId" value="115" type="hidden" />
             	<div class="cb pt20"><input  type="submit"  value="量表二"   class="but2"></div>
                </form>
                </li>
                
                <li>
                <form action="GetScaleServlet" method="GET" >
-                <input name="totalScaleId" value="3" type="hidden" />
+                <input name="totalScaleId" value="118" type="hidden" />
             	<div class="cb pt20"><input  type="submit"  value="量表三"   class="but2"/></div>
                </form>
                </li>

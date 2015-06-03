@@ -13,6 +13,16 @@ public class Scale {
 	String scaleDescription;//量表描述
 	
 	String shortname;//量表简称
+	
+	String id;//量表id
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getScaleName() {
 		return scaleName;

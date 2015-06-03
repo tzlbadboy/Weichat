@@ -23,13 +23,13 @@ public class UserDaoImpl {
 	 static PreparedStatement ps = null;
 	
 	/**
-	 * 通过openid判断用户是否绑定微信
-	 * @param openid
+	 * 通过openId判断用户是否绑定微信
+	 * @param openId
 	 * @return
 	 */
-	public static boolean checkBind(String openid) {
+	public static boolean checkBind(String openId) {
 		 boolean flag=false;
-		 String sql = "select * from weixin where openid='"+openid+"'";
+		 String sql = "select * from weixin where openId='"+openId+"'";
 		 try{
 			 conn = DBConnection.getConn(); 
 			 sm=conn.createStatement();
@@ -52,7 +52,7 @@ public class UserDaoImpl {
 	public static boolean addUser(WeixinUser user) {
 		conn =DBConnection.getConn();
     	ps = null;
-    	String sql = "insert into weixin(openid,cardID,name,phone) values(?,?,?,?)";
+    	String sql = "insert into weixin(openId,cardID,name,phone) values(?,?,?,?)";
     	try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getOpenId());
@@ -70,13 +70,13 @@ public class UserDaoImpl {
 	}
 	
 	/**
-	 * 根据openid获得用户的信息
-	 * @param openid
+	 * 根据openId获得用户的信息
+	 * @param openId
 	 * @return
 	 */
-	public static WeixinUser getUser(String openid) {
+	public static WeixinUser getUser(String openId) {
 		WeixinUser user = new WeixinUser();
-		String sql = "select * from weixin where openid='"+openid+"'";
+		String sql = "select * from weixin where openId='"+openId+"'";
 		try{
 			conn = DBConnection.getConn(); 
 			sm=conn.createStatement();
@@ -100,17 +100,17 @@ public class UserDaoImpl {
 	
 	
 	/**
-	 * 根据openid删除用户即解绑
-	 * @param openid
+	 * 根据openId删除用户即解绑
+	 * @param openId
 	 * @return
 	 */
-	public static boolean deleteUser(String openid) {
+	public static boolean deleteUser(String openId) {
 		conn =DBConnection.getConn();
     	ps = null;
-    	String sql = "delete from weixin where openid=?";
+    	String sql = "delete from weixin where openId=?";
     	try{
     		ps = conn.prepareStatement(sql);
-    		ps.setString(1, openid);
+    		ps.setString(1, openId);
     		return ps.executeUpdate() == 1 ? true : false;
     	}catch (SQLException e) {
 			e.printStackTrace();

@@ -72,7 +72,7 @@ public class OAuthServlet extends HttpServlet {
 			request.setAttribute("snsUserInfo", snsUserInfo);
 			
 			request.getSession().setAttribute("openId", openId);
-			System.out.println("openId="+openId);
+			logger.info("openId="+openId);
 		}
 		
 		if(flag) {
