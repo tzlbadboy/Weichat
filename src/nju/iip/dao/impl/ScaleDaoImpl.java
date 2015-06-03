@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import nju.iip.dto.Options;
@@ -88,7 +90,7 @@ public class ScaleDaoImpl {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			}
+		}
 		finally {
 			closeDB();
 		}
@@ -122,6 +124,34 @@ public class ScaleDaoImpl {
 		return scale;
 	}
 	
+	
+	/**
+	 * 将用户量表填写结果存入数据库表
+	 * @param openId
+	 * @param scale
+	 * @param score
+	 * @return
+	 */
+	public static boolean storeResult(String openId,Scale scale,String score) {
+		Date now = new Date();
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );//可以方便地修改日期格式
+    	String time = dateFormat.format(now);
+		String sql = "insert into weixin_scaleresult(openId,scaleId,scaleName,time) values(?,?,?,?)";
+		try {
+			conn = DBConnection.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, openId);
+			ps.setString(2, scale.getId());
+			ps.setString(3, scale.getScaleName());
+			ps.setString(4, time);
+			return ps.executeUpdate() == 1 ? true : false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeDB();
+		}
+	}
 	
 	
 	/**
@@ -160,7 +190,8 @@ public class ScaleDaoImpl {
 	
 	
 	public static void main(String[] args) {
-		System.out.println(getScale(125).getScaleName());
+		Scale scale =new Scale();
+		System.out.println(storeResult("wq",scale,"5"));
 	}
 
 }

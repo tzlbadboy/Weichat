@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import nju.iip.dao.impl.ScaleDaoImpl;
 import nju.iip.dto.Scale;
 
 import org.slf4j.Logger;
@@ -50,9 +51,16 @@ public class GetAnswerServlet extends HttpServlet {
 		    Scale scale = (Scale)request.getSession().getAttribute("scale");
 		    logger.info("scaleId="+scale.getId());
 	        PrintWriter out = response.getWriter();
-	        String answers=request.getParameter("answers");
+	        String answers = request.getParameter("answers");
+	        String score = request.getParameter("score");
 	        logger.info("answers="+answers);
-	        out.print("success");
+	        logger.info("score="+score);
+	        if(ScaleDaoImpl.storeResult(openId, scale, score)) {
+	        	out.print("success");
+	        }
+	        else {
+	        	out.print("faied");
+	        }
 	        out.flush();
 	        out.close();
 	}

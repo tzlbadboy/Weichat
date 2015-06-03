@@ -61,8 +61,8 @@
         progressWidth = progressKeeper.width(),
         userAnswers = [],
         questionLength = config.questions.length,
-        slidesList = superContainer.find('.slide-container');
-       
+        slidesList = superContainer.find('.slide-container'),
+        score;
         
         //获取用户最终得分
         function getScore() {
@@ -178,12 +178,13 @@
                 for (var r = 0; r < userAnswers.length; r++) {
                     collate.push('{"questionNumber":"' + parseInt(r + 1, 10) + '", "userAnswer":"' + userAnswers[r] + '"}');
                 }
+                score = getScore();
                 $.ajax({
                     type: 'POST',
                     url: config.sendResultsURL,
-                    data: {"answers":collate.join(",")},
+                    data: {"answers":collate.join(","),"score":score},
                     success: function(msg){
-                        alert(msg+"ok");
+                        alert(msg+"!");
                     }
                 });
             }
@@ -191,8 +192,7 @@
             var results = checkAnswers(),
             resultSet = '',
             trueCount = 0,
-            shareButton = '',
-            score = getScore();
+            shareButton = '';
             if (config.shortURL === null) {
                 config.shortURL = window.location;
             };

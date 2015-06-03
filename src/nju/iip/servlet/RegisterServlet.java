@@ -1,11 +1,16 @@
 package nju.iip.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import nju.iip.dao.impl.UserDaoImpl;
 import nju.iip.dto.WeixinUser;
 
@@ -14,8 +19,10 @@ import nju.iip.dto.WeixinUser;
  * @author wangqiang
  *
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = { "/RegisterServlet" })
 public class RegisterServlet extends HttpServlet {
+	
+	private static final Logger logger = LoggerFactory.getLogger(OAuthServlet.class);
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -43,10 +50,10 @@ public class RegisterServlet extends HttpServlet {
 	     String cardId = request.getParameter("cardId");
 	     String phone = request.getParameter("phone");
 	     String openId = request.getSession().getAttribute("openId").toString();
-	     System.out.println("name="+name);
-	     System.out.println("cardId="+cardId);
-	     System.out.println("phone="+phone);
-	     System.out.println("openId="+openId);
+	     logger.info("name="+name);
+	     logger.info("cardId="+cardId);
+	     logger.info("phone="+phone);
+	     logger.info("openId="+openId);
 	     WeixinUser user = new WeixinUser();
 	     user.setName(name);
 	     user.setCardID(cardId);
