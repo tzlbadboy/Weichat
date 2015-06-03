@@ -201,8 +201,8 @@
                     trueCount++;
                     isCorrect = true;
                 }
-                resultSet += '<div class="result-row">' + (results[i] === true ? "<div class='correct'>#"+(i + 1)+"<span></span></div>": "<div class='wrong'>#"+(i + 1)+"<span></span></div>");
-                resultSet += '<div class="resultsview-qhover">' + config.questions[i].question;
+                resultSet += '<div class="result-row">' + (Number(userAnswers[i])<2 ? "<div class='correct'>#"+(i + 1)+"<span></span></div>": "<div class='wrong'>#"+(i + 1)+"<span></span></div>");
+                resultSet += '<div class="resultsview-qhover">' + config.questions[i].questionContent;
                 resultSet += "<ul>";
                 for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[i].answers.length; answersIteratorIndex++) {
                     var classestoAdd = '';
@@ -212,13 +212,13 @@
                     if (userAnswers[i] == answersIteratorIndex + 1) {
                         classestoAdd += ' selected';
                     }
-                    resultSet += '<li class="' + classestoAdd + '">' + config.questions[i].answers[answersIteratorIndex] + '</li>';
+                    resultSet += '<li class="' + classestoAdd + '">' + config.questions[i].answers[answersIteratorIndex].optionContent + '</li>';
                 }
                 resultSet += '</ul></div></div>';
             }
         //    score = roundReloaded(trueCount / questionLength * 100, 2);
             
-            resultSet = '<h2 class="qTitle">' + judgeSkills(score) + '<br/> 您的分数： ' + score + '</h2>' + shareButton + '<div class="jquizzy-clear"></div>' + resultSet + '<div class="jquizzy-clear"></div>';
+            resultSet = '<h2 class="qTitle">' + 'finish!' + '<br/> 您的分数： ' + score + '</h2>' + shareButton + '<div class="jquizzy-clear"></div>' + resultSet + '<div class="jquizzy-clear"></div>';
             var $params="username="+"wq"+"&password="+"123";
             /*$.ajax({
             	 type : "POST",
