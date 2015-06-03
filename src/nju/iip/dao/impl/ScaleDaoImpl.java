@@ -136,14 +136,15 @@ public class ScaleDaoImpl {
 		Date now = new Date();
     	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );//可以方便地修改日期格式
     	String time = dateFormat.format(now);
-		String sql = "insert into weixin_scaleresult(openId,scaleId,scaleName,time) values(?,?,?,?)";
+		String sql = "insert into weixin_scaleresult(openId,scaleId,scaleName,score,time) values(?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, openId);
 			ps.setString(2, scale.getId());
 			ps.setString(3, scale.getScaleName());
-			ps.setString(4, time);
+			ps.setString(4, score);
+			ps.setString(5, time);
 			return ps.executeUpdate() == 1 ? true : false;
 		}catch (SQLException e) {
 			e.printStackTrace();
