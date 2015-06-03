@@ -51,6 +51,8 @@ public class GetScaleServlet extends HttpServlet {
 	    jsonStr = json.toString();
 	    System.out.println("jsonStr="+jsonStr);
 		request.setAttribute("questions", jsonStr);
+		String openId = (String) request.getSession().getAttribute("openId");
+	    System.out.println("openId="+openId);
 		request.getRequestDispatcher("scale.jsp").forward(request, response);
 	}
 

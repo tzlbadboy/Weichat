@@ -1,6 +1,7 @@
 package nju.iip.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -71,14 +72,14 @@ public class OAuthServlet extends HttpServlet {
 			request.setAttribute("snsUserInfo", snsUserInfo);
 			
 			request.getSession().setAttribute("openId", openId);
+			System.out.println("openId="+openId);
 		}
 		
 		if(flag) {
 			
-			
 			if(state.equals("weixin")) {
 				// 跳转到index.jsp
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("userInfo.jsp").forward(request, response);
 			}
 			
 			else if(state.equals("liangbiao")){
@@ -86,7 +87,7 @@ public class OAuthServlet extends HttpServlet {
 			}
 			
 			else {
-				request.getRequestDispatcher("question.jsp").forward(request, response);
+				request.getRequestDispatcher("sorry.jsp").forward(request, response);
 			}
 			
 		}

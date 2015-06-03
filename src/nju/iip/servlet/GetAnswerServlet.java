@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GetAnswerServlet
+ * 记录用户所填量表
+ * @author wangqiang
+ * @since 2015-6-3
+ *
  */
 public class GetAnswerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,7 +36,10 @@ public class GetAnswerServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 response.setContentType("text/html");
+		    response.setContentType("text/html");
+		    String openId = (String) request.getSession().getAttribute("openId");
+		    System.out.println("openId="+openId);
+		    
 	        PrintWriter out = response.getWriter();
 	        String answers=request.getParameter("answers");
 	        System.out.println("answers="+answers);
