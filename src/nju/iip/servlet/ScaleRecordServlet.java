@@ -2,15 +2,12 @@ package nju.iip.servlet;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import nju.iip.dao.impl.ScaleDaoImpl;
-
+import nju.iip.dto.ScaleRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +34,7 @@ public class ScaleRecordServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("doGet");
 		String openId = (String) request.getSession().getAttribute("openId");
-		List<Map<String, String>> record_listList = ScaleDaoImpl.getScaleRecord(openId);
+		List<ScaleRecord> record_listList = ScaleDaoImpl.getScaleRecord(openId);
 		request.setAttribute("record_listList", record_listList);
 		request.getRequestDispatcher("resultscale.jsp").forward(request, response);
 	}
@@ -48,5 +45,7 @@ public class ScaleRecordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request,response);
 	}
+	
+	
 
 }

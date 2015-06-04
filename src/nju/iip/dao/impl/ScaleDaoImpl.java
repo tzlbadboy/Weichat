@@ -8,16 +8,13 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import nju.iip.dto.Options;
 import nju.iip.dto.Questions;
 import nju.iip.dto.Scale;
+import nju.iip.dto.ScaleRecord;
 import nju.iip.util.DBConnection;
 
-import org.apache.commons.collections.map.HashedMap;
 
 /**
  * 与量表有关的数据库操作
@@ -163,19 +160,19 @@ public class ScaleDaoImpl {
 	 * @param openId
 	 * @return
 	 */
-	public static List<Map<String, String>> getScaleRecord(String openId) {
-		List<Map<String, String>> record_listList = new ArrayList<Map<String, String>>();
+	public static List<ScaleRecord> getScaleRecord(String openId) {
+		List<ScaleRecord> record_listList = new ArrayList<ScaleRecord>();
 		String sql = "select * from weixin_scaleresult where openId='"+openId+"'";
 		try {
 			conn = DBConnection.getConn();
 			sm=conn.createStatement();
 			rs=sm.executeQuery(sql);
 			while(rs.next()) {
-				Map<String, String> map = new HashMap<String,String>();
-				map.put("scaleName", rs.getString("scaleName"));
-				map.put("score", rs.getString("score"));
-				map.put("time", rs.getString("time"));
-				record_listList.add(map);
+				ScaleRecord record = new ScaleRecord();
+				record.setScaleName(rs.getString("scaleName"));
+				record.setScore(rs.getString("score"));
+				record.setTime(rs.getString("time"));
+				record_listList.add(record);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -222,9 +219,5 @@ public class ScaleDaoImpl {
 	}
 	
 	
-	public static void main(String[] args) {
-		List<Map<String, String>> record_listList = getScaleRecord("om8TAtye3lkQ1PQMDzEI9UlMRKgo");
-		System.out.println(record_listList.size());
-	}
 
 }

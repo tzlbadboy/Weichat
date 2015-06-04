@@ -1,7 +1,7 @@
 ﻿<%@ page language="java" pageEncoding="utf-8"%>
 <%@ page import="nju.iip.dto.WeixinUser"%>
+<%@ page import="nju.iip.dto.ScaleRecord"%>
 <%@ page import="java.util.List"%>
-<%@ page import="java.util.Map"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,25 +23,25 @@
 <body>
 	<% 
 		// 获取由OAuthServlet中传入的参数
-		List<Map<String, String>> record_listList = (List<Map<String, String>>)request.getAttribute("record_listList"); 
+		List<ScaleRecord> record_listList = (List<ScaleRecord>)request.getAttribute("record_listList"); 
 		if(null != record_listList) {
 			int i = 1;
-			for(Map<String, String> map:record_listList) {
+			for(ScaleRecord record:record_listList) {
 	%>
 	<div class="bgfff form ov">
 	<div class="fb">NO.<%=i%></div>
 	 <ul class="cb">
 	<li>
 	<div class="fl la_bg tc"><label for="name" class="lable">量表名称</label></div>
-	<div class="fl l_r">&nbsp;&nbsp;<%=map.get("scaleName")%></div>
+	<div class="fl l_r">&nbsp;&nbsp;<%=record.getScaleName()%></div>
 	</li>
 	<li>
 	<div class="fl la_bg tc"><label for="name" class="lable">得分</label></div>
-	<div class="fl l_r">&nbsp;&nbsp;<%=map.get("score")%></div>
+	<div class="fl l_r">&nbsp;&nbsp;<%=record.getScore()%></div>
 	</li>
 	<li>
 	<div class="fl la_bg tc"><label for="name" class="lable">填写时间</label></div>
-	<div class="fl l_r" >&nbsp;&nbsp;<%=map.get("time")%></div>
+	<div class="fl l_r" >&nbsp;&nbsp;<%=record.getTime()%></div>
 	</li>
     </ul>
 	</div>
