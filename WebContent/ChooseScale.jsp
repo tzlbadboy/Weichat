@@ -22,16 +22,19 @@
 <%
       List<Scale> ScaleList = (List<Scale>) request.getAttribute("ScaleList");
       if(ScaleList!=null) {
+    	  int i = 1;
     	  for(Scale scale:ScaleList) {
 %>
                <li>
                <form action="GetScaleServlet" method="GET">
+               <% String name = i+"."+scale.getScaleName();%>
                 <input name="totalScaleId" value=<%=scale.getId()%> type="hidden" />
-            	<div class="cb pt20"><input  type="submit"  value=<%=scale.getScaleName()%>   class="but2" /></div>
+            	<div class="cb pt20"><input  type="submit"  value=<%=name%>  class="but2" /></div>
                </form>
                </li>
                
                <%
+               i++;
     	  }
       }
       else {
