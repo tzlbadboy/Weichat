@@ -56,6 +56,12 @@ public class ScaleDaoImpl {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 根据questionId_list取出所有对应题目和选项
 	 * @param questionId_list
@@ -72,9 +78,12 @@ public class ScaleDaoImpl {
 				rs=sm.executeQuery(sql);
 				//取出题目的内容
 				if(rs.next()) {
+					String showType = rs.getString("showType");
+					int indexParent = rs.getInt("indexParent");
+					if(rs.getString("showType").equals("cut")||(showType.equals("matrix")&&indexParent==0)) continue;
 					question.setQuestionContent(rs.getString("questionContent"));
-					question.setShowType(rs.getString("showType"));
-					if(rs.getString("showType").equals("cut")) continue;
+					question.setShowType(showType);
+					
 				}
 				List<Options> options = new ArrayList<Options>();
 				sql = "select * from questionoption where questionId='"+questionId+"'";
@@ -249,7 +258,7 @@ public class ScaleDaoImpl {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(getScaleList().size());
+		System.out.println(getQuestions(getQuestionId(109)).size());
 	}
 
 }
