@@ -49,8 +49,6 @@
     <servlet-name>GetScaleServlet</servlet-name>
     <url-pattern>/GetScaleServlet</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
     <servlet-name>GetAnswerServlet</servlet-name>
     <servlet-class>  
@@ -71,6 +69,17 @@
   <servlet-mapping>
     <servlet-name>ScaleRecordServlet</servlet-name>
     <url-pattern>/ScaleRecordServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GetScaleListServlet</servlet-name>
+    <servlet-class>  
+            nju.iip.servlet.GetScaleListServlet  
+        </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetScaleListServlet</servlet-name>
+    <url-pattern>/GetScaleListServlet</url-pattern>
   </servlet-mapping>
   
 </web-app>

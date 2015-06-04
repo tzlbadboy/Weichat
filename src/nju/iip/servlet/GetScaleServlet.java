@@ -18,7 +18,7 @@ import nju.iip.dto.Questions;
 import nju.iip.dto.Scale;
 
 /**
- * 
+ * 根据totalScaleId取出所有题目
  * @author wangqiang
  *
  */
@@ -52,12 +52,12 @@ public class GetScaleServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    jsonStr = json.toString();
-	   logger.info("jsonStr="+jsonStr);
+	    jsonStr = json.toString();//量表对应所有题目的json字符串
+	    logger.info("jsonStr="+jsonStr);
 		request.setAttribute("questions", jsonStr);
 		request.getSession().setAttribute("scale", scale);
 		String openId = (String) request.getSession().getAttribute("openId");
-	   logger.info("openId="+openId);
+	    logger.info("openId="+openId);
 		request.getRequestDispatcher("scale.jsp").forward(request, response);
 	}
 

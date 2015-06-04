@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import nju.iip.dto.Options;
 import nju.iip.dto.Questions;
 import nju.iip.dto.Scale;
@@ -183,6 +184,34 @@ public class ScaleDaoImpl {
 		return record_listList;
 	}
 	
+	/**
+	 * 取出所有量表
+	 * @return
+	 */
+	public static List<Scale> getScaleList() {
+		List<Scale> ScaleList = new ArrayList<Scale>();
+		String sql = "select * from parkinsontotalscale";
+		try {
+			conn = DBConnection.getConn();
+			sm=conn.createStatement();
+			rs=sm.executeQuery(sql);
+			while(rs.next()) {
+				Scale scale = new Scale();
+				scale.setScaleName(rs.getString("scaleName"));
+				scale.setId(rs.getString("id"));
+				scale.setScaleDescription(rs.getString("scaleDescription"));
+				scale.setShortname(rs.getString("shortname"));
+				ScaleList.add(scale);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			}
+		finally {
+			closeDB();
+		}
+		return ScaleList;
+	}
+	
 	
 	/**
 	 * 关闭数据库
@@ -218,6 +247,8 @@ public class ScaleDaoImpl {
 		}
 	}
 	
-	
+	public static void main(String[] args) {
+		System.out.println(getScaleList().size());
+	}
 
 }

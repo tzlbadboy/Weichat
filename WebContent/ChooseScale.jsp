@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" pageEncoding="utf-8"%>
+<%@ page import="nju.iip.dto.Scale"%>
+<%@ page import="java.util.List"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -16,25 +19,25 @@
      <div class="bgfff form ov">
      <div class="fb">请选择一张量表：</div>
          <ul class="cb">
+<%
+      List<Scale> ScaleList = (List<Scale>) request.getAttribute("ScaleList");
+      if(ScaleList!=null) {
+    	  for(Scale scale:ScaleList) {
+%>
                <li>
                <form action="GetScaleServlet" method="GET">
-                <input name="totalScaleId" value="117" type="hidden" />
-            	<div class="cb pt20"><input  type="submit"  value="量表一"   class="but2" /></div>
-               </form>
-               </li>
-               <li>
-               <form action="GetScaleServlet" method="GET">
-                <input name="totalScaleId" value="115" type="hidden" />
-            	<div class="cb pt20"><input  type="submit"  value="量表二"   class="but2"></div>
+                <input name="totalScaleId" value=<%=scale.getId()%> type="hidden" />
+            	<div class="cb pt20"><input  type="submit"  value=<%=scale.getScaleName()%>   class="but2" /></div>
                </form>
                </li>
                
-               <li>
-               <form action="GetScaleServlet" method="GET" >
-                <input name="totalScaleId" value="118" type="hidden" />
-            	<div class="cb pt20"><input  type="submit"  value="量表三"   class="but2"/></div>
-               </form>
-               </li>
+               <%
+    	  }
+      }
+      else {
+    	  out.print("获取量表信息失败！");
+      }
+               %>
                
           </ul>
      </div>
