@@ -74,6 +74,7 @@ public class ScaleDaoImpl {
 				if(rs.next()) {
 					question.setQuestionContent(rs.getString("questionContent"));
 					question.setShowType(rs.getString("showType"));
+					if(rs.getString("showType").equals("cut")) continue;
 				}
 				List<Options> options = new ArrayList<Options>();
 				sql = "select * from questionoption where questionId='"+questionId+"'";
