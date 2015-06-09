@@ -1,29 +1,14 @@
 ﻿<%@ page language="java" pageEncoding="utf-8"%>
 <%@ page import="nju.iip.dto.WeixinUser;"%>
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="format-detection" content="telephone=no">
-<link type="text/css" rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" type="text/css" href="css/common.css">
-  <!-- 新 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-<!-- 可选的Bootstrap主题文件（一般不用引入） -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="js/common.js"></script>
 	<title>用户信息</title>
-	  
+	<meta name="viewport" content="width=device-width,user-scalable=0">
+	<style type="text/css">
+		*{margin:0; padding:0}
+		table{border:1px dashed #B9B9DD;font-size:12pt}
+		td{border:1px dashed #B9B9DD;word-break:break-all; word-wrap:break-word;}
+	</style>
 </head>
 <body>
 	<% 
@@ -31,8 +16,8 @@
 		WeixinUser user = (WeixinUser)request.getAttribute("snsUserInfo"); 
 		if(null != user) {
 	%>
-	<table class="table table-bordered">
-		<tr><th width="20%">属性</th><th width="80%">值</th></tr>
+	<table>
+		<tr><td width="20%">属性</td><td width="80%">值</td></tr>
 		<tr><td>OpenID</td><td><%=user.getOpenId()%></td></tr>
 		<tr><td>昵称</td><td><%=user.getNickname()%></td></tr>
 		<tr><td>性别</td><td><%=user.getSex()%></td></tr>
