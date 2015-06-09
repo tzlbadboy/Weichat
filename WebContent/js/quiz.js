@@ -28,7 +28,7 @@
         
         var superContainer = $(this),
         answers = [],
-        introFob = '<div class="intro-container slide-container"><a class="nav-start" href="#">'+config.scale.scaleDescription+'<br/><br/><span><img src="'+config.startImg+'"></span></a></div>	',
+        introFob = '<div class="intro-container slide-container">'+config.scale.scaleDescription+'<br/><br/><a class="nav-start" href="#"><span><img src="'+config.startImg+'"></span></a></div>	',
         exitFob = '<div class="results-container slide-container"><div class="question-number">' + config.endText + '</div><div class="result-keeper"></div></div><div class="notice">请选择一个选项！</div>',
         contentFob = '',
         questionsIteratorIndex,
