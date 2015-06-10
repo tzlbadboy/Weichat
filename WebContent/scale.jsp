@@ -32,19 +32,10 @@ $(function(){
 });
 </script>
 
-<script type="text/javascript">
-var s=0
-function startTime()
-{
-$("#now_time").html(s+"秒");
-s = s+1
-t=setTimeout('startTime()',1000);
-}
-</script>
 
 
 </head>
-<body onload="startTime()">
+<body>
   
 <div class="demo">
 	<div id='quiz-container'></div>

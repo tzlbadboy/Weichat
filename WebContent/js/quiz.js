@@ -26,7 +26,8 @@
         
         var config = $.extend(defaults, settings);
         
-        $("span#all_an").html(config.questions.length);
+        $("#all_an").html(config.questions.length);
+        $("#now_an").html(0);
         
         var superContainer = $(this),
         answers = [],
@@ -40,7 +41,6 @@
        
         
         for (questionsIteratorIndex = 0; questionsIteratorIndex < config.questions.length; questionsIteratorIndex++) {
-        	$("span#now_an").html(questionsIteratorIndex+1);
             contentFob += '<div class="slide-container"><div class="question-number">' + (questionsIteratorIndex + 1) + '/' + config.questions.length + '</div><div class="question">' + (questionsIteratorIndex+1)+'.'+config.questions[questionsIteratorIndex].questionContent + '</div><ul class="answers">';
             for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[questionsIteratorIndex].answers.length; answersIteratorIndex++) {
                 contentFob += '<li>' + config.questions[questionsIteratorIndex].answers[answersIteratorIndex].optionContent + '</li>';
@@ -125,22 +125,34 @@
                 thisLi.addClass('selected');
             }
         });
-      
+        
+        var s=0;
+        function startTime()
+        {
+        $("#now_time").html(s+"秒");
+        s = s+1;
+        setTimeout(startTime,1000);
+        }
+        
         superContainer.find('.nav-start').click(function() {
             $(this).parents('.slide-container').fadeOut(200,
             function() {
                 $(this).next().fadeIn(200);
+                startTime();
                 progressKeeper.fadeIn(200);
+                
             });
             return false;
         });
        
-        
+        var count = 0;
         superContainer.find('.next').click(function() {
             if ($(this).parents('.slide-container').find('li.selected').length === 0) {
                 notice.fadeIn(200);
                 return false;
             }
+            $("#now_an").html(count+1);
+        	count = count+1;
             notice.hide();
             $(this).parents('.slide-container').fadeOut(200,
             function() {
