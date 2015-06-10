@@ -26,6 +26,8 @@
         
         var config = $.extend(defaults, settings);
         
+        $("span#all_an").html(config.questions.length);
+        
         var superContainer = $(this),
         answers = [],
         introFob = '<div class="intro-container slide-container">'+config.scale.scaleDescription+'<br/><br/><a class="nav-start" href="#"><span><img src="'+config.startImg+'"></span></a></div>	',
@@ -35,10 +37,10 @@
         answersIteratorIndex;
         superContainer.addClass('main-quiz-holder');
      
-        $("span#all_an").html(000);
+       
         
         for (questionsIteratorIndex = 0; questionsIteratorIndex < config.questions.length; questionsIteratorIndex++) {
-        	$("span#now_an").html(000);
+        	$("span#now_an").html(questionsIteratorIndex+1);
             contentFob += '<div class="slide-container"><div class="question-number">' + (questionsIteratorIndex + 1) + '/' + config.questions.length + '</div><div class="question">' + (questionsIteratorIndex+1)+'.'+config.questions[questionsIteratorIndex].questionContent + '</div><ul class="answers">';
             for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[questionsIteratorIndex].answers.length; answersIteratorIndex++) {
                 contentFob += '<li>' + config.questions[questionsIteratorIndex].answers[answersIteratorIndex].optionContent + '</li>';

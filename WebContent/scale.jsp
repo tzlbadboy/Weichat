@@ -23,14 +23,12 @@
 		String str = (String)request.getAttribute("questions"); 
   %>
 <script type="text/javascript">
-$(document).ready(function(){
 var init = <%=str%>;
 if(init!=null) {
 $("title").html(init.scale.scaleName); 
 }
 $(function(){
 	$('#quiz-container').jquizzy(init);
-});
 });
 </script>
 
