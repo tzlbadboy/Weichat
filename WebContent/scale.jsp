@@ -23,6 +23,7 @@
 		String str = (String)request.getAttribute("questions"); 
   %>
 <script type="text/javascript">
+$(document).ready(function(){
 var init = <%=str%>;
 if(init!=null) {
 $("title").html(init.scale.scaleName); 
@@ -30,7 +31,9 @@ $("title").html(init.scale.scaleName);
 $(function(){
 	$('#quiz-container').jquizzy(init);
 });
+});
 </script>
+
 <script type="text/javascript">
 var s=0
 function startTime()
@@ -40,6 +43,8 @@ s = s+1
 t=setTimeout('startTime()',1000);
 }
 </script>
+
+
 </head>
 <body onload="startTime()">
   
@@ -59,5 +64,7 @@ t=setTimeout('startTime()',1000);
 </tr>
 </tbody></table>
 </div>
+
+
 </body>
 </html>
