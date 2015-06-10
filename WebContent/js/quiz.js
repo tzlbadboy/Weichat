@@ -35,10 +35,10 @@
         answersIteratorIndex;
         superContainer.addClass('main-quiz-holder');
      
-        document.getElementById('all_an').innerHTML = config.questions.length;
+        $("#all_an").html(config.questions.length);
         
         for (questionsIteratorIndex = 0; questionsIteratorIndex < config.questions.length; questionsIteratorIndex++) {
-        	document.getElementById('now_an').innerHTML = questionsIteratorIndex+1;
+        	$("#now_an").html(questionsIteratorIndex+1);
             contentFob += '<div class="slide-container"><div class="question-number">' + (questionsIteratorIndex + 1) + '/' + config.questions.length + '</div><div class="question">' + (questionsIteratorIndex+1)+'.'+config.questions[questionsIteratorIndex].questionContent + '</div><ul class="answers">';
             for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[questionsIteratorIndex].answers.length; answersIteratorIndex++) {
                 contentFob += '<li>' + config.questions[questionsIteratorIndex].answers[answersIteratorIndex].optionContent + '</li>';

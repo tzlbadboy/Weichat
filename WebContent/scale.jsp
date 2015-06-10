@@ -35,9 +35,9 @@ $(function(){
 var s=0
 function startTime()
 {
+$("#now_time").html(s+"秒");
 s = s+1
-document.getElementById('now_time').innerHTML=s+'<i>秒</i>'
-t=setTimeout('startTime()',1000)
+t=setTimeout('startTime()',1000);
 }
 </script>
 </head>
