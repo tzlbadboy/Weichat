@@ -116,8 +116,13 @@ public class CoreService {
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_LOCATION)){
                 	String Latitude = requestMap.get("Latitude");
                 	String Longitude = requestMap.get("Longitude");
-                	UserDaoImpl.locationUser(Latitude, Longitude, fromUserName);
-                	respContent = "您的坐标为："+Latitude+"\n"+Longitude;
+                	if(!UserDaoImpl.isLocated(fromUserName)) {
+                		UserDaoImpl.locationUser(Latitude, Longitude, fromUserName);
+                	}
+                	else {
+                		UserDaoImpl.updateUserLocation(Latitude, Longitude, fromUserName);
+					}
+                	//respContent = "您的坐标为："+Latitude+"\n"+Longitude;
                 }
                 
                 

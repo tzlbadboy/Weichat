@@ -1,6 +1,7 @@
 package nju.iip.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.json.JSONObject;
 import nju.iip.dao.impl.UserDaoImpl;
 import nju.iip.dto.WeixinOauth2Token;
 import nju.iip.dto.WeixinUser;
@@ -89,6 +91,16 @@ public class OAuthServlet extends HttpServlet {
 			else if(state.equals("jilu")) {
 				request.getRequestDispatcher("ScaleRecordServlet").forward(request, response);
 			}
+			
+			else if(state.equals("nearby")) {
+				List<WeixinUser> user_list = UserDaoImpl.getAllUserLocation();
+				JSONObject json = new JSONObject();
+				json.put("location", user_list);
+				logger.info(json.toString());
+				request.setAttribute("location_json",json.toString());
+				request.getRequestDispatcher("map.jsp").forward(request, response);
+			}
+			
 			else {
 				request.getRequestDispatcher("sorry.jsp").forward(request, response);
 			}

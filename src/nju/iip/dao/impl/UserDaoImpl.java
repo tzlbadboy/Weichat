@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import nju.iip.dto.WeixinUser;
 import nju.iip.util.DBConnection;
@@ -123,6 +125,47 @@ public class UserDaoImpl {
 	}
 	
 	/**
+	 * 判断用户位置是否被记录过
+	 * @param openId
+	 * @return
+	 */
+	public static boolean isLocated(String openId) {
+		 String sql = "select * from weixin_location where openId='"+openId+"'";
+		 try{
+			 conn = DBConnection.getConn(); 
+			 sm=conn.createStatement();
+			 rs=sm.executeQuery(sql);
+			 return rs.next() == true;
+		 }catch(Exception e){
+				e.printStackTrace();
+				return false;
+		 }
+		finally {
+			closeDB();
+		}
+	}
+	
+	public static boolean updateUserLocation(String Latitude,String Longitude,String openId) {
+		Date now = new Date();
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );//可以方便地修改日期格式
+    	String time = dateFormat.format(now);
+		conn =DBConnection.getConn();
+		String sql="update weixin_location set Latitude='"+Latitude+"',Longitude='"+Longitude+"',time='"+time+"' where openId='"+openId+"'";
+		try {
+			conn = DBConnection.getConn(); 
+			ps = conn.prepareStatement(sql);
+			return ps.executeUpdate() == 1 ? true : false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeDB();
+		}
+	}
+	
+	
+	
+	/**
 	 * 记录用户位置信息
 	 * @param Latitude (纬度)
 	 * @param Longitude (经度)
@@ -149,6 +192,32 @@ public class UserDaoImpl {
 		} finally {
 			closeDB();
 		}
+	}
+	
+	public static List<WeixinUser> getAllUserLocation() {
+		List<WeixinUser> user_list = new ArrayList<WeixinUser>();
+		String sql = "select * from weixin_location";
+		try{
+			conn = DBConnection.getConn(); 
+			sm=conn.createStatement();
+			rs=sm.executeQuery(sql);
+		    while(rs.next()){
+		    	WeixinUser user = new WeixinUser();
+				String Latitude = rs.getString("Latitude");
+    			String Longitude = rs.getString("Longitude");
+    			String openId = rs.getString("openId");
+    			user.setLatitude(Latitude);
+    			user.setLongitude(Longitude);
+    		    user.setOpenId(openId);
+    		    user_list.add(user);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			}
+		finally {
+			closeDB();
+		}
+		return user_list;
 	}
 	
 	
@@ -188,7 +257,7 @@ public class UserDaoImpl {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(locationUser("a","b","c"));
+		System.out.println(updateUserLocation("a","b","om8TAtye3lkQ1PQMDzEI9UlMRKgo"));
 	}
 	
 }
