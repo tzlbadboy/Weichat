@@ -52,7 +52,7 @@ t=setTimeout('startTime()',1000)
 <tbody><tr>
 <td id="fix_footer_menu" align="center"><span id="now_an"></span><br>
 已答题目</td>
-<td id="fix_footer_menu" align="center"><span></span><br>
+<td id="fix_footer_menu" align="center"><span id="all_an"></span><br>
 题目总数</td>
 <td id="fix_footer_menu" align="center"><span id="now_time" data-src="21"></span><br>
 答题用时</td>
