@@ -31,8 +31,17 @@ $(function(){
 	$('#quiz-container').jquizzy(init);
 });
 </script>
+<script type="text/javascript">
+var s=0
+function startTime()
+{
+s = s+1
+document.getElementById('now_time').innerHTML=s+'<i>秒</i>'
+t=setTimeout('startTime()',1000)
+}
+</script>
 </head>
-<body>
+<body onload="startTime()">
   
 <div class="demo">
 	<div id='quiz-container'></div>
@@ -50,14 +59,5 @@ $(function(){
 </tr>
 </tbody></table>
 </div>
-<script type="text/javascript">
-var s=0
-function startTime()
-{
-s = s+1
-document.getElementById('now_time').innerHTML=s+'<i>秒</i>'
-t=setTimeout('startTime()',1000)
-}
-</script>
 </body>
 </html>
