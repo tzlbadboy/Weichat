@@ -38,5 +38,26 @@ $(function(){
 	<div id='quiz-container'></div>
 </div>
 
+<div class="fix_footer" id="fix_footer" style="left: 0px; color: rgb(255, 255, 255); height: 55px; width: 100%; position: fixed; bottom: 0%; font-size: 14px; display: block; background-color: rgb(51, 55, 57);">
+<table width="100%" height="100%" border="0" style="border-collapse: collapse;">
+<tbody><tr>
+<td id="fix_footer_menu" align="center"><span id="now_an"></span><br>
+已答题目</td>
+<td id="fix_footer_menu" align="center"><span></span><br>
+题目总数</td>
+<td id="fix_footer_menu" align="center"><span id="now_time" data-src="21"></span><br>
+答题用时</td>
+</tr>
+</tbody></table>
+</div>
+<script type="text/javascript">
+var s=0
+function startTime()
+{
+s = s+1
+document.getElementById('now_time').innerHTML=s+'<i>秒</i>'
+t=setTimeout('startTime()',1000)
+}
+</script>
 </body>
 </html>
