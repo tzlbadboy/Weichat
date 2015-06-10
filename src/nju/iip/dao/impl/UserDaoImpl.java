@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import nju.iip.dto.WeixinUser;
 import nju.iip.util.DBConnection;
@@ -121,6 +123,37 @@ public class UserDaoImpl {
 	}
 	
 	/**
+	 * 记录用户位置信息
+	 * @param Latitude (纬度)
+	 * @param Longitude (经度)
+	 * @param openId
+	 * @return
+	 */
+	public static boolean locationUser(String Latitude,String Longitude,String openId) {
+		Date now = new Date();
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );//可以方便地修改日期格式
+    	String time = dateFormat.format(now);
+		conn =DBConnection.getConn();
+    	ps = null;
+    	String sql = "insert into weixin_location(Latitude,Longitude,openId,time) values(?,?,?,?)";
+    	try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, Latitude);
+			ps.setString(2, Longitude);
+			ps.setString(3,openId);
+			ps.setString(4, time);
+			return ps.executeUpdate() == 1 ? true : false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeDB();
+		}
+	}
+	
+	
+	
+	/**
 	 * 关闭数据库
 	 */
 	public static void closeDB() {
@@ -152,6 +185,10 @@ public class UserDaoImpl {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(locationUser("a","b","c"));
 	}
 	
 }
