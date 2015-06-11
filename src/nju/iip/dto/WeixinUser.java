@@ -10,12 +10,6 @@ import java.util.List;
  */
 public class WeixinUser {
 	
-	//当前所在位置维度
-	private String latitude;
-	
-	//当前所在位置经度
-	private String longitude;
-
 	//用户姓名
 	private String name;
 	
@@ -43,22 +37,6 @@ public class WeixinUser {
 	// 用户特权信息
 	private List<String> privilegeList;
 	
-	
-	public String getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
-	}
 
 	public String getName() {
 		return name;

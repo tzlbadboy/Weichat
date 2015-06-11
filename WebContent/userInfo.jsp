@@ -27,7 +27,7 @@
 <body>
 	<% 
 		// 获取由OAuthServlet中传入的参数
-		WeixinUser user = (WeixinUser)request.getAttribute("snsUserInfo"); 
+		WeixinUser user = (WeixinUser)request.getSession().getAttribute("snsUserInfo"); 
 		if(null != user) {
 	%>
 	<table class="table table-bordered">

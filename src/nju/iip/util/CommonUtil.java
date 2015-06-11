@@ -15,6 +15,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 
+import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
@@ -24,10 +25,12 @@ public class CommonUtil {
 	
 	private static Logger log = LoggerFactory.getLogger(CommonUtil.class);
 
-	// 凭证获取（GET）
-	public final static String token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
+	// 获取access_token的接口地址（GET） 限200（次/天）  
+    public final static String access_token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";  
 	
-	/**
+    
+    
+    /**
 	 * 发送https请求
 	 * 
 	 * @param requestUrl 请求地址
@@ -120,5 +123,49 @@ public class CommonUtil {
 
         return result; 
     } 
+    
+    
+ 
+    
+    /** 
+     * 获取access_token 
+     *  
+     * @param appid 凭证 
+     * @param appsecret 密钥 
+     * @return 
+     */  
+    public static String getAccessToken(String appid, String appsecret) {  
+    	String accessToken = null;  
+      
+        String requestUrl = access_token_url.replace("APPID", appid).replace("APPSECRET", appsecret);  
+        JSONObject jsonObject = httpsRequest(requestUrl, "GET", null);  
+        // 如果请求成功  
+        if (null != jsonObject) {  
+            try {  
+            	accessToken = jsonObject.getString("access_token");
+            } catch (JSONException e) {  
+                accessToken = null;  
+                // 获取token失败  
+                log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));  
+            }  
+        }  
+        return accessToken;  
+    }  
+    
+    
+    
+    
+    
+    public static void main(String[] args) {
+    	String url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN";
+    	String ACCESS_TOKEN = getAccessToken("wxb4bb093136ffd648","0a513930a9e98380ec1b338f5cd47390");
+    	url = url.replace("ACCESS_TOKEN", ACCESS_TOKEN);
+    	String str = "{ \"touser\": \"om8TAt3AZ45vL04yMlqw08FPLQBs\", \"msgtype\": \"text\", \"text\": { \"content\": \"Hello World！\" } }";
+    	//System.out.println(url);
+    	System.out.println(ACCESS_TOKEN);
+    	JSONObject jsonObject = httpsRequest(url,"POST",str);
+    	System.out.println("errmsg="+jsonObject.get("errmsg"));
+    	System.out.println("errcode="+jsonObject.get("errcode"));
+    }
 
 }

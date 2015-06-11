@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import nju.iip.dao.impl.LocationDaoImpl;
 import nju.iip.dao.impl.UserDaoImpl;
 import nju.iip.dto.TextMessage;
 import nju.iip.servlet.OAuthServlet;
@@ -116,11 +117,11 @@ public class CoreService {
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_LOCATION)){
                 	String Latitude = requestMap.get("Latitude");
                 	String Longitude = requestMap.get("Longitude");
-                	if(!UserDaoImpl.isLocated(fromUserName)) {
-                		UserDaoImpl.locationUser(Latitude, Longitude, fromUserName);
+                	if(!LocationDaoImpl.isLocated(fromUserName)) {
+                		LocationDaoImpl.locationUser(Latitude, Longitude, fromUserName);
                 	}
                 	else {
-                		UserDaoImpl.updateUserLocation(Latitude, Longitude, fromUserName);
+                		LocationDaoImpl.updateUserLocation(Latitude, Longitude, fromUserName);
 					}
                 	//respContent = "您的坐标为："+Latitude+"\n"+Longitude;
                 }
