@@ -154,13 +154,11 @@ public class CommonUtil {
     
     
     
-    
-    
     public static void main(String[] args) {
     	String url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN";
     	String ACCESS_TOKEN = getAccessToken("wxb4bb093136ffd648","0a513930a9e98380ec1b338f5cd47390");
     	url = url.replace("ACCESS_TOKEN", ACCESS_TOKEN);
-    	String str = "{ \"touser\": \"om8TAt3AZ45vL04yMlqw08FPLQBs\", \"msgtype\": \"text\", \"text\": { \"content\": \"Hello World！\" } }";
+    	String str = "{ \"touser\": \"om8TAt_NhOv_H0uejKd94DEg12BM\", \"msgtype\": \"text\", \"text\": { \"content\": \"OK~\" } }";
     	//System.out.println(url);
     	System.out.println(ACCESS_TOKEN);
     	JSONObject jsonObject = httpsRequest(url,"POST",str);

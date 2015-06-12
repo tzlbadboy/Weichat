@@ -1,19 +1,14 @@
 package nju.iip.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import nju.iip.dao.impl.UserDaoImpl;
-import nju.iip.dto.WeixinOauth2Token;
 import nju.iip.dto.WeixinUser;
-import nju.iip.util.AdvancedUtil;
 
 /**
  * 用户注册
@@ -52,6 +47,9 @@ public class RegisterServlet extends HttpServlet {
 	     String phone = request.getParameter("phone");
 	     String openId = request.getSession().getAttribute("openId").toString();
 	     WeixinUser user = (WeixinUser)request.getSession().getAttribute("snsUserInfo");
+	     logger.info("name="+name);
+	     logger.info("cardId="+cardId);
+	     logger.info("phone="+phone);
 	     user.setName(name);
 	     user.setCardID(cardId);
 	     user.setOpenId(openId);

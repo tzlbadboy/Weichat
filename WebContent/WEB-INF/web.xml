@@ -50,14 +50,14 @@
     <url-pattern>/GetScaleServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetAnswerServlet</servlet-name>
+    <servlet-name>RecordAnswerServlet</servlet-name>
     <servlet-class>  
-            nju.iip.servlet.GetAnswerServlet  
+            nju.iip.servlet.RecordAnswerServlet  
         </servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetAnswerServlet</servlet-name>
-    <url-pattern>/GetAnswerServlet</url-pattern>
+    <servlet-name>RecordAnswerServlet</servlet-name>
+    <url-pattern>/RecordAnswerServlet</url-pattern>
   </servlet-mapping>
   
   <servlet>
