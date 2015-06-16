@@ -48,7 +48,7 @@
 	</div>
 
 	<div class="fix_footer" id="fix_footer"
-		style="left: 0px; color: rgb(255, 255, 255); height: 55px; width: 100%; position: fixed; bottom: 0%; font-size: 14px; display: block; background-color:#337ab7;">
+		style="left: 0px; color: rgb(255, 255, 255); height: 55px; width: 100%; position: fixed; bottom: 0%; font-size: 14px; display: block; background-color:rgb(51, 55, 57);">
 		<table width="100%" height="100%" border="0"
 			style="border-collapse: collapse;">
 			<tbody>
