@@ -59,7 +59,6 @@
     <servlet-name>RecordAnswerServlet</servlet-name>
     <url-pattern>/RecordAnswerServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ScaleRecordServlet</servlet-name>
     <servlet-class>  
@@ -81,5 +80,18 @@
     <servlet-name>GetScaleListServlet</servlet-name>
     <url-pattern>/GetScaleListServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ReceivePostServlet</servlet-name>
+    <servlet-class>  
+            nju.iip.servlet.ReceivePostServlet  
+        </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReceivePostServlet</servlet-name>
+    <url-pattern>/ReceivePostServlet</url-pattern>
+  </servlet-mapping>
+  
+  
   
 </web-app>
