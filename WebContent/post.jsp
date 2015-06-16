@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>Bootstrap 101 Template</title>
+<title>社区问答</title>
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/base.css">
@@ -114,6 +114,7 @@ $(document).ready(function(){
             success: function(msg){
                // alert(msg+"!");
                $("#myModal").modal('hide');
+               setTimeout(function(){ $(".bs-example-modal-sm").modal('hide');},2000);
             }
         });
   });
