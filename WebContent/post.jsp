@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" pageEncoding="utf-8"%>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -9,39 +10,31 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/common.css">
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<style type="text/css">
-body {
-	padding-top: 50px;
-}
-
-.starter-template {
-	padding: 40px 15px;
-	text-align: center;
-}
-</style>
 </head>
 <body>
-
-
-
-
-	<div class="container">
-
-
-
-		<div class="starter-template">
-			<h1>Bootstrap starter template</h1>
-			<p class="lead">
-				Use this document as a way to quickly start any new project.<br>
-				All you get is this text and a mostly barebones HTML document.
-			</p>
-		</div>
+	<%
+		for (int i = 0; i < 7; i++) {
+	%>
+	<div class="bgfff form ov">
+		<div class="fb">title：这里是标题</div>
+		<hr />
+		<div>这里是正文</div>
+		<hr />
+		<div>这里帖子相关信息</div>
 	</div>
-	<!-- /.container -->
 
 
+	<%
+		}
+	%>
+
+	<div style="margin: 10px 0 60px 0">
+		<button type="button" class="btn btn-info"
+			style="margin: 0 auto; display: block;">下一页</button>
+	</div>
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1">
@@ -55,42 +48,44 @@ body {
 				</div>
 				<div class="modal-body">
 
-						<div class="form-group">
-							<label for="recipient-name" class="control-label">标题:</label> <input
-								type="text" class="form-control" name="username"
-								id="recipient-name">
-						</div>
-						<div class="form-group">
-							<label for="message-text" class="control-label">内容:</label>
-							<textarea class="form-control" id="message-text" name="message"></textarea>
-						</div>
-						<font color="red" id="error"></font> 
-						<div class="modal-footer">
-							<input type="button" class="btn btn-default" data-dismiss="modal"
-								value="取消"> 
-								
-							<input type="button" class="btn btn-primary" id="send" value="确认">
-						</div>
+					<div class="form-group">
+						<label for="recipient-name" class="control-label">标题:</label> <input
+							type="text" class="form-control" name="username"
+							id="recipient-name">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="control-label">内容:</label>
+						<textarea class="form-control" id="message-text" name="message"></textarea>
+					</div>
+					<font color="red" id="error"></font>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal"
+							value="取消"> <input type="button" class="btn btn-primary"
+							id="send" value="确认">
+					</div>
 				</div>
 
 			</div>
 		</div>
 	</div>
-	
-	
-	
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content" style="text-align: center;">
-      <br>发帖成功！<span class="glyphicon glyphicon-ok"></span><br><br>
-    </div>
-  </div>
-</div>
-	
-	
+
+
+
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content" style="text-align: center;">
+				<br>发帖成功！<span class="glyphicon glyphicon-ok"></span><br>
+				<br>
+			</div>
+		</div>
+	</div>
+
+
 
 	<nav class="navbar navbar-default navbar-fixed-bottom">
-		<div class="container" style="padding-right: 0; padding-left: 0;width:100%;">
+		<div class="container"
+			style="padding-right: 0; padding-left: 0; width: 100%;">
 			<!-- Button trigger modal -->
 			<button type="button" class="btn btn-primary btn-lg"
 				data-toggle="modal" data-target="#myModal"
@@ -99,34 +94,38 @@ body {
 			</button>
 		</div>
 	</nav>
-	
-	
-	
 
-<script type="text/javascript">
-$(document).ready(function(){
-  $("input#send").click(function(){
-	  var title = $("input#recipient-name").val();
-	  var content = $("textarea#message-text").val();
-	  if(title===""||content==="") {
-		 $("#error").html("内容不能为空！");
-	  }
-	  else {
-	    $.ajax({
-            type: 'POST',
-            url: "ReceivePostServlet",
-            data: {"title":title,"content":content},
-            success: function(msg){
-               // alert(msg+"!");
-               $("#myModal").modal('hide');
-               $(".bs-example-modal-sm").modal('show');
-               setTimeout(function(){$(".bs-example-modal-sm").modal('hide');},2000);
-            }
-        });
-	  }
-  });
-});
-</script>
+
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("input#send").click(function() {
+				var title = $("input#recipient-name").val();
+				var content = $("textarea#message-text").val();
+				if (title == "" || content == "") {
+					$("#error").html("内容不能为空！");
+				} else {
+					$.ajax({
+						type : 'POST',
+						url : "ReceivePostServlet",
+						data : {
+							"title" : title,
+							"content" : content
+						},
+						success : function(msg) {
+							// alert(msg+"!");
+							$("#myModal").modal('hide');
+							$(".bs-example-modal-sm").modal('show');
+							setTimeout(function() {
+								$(".bs-example-modal-sm").modal('hide');
+							}, 2000);
+						}
+					});
+				}
+			});
+		});
+	</script>
 
 </body>
 </html>

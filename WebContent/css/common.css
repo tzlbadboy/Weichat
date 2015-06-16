@@ -1,10 +1,10 @@
 ﻿@charset "utf-8";
 /* CSS Document */
-body{background:#e4e4e4; font-size:14px;font-family:Arial, '微软雅黑', sans-serif;}
+body{background:#e4e4e4; font-size:14px;font-family:Arial, '微软雅黑', sans-serif;line-height: 0.5;}
 a,textarea,button,input,ul,li,div,span,td{ font-size:14px;font-family:Arial, '微软雅黑', sans-serif;-webkit-appearance:none;}
 .container{max-width:640px; margin:0 auto;}
 .wrap{max-width:640px; margin:0 auto;}
-.bgfff{background:#fff; width:82%; margin:0 auto; padding:20px; margin-top:20px;}
+.bgfff{background:#fff; width:90%; margin:0 auto; padding:15px; margin-top:10px;border-radius: 6px;}
 .le_sp{letter-spacing:7px;}
 .cur{cursor:pointer;}
 /* 连接颜色 */
