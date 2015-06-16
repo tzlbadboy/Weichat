@@ -64,11 +64,12 @@ body {
 							<label for="message-text" class="control-label">内容:</label>
 							<textarea class="form-control" id="message-text" name="message"></textarea>
 						</div>
+						<font color="red" id="error"></font> 
 						<div class="modal-footer">
 							<input type="button" class="btn btn-default" data-dismiss="modal"
 								value="取消"> 
 								
-							<input type="button" class="btn btn-primary" id="send" value="确认" data-toggle="modal" data-target=".bs-example-modal-sm">
+							<input type="button" class="btn btn-primary" id="send" value="确认">
 						</div>
 				</div>
 
@@ -107,6 +108,10 @@ $(document).ready(function(){
   $("input#send").click(function(){
 	  var title = $("input#recipient-name").val();
 	  var content = $("textarea#message-text").val();
+	  if(title===""||content==="") {
+		 $("#error").html("内容不能为空！");
+	  }
+	  else {
 	    $.ajax({
             type: 'POST',
             url: "ReceivePostServlet",
@@ -114,9 +119,11 @@ $(document).ready(function(){
             success: function(msg){
                // alert(msg+"!");
                $("#myModal").modal('hide');
-               setTimeout(function(){ $(".bs-example-modal-sm").modal('hide');},2000);
+               $(".bs-example-modal-sm").modal('show');
+               setTimeout(function(){$(".bs-example-modal-sm").modal('hide');},2000);
             }
         });
+	  }
   });
 });
 </script>
