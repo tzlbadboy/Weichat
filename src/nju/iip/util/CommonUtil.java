@@ -1,6 +1,7 @@
 package nju.iip.util;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -155,13 +156,25 @@ public class CommonUtil {
     
     
     public static void main(String[] args) {
+    	
+    	String line = "";
+    	//从json.txt中把json内容取出来
+    	try {
+    		FileInputStream fs = new FileInputStream( "json.txt");
+        	InputStreamReader is= new InputStreamReader(fs,"utf8" );
+        	BufferedReader br= new BufferedReader(is);
+        	line=br.readLine();
+        	br.close();
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	
     	String url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN";
-    	String ACCESS_TOKEN = getAccessToken("wxb4bb093136ffd648","0a513930a9e98380ec1b338f5cd47390");
-    	url = url.replace("ACCESS_TOKEN", ACCESS_TOKEN);
-    	String str = "{ \"touser\": \"om8TAt_NhOv_H0uejKd94DEg12BM\", \"msgtype\": \"text\", \"text\": { \"content\": \"OK~\" } }";
-    	//System.out.println(url);
-    	System.out.println(ACCESS_TOKEN);
-    	JSONObject jsonObject = httpsRequest(url,"POST",str);
+    	//String ACCESS_TOKEN = getAccessToken("wxb4bb093136ffd648","0a513930a9e98380ec1b338f5cd47390");
+    	url = url.replace("ACCESS_TOKEN", "1fYiNdw8BI-Kb95sfO3Ldsxnv5WwUGUa8HmlLvV0tVG7_qHZf7SZn7aOSj_VQwsqc7SXpTF5dSUwQxe_9bQXQoJw0bf5EnCf7fftVmN9VCs");
+    	System.out.println(line);
+    	//System.out.println(ACCESS_TOKEN);
+    	JSONObject jsonObject = httpsRequest(url,"POST",line);
     	System.out.println("errmsg="+jsonObject.get("errmsg"));
     	System.out.println("errcode="+jsonObject.get("errcode"));
     }
