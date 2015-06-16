@@ -52,6 +52,13 @@
         {
             "name": "互动", 
             "sub_button": [
+            
+                {
+                    "type": "view", 
+                    "name": "社区问答", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=bbs#wechat_redirect"
+                },
+            
    
                 {
                     "type": "view", 
