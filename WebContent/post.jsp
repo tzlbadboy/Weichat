@@ -78,7 +78,7 @@
 		aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content" id="show_reslut" style="text-align: center;margin: 5px auto 5px auto">
-				<span class="glyphicon glyphicon-ok"></span>
+				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><hr />
 			</div>
 		</div>
 	</div>
@@ -124,7 +124,7 @@
 						success : function(msg) {
 							// alert(msg+"!");
 							$("#myModal").modal('hide');
-							$("div#show_reslut").html("<br><br>"+msg+"<br>");
+							$("span.return_msg").html("<br><br>"+msg);
 							$(".bs-example-modal-sm").modal('show');
 							setTimeout(function() {
 								$(".bs-example-modal-sm").modal('hide');

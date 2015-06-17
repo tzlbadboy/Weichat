@@ -67,9 +67,9 @@ public class ReceivePostServlet extends HttpServlet {
 		post.setPostTime(CommonUtil.getTime());
 		PrintWriter out = response.getWriter();
 		if (PostDaoImpl.addPost(post)) {
-			out.write("发帖成功！");
+			out.write("发帖成功");
 		} else {
-			out.write("发帖失败！");
+			out.write("发帖失败");
 		}
 
 		out.flush();
