@@ -34,8 +34,6 @@
 	%>
 
 	<div style="margin: 10px 0 60px 0">
-		<button type="button" class="btn btn-info"
-			style="margin: 0 auto; display: block;">下一页</button>
 	</div>
 
 	<!-- Modal -->
@@ -78,7 +76,7 @@
 		aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content" id="show_reslut" style="text-align: center;margin: 5px auto 5px auto">
-				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><hr />
+				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><br><br><br>
 			</div>
 		</div>
 	</div>
