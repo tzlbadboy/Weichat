@@ -2,7 +2,7 @@
 /* CSS Document */
 body{background:#e4e4e4; font-size:14px;font-family:Arial, '微软雅黑', sans-serif;line-height: 0.5;}
 a,textarea,button,input,ul,li,div,span,td{ font-size:14px;font-family:Arial, '微软雅黑', sans-serif;-webkit-appearance:none;}
-.container{max-width:640px; margin:0 auto;}
+.container{margin:0 auto;}
 .wrap{max-width:640px; margin:0 auto;}
 .bgfff{background:#fff; width:90%; margin:0 auto; padding:15px; margin-top:10px;border-radius: 6px;}
 .le_sp{letter-spacing:7px;}

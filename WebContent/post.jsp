@@ -48,12 +48,13 @@
 				</div>
 				<div class="modal-body">
 
-					<div class="form-group">
-						<label for="recipient-name" class="control-label">标题:</label> <input
-							type="text" class="form-control" name="username"
-							id="recipient-name">
+					<div class="form-group" id="form-title">
+						<label for="recipient-name" class="control-label">标题:</label> 
+						<input type="text" class="form-control" name="username"
+							id="message-title" >
+							
 					</div>
-					<div class="form-group">
+					<div class="form-group" id="form-content">
 						<label for="message-text" class="control-label">内容:</label>
 						<textarea class="form-control" id="message-text" name="message"></textarea>
 					</div>
@@ -101,11 +102,17 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("input#send").click(function() {
-				var title = $("input#recipient-name").val();
+				var title = $("input#message-title").val();
 				var content = $("textarea#message-text").val();
-				if (title == "" || content == "") {
-					$("#error").html("内容不能为空！");
-				} else {
+				if (title == "") {
+					$("#form-title").addClass("has-error");
+					$("#message-title").attr("placeholder","请输入标题");
+				}
+				if(content == "") {
+					$("#form-content").addClass("has-error");
+					$("#message-text").attr("placeholder","请输入内容");
+				}
+				if(title!=""&&content!=""){
 					$.ajax({
 						type : 'POST',
 						url : "ReceivePostServlet",
