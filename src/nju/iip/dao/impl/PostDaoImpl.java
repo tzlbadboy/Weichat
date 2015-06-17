@@ -55,7 +55,7 @@ public class PostDaoImpl {
 	 */
 	public static List<Post> getAllPost() {
 		List<Post> post_list = new ArrayList<Post>();
-		String sql = "select * from weixin_post order by id";
+		String sql = "select * from weixin_post order by id desc";
 		try {
 			conn = DBConnection.getConn();
 			sm=conn.createStatement();
