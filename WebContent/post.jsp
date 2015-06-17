@@ -77,9 +77,8 @@
 	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
 		aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
-			<div class="modal-content" style="text-align: center;">
-				<br>发帖成功！<span class="glyphicon glyphicon-ok"></span><br>
-				<br>
+			<div class="modal-content" id="show_reslut" style="text-align: center;margin: 5px auto 5px auto">
+				<span class="glyphicon glyphicon-ok"></span>
 			</div>
 		</div>
 	</div>
@@ -125,6 +124,7 @@
 						success : function(msg) {
 							// alert(msg+"!");
 							$("#myModal").modal('hide');
+							$("div#show_reslut").html("<br><br>"+msg+"<br>");
 							$(".bs-example-modal-sm").modal('show');
 							setTimeout(function() {
 								$(".bs-example-modal-sm").modal('hide');

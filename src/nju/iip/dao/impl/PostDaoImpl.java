@@ -28,7 +28,7 @@ public class PostDaoImpl {
 	 * @return
 	 */
 	public static boolean addPost(Post post) {
-		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId,lastReplyTime) values(?,?,?,?,?,?,?)";
+		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId) values(?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
