@@ -106,7 +106,7 @@ public class OAuthServlet extends HttpServlet {
 			}
 			
 			else if(state.equals("bbs")) {
-				request.getRequestDispatcher("post.jsp").forward(request, response);
+				request.getRequestDispatcher("post_list.jsp").forward(request, response);
 			}
 			
 			else {

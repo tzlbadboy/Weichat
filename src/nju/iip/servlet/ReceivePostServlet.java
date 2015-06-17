@@ -59,6 +59,7 @@ public class ReceivePostServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		logger.info("title=" + title + " content=" + content);
 		Post post = new Post();
+		post.setHeadImgUrl(user.getHeadImgUrl());
 		post.setTitle(title);
 		post.setContent(content);
 		post.setOpenId(user.getOpenId());

@@ -30,7 +30,7 @@ public class PostDaoImpl {
 	 * @return
 	 */
 	public static boolean addPost(Post post) {
-		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId) values(?,?,?,?,?,?)";
+		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId,headImgUrl) values(?,?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
@@ -40,6 +40,7 @@ public class PostDaoImpl {
 			ps.setString(4, post.getAuthor());
 			ps.setInt(5,post.getReply());
 			ps.setString(6, post.getOpenId());
+			ps.setString(7, post.getHeadImgUrl());
 			return ps.executeUpdate() == 1 ? true : false;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -80,6 +81,34 @@ public class PostDaoImpl {
 		return post_list;
 	}
 	
+	/**
+	 * 根据帖子id取出帖子
+	 * @param id
+	 * @return
+	 */
+	public static Post getPostById(int id) {
+		Post post =new Post();
+		String sql = "select * from weixin_post where id='"+id+"'";
+		try {
+			conn = DBConnection.getConn();
+			sm=conn.createStatement();
+			rs=sm.executeQuery(sql);
+			if(rs.next()) {
+				post.setAuthor(rs.getString("author"));
+				post.setContent(rs.getString("content"));
+				post.setTitle(rs.getString("title"));
+				post.setHeadImgUrl(rs.getString("headImgUrl"));
+				post.setPostTime(rs.getString("postTime"));
+				post.setReply(rs.getInt("reply"));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			}
+		finally {
+			closeDB();
+		}
+		return post;
+	}
 	
 	
 

@@ -1,36 +1,47 @@
 package nju.iip.dto;
 
-
 /**
  * 帖子类
+ * 
  * @author wangqiang
- *
+ * 
  */
 public class Post {
-	
-	//帖子id
+
+	// 帖子id
 	private int id;
-	
-	//标题
+
+	// 标题
 	private String title;
-	
-	//内容
+
+	// 内容
 	private String content;
-	
-	//作者
+
+	// 作者
 	private String author;
-	
-	//发帖人的openId
+
+	// 发帖人的openId
 	private String openId;
-	
-	//发帖时间
+
+	// 用户头像链接
+	private String headImgUrl;
+
+	// 发帖时间
 	private String postTime;
-	
-	//回复数
+
+	// 回复数
 	private int reply;
-	
-	//最后回复时间
+
+	// 最后回复时间
 	private String lastReplyTime;
+
+	public String getHeadImgUrl() {
+		return headImgUrl;
+	}
+
+	public void setHeadImgUrl(String headImgUrl) {
+		this.headImgUrl = headImgUrl;
+	}
 
 	public int getId() {
 		return id;
