@@ -1,7 +1,6 @@
 package nju.iip.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 import nju.iip.dao.impl.LocationDaoImpl;
-import nju.iip.dao.impl.PostDaoImpl;
 import nju.iip.dao.impl.UserDaoImpl;
-import nju.iip.dto.Post;
 import nju.iip.dto.WeixinOauth2Token;
 import nju.iip.dto.WeixinUser;
 import nju.iip.util.AdvancedUtil;

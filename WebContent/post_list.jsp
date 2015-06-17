@@ -21,20 +21,30 @@
 <body>
 	<%
 		List<Post> post_list = PostDaoImpl.getAllPost();
-			for (Post post:post_list) {
+		for (Post post:post_list) {
 	%>
-	<div class="bgfff form ov" id=<%=post.getId() %>>
+	<div class="bgfff form ov" id=<%=post.getId()%>>
 		<div class="fb">
 			<font size="3.5px"><%=post.getTitle()%></font>
 		</div>
-		<hr style="border:0;height:0.1px;" />
+		<hr style="border: 0; height: 0.1px;" />
 		<div>
 			<font size="3px"><%=post.getContent()%></font>
 		</div>
 		<hr />
 		<div>
-			<font size="2px" color="#337ab7"><%=post.getAuthor()%></font>&nbsp;&nbsp;<font
-				size="1.5px" color="#C8C6C6"><%=post.getPostTime()%></font>
+			<table width="100%">
+				<tr>
+					<td width="50%"><font size="2px" color="#337ab7"><%=post.getAuthor()%></font>&nbsp;&nbsp;<font
+						size="1.5px" color="#C8C6C6"><%=post.getPostTime()%></font></td>
+						
+						<td style="text-align:right;">
+						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;
+						<font
+						size="3px" color="#C8C6C6"><%=post.getReply()%></font>&nbsp;&nbsp;
+						</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 
@@ -111,15 +121,12 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
-			
+
 			$("div.bgfff").click(function() {
 				var postId = $(this).attr("id");
-				location.href = "ShowPostServlet?id="+postId;
+				location.href = "ShowPostServlet?id=" + postId;
 			});
-			
-			
-			
+
 			$("input#send").click(function() {
 				var title = $("input#message-title").val();
 				var content = $("textarea#message-text").val();
@@ -148,7 +155,7 @@
 								$(".bs-example-modal-sm").modal('hide');
 								location.href = "post_list.jsp";
 							}, 2000);
-							
+
 						}
 					});
 				}
