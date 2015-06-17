@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import nju.iip.dto.Post;
 import nju.iip.util.DBConnection;
@@ -47,6 +49,38 @@ public class PostDaoImpl {
 		}
 	}
 	
+	/**
+	 * 获得所有帖子
+	 * @return
+	 */
+	public static List<Post> getAllPost() {
+		List<Post> post_list = new ArrayList<Post>();
+		String sql = "select * from weixin_post order by id";
+		try {
+			conn = DBConnection.getConn();
+			sm=conn.createStatement();
+			rs=sm.executeQuery(sql);
+			while(rs.next()) {
+				Post post = new Post();
+				post.setAuthor(rs.getString("author"));
+				post.setContent(rs.getString("content"));
+				post.setId(rs.getInt("id"));
+				post.setPostTime(rs.getString("postTime"));
+				post.setTitle(rs.getString("title"));
+				post.setReply(rs.getInt("reply"));
+				post_list.add(post);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			}
+		finally {
+			closeDB();
+		}
+		
+		return post_list;
+	}
+	
+	
 	
 
 	/**
@@ -81,6 +115,14 @@ public class PostDaoImpl {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static void main(String[] args) {
+		List<Post> post_list = getAllPost();
+		for(Post post:post_list) {
+			System.out.println(post.getId());
+		}
+		
 	}
 
 }

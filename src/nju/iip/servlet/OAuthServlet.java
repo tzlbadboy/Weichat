@@ -1,6 +1,7 @@
 package nju.iip.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,15 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.sf.json.JSONObject;
 import nju.iip.dao.impl.LocationDaoImpl;
+import nju.iip.dao.impl.PostDaoImpl;
 import nju.iip.dao.impl.UserDaoImpl;
+import nju.iip.dto.Post;
 import nju.iip.dto.WeixinOauth2Token;
 import nju.iip.dto.WeixinUser;
 import nju.iip.util.AdvancedUtil;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -103,6 +106,8 @@ public class OAuthServlet extends HttpServlet {
 			}
 			
 			else if(state.equals("bbs")) {
+				List<Post> post_list = PostDaoImpl.getAllPost();
+				request.setAttribute("posts", post_list);
 				request.getRequestDispatcher("post.jsp").forward(request, response);
 			}
 			

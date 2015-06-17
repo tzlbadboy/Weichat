@@ -1,4 +1,7 @@
 ﻿<%@ page language="java" pageEncoding="utf-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="nju.iip.dto.Post"%>
+<%@ page import="nju.iip.dao.impl.PostDaoImpl"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -18,14 +21,21 @@
 </head>
 <body>
 	<%
-		for (int i = 0; i < 7; i++) {
+		// List<Post> post_list = PostDaoImpl.getAllPost();
+		List<Post> post_list = (List<Post>) request.getAttribute("posts");
+			for (Post post:post_list) {
 	%>
 	<div class="bgfff form ov">
-		<div class="fb">title：这里是标题</div>
+		<div class="fb"><%=post.getTitle()%></div>
 		<hr />
-		<div>这里是正文</div>
+		<div>
+			<font size="2.5px"><%=post.getContent()%></font>
+		</div>
 		<hr />
-		<div>这里帖子相关信息</div>
+		<div>
+			<font size="1.5px" color="#337ab7"><%=post.getAuthor()%></font>&nbsp;&nbsp;<font
+				size="1" color="#C8C6C6"><%=post.getPostTime()%></font>
+		</div>
 	</div>
 
 
@@ -33,8 +43,7 @@
 		}
 	%>
 
-	<div style="margin: 10px 0 60px 0">
-	</div>
+	<div style="margin: 10px 0 60px 0"></div>
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1">
@@ -75,8 +84,11 @@
 	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
 		aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
-			<div class="modal-content" id="show_reslut" style="text-align: center;margin: 5px auto 5px auto">
-				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><br><br><br>
+			<div class="modal-content" id="show_reslut"
+				style="text-align: center; margin: 5px auto 5px auto">
+				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><br>
+				<br>
+				<br>
 			</div>
 		</div>
 	</div>
@@ -122,7 +134,7 @@
 						success : function(msg) {
 							// alert(msg+"!");
 							$("#myModal").modal('hide');
-							$("span.return_msg").html("<br><br>"+msg);
+							$("span.return_msg").html("<br><br>" + msg);
 							$(".bs-example-modal-sm").modal('show');
 							setTimeout(function() {
 								$(".bs-example-modal-sm").modal('hide');
