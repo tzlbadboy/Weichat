@@ -106,8 +106,6 @@ public class OAuthServlet extends HttpServlet {
 			}
 			
 			else if(state.equals("bbs")) {
-				List<Post> post_list = PostDaoImpl.getAllPost();
-				request.setAttribute("posts", post_list);
 				request.getRequestDispatcher("post.jsp").forward(request, response);
 			}
 			

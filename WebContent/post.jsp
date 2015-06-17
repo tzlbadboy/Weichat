@@ -21,20 +21,21 @@
 </head>
 <body>
 	<%
-		// List<Post> post_list = PostDaoImpl.getAllPost();
-		List<Post> post_list = (List<Post>) request.getAttribute("posts");
+		List<Post> post_list = PostDaoImpl.getAllPost();
 			for (Post post:post_list) {
 	%>
 	<div class="bgfff form ov">
-		<div class="fb"><%=post.getTitle()%></div>
-		<hr />
-		<div>
-			<font size="2.5px"><%=post.getContent()%></font>
+		<div class="fb">
+			<font size="3.5px"><%=post.getTitle()%></font>
 		</div>
 		<hr />
 		<div>
-			<font size="1.5px" color="#337ab7"><%=post.getAuthor()%></font>&nbsp;&nbsp;<font
-				size="1" color="#C8C6C6"><%=post.getPostTime()%></font>
+			<font size="3px"><%=post.getContent()%></font>
+		</div>
+		<hr />
+		<div>
+			<font size="2px" color="#337ab7"><%=post.getAuthor()%></font>&nbsp;&nbsp;<font
+				size="1.5px" color="#C8C6C6"><%=post.getPostTime()%></font>
 		</div>
 	</div>
 
@@ -87,8 +88,7 @@
 			<div class="modal-content" id="show_reslut"
 				style="text-align: center; margin: 5px auto 5px auto">
 				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><br>
-				<br>
-				<br>
+				<br> <br>
 			</div>
 		</div>
 	</div>
@@ -138,7 +138,9 @@
 							$(".bs-example-modal-sm").modal('show');
 							setTimeout(function() {
 								$(".bs-example-modal-sm").modal('hide');
+								location.href = "post.jsp";
 							}, 2000);
+							
 						}
 					});
 				}
