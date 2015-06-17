@@ -5,6 +5,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport"
+	content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>社区问答</title>
 <!-- Bootstrap -->
@@ -49,10 +51,10 @@
 				<div class="modal-body">
 
 					<div class="form-group" id="form-title">
-						<label for="recipient-name" class="control-label">标题:</label> 
-						<input type="text" class="form-control" name="username"
-							id="message-title" >
-							
+						<label for="recipient-name" class="control-label">标题:</label> <input
+							type="text" class="form-control" name="username"
+							id="message-title">
+
 					</div>
 					<div class="form-group" id="form-content">
 						<label for="message-text" class="control-label">内容:</label>
@@ -106,13 +108,13 @@
 				var content = $("textarea#message-text").val();
 				if (title == "") {
 					$("#form-title").addClass("has-error");
-					$("#message-title").attr("placeholder","请输入标题");
+					$("#message-title").attr("placeholder", "请输入标题");
 				}
-				if(content == "") {
+				if (content == "") {
 					$("#form-content").addClass("has-error");
-					$("#message-text").attr("placeholder","请输入内容");
+					$("#message-text").attr("placeholder", "请输入内容");
 				}
-				if(title!=""&&content!=""){
+				if (title != "" && content != "") {
 					$.ajax({
 						type : 'POST',
 						url : "ReceivePostServlet",

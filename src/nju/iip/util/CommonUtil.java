@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.net.ConnectException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -151,9 +153,18 @@ public class CommonUtil {
             }  
         }  
         return accessToken;  
-    }  
+    }
     
-    
+    /**
+     * 获取当前时间
+     * @return
+     */
+    public static String getTime() {
+    	Date now = new Date();
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );//可以方便地修改日期格式
+    	String time = dateFormat.format(now);
+    	return time;
+    }
     
     public static void main(String[] args) {
     	
