@@ -59,7 +59,6 @@ public class LocationDaoImpl {
 			Date now = new Date();
 	    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );//可以方便地修改日期格式
 	    	String time = dateFormat.format(now);
-			conn =DBConnection.getConn();
 			String sql="update weixin_location set Latitude='"+Latitude+"',Longitude='"+Longitude+"',time='"+time+"' where openId='"+openId+"'";
 			try {
 				conn = DBConnection.getConn(); 

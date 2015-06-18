@@ -58,7 +58,7 @@ public class AddCommentServlet extends HttpServlet {
 		comment.setCommentTime(CommonUtil.getTime());
 		
 		PrintWriter out = response.getWriter();
-		if(PostDaoImpl.addComment(comment)) {
+		if(PostDaoImpl.addComment(comment)&&PostDaoImpl.addReplyNum(Integer.valueOf(postId))) {
 			out.write("success!");
 		}
 		else {

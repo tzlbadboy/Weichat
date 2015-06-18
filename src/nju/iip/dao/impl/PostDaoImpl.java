@@ -137,6 +137,53 @@ public class PostDaoImpl {
 		}
 	}
 	
+	/**
+	 * 评论数+1操作
+	 * @return
+	 */
+	public static boolean addReplyNum(int postId) {
+		String sql = "update weixin_post set reply=reply+1 where id='"+postId+"'";
+		try {
+			conn = DBConnection.getConn(); 
+			ps = conn.prepareStatement(sql);
+			return ps.executeUpdate() == 1 ? true : false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeDB();
+		}
+	}
+	
+	/**
+	 * 取得帖子的所有评论
+	 * @param postId
+	 * @return
+	 */
+	public static List<Comment> getAllComment(int postId) {
+		List<Comment> comment_list = new ArrayList<Comment>(); 
+		String sql = "select * from weixin_comment where postId='"+postId+"'";
+		try {
+			conn = DBConnection.getConn();
+			sm=conn.createStatement();
+			rs=sm.executeQuery(sql);
+			while(rs.next()) {
+				Comment comment = new Comment();
+				comment.setAuthor(rs.getString("author"));
+				comment.setComment_content(rs.getString("comment"));
+				comment.setCommentTime(rs.getString("commentTime"));
+				comment.setHeadImgUrl(rs.getString("headImgUrl"));
+				comment_list.add(comment);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			}
+		finally {
+			closeDB();
+		}
+		return comment_list;
+	}
+	
 	
 
 	/**
@@ -174,10 +221,8 @@ public class PostDaoImpl {
 	}
 	
 	public static void main(String[] args) {
-		List<Post> post_list = getAllPost();
-		for(Post post:post_list) {
-			System.out.println(post.getId());
-		}
+		List<Comment> comment_list = getAllComment(1);
+			System.out.println(comment_list.size());
 		
 	}
 
