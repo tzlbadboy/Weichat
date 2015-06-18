@@ -89,8 +89,7 @@
     <servlet-name>ReceivePostServlet</servlet-name>
     <url-pattern>/ReceivePostServlet</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>ShowPostServlet</servlet-name>
     <servlet-class>  
             nju.iip.servlet.ShowPostServlet  
@@ -99,6 +98,17 @@
   <servlet-mapping>
     <servlet-name>ShowPostServlet</servlet-name>
     <url-pattern>/ShowPostServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AddCommentServlet</servlet-name>
+    <servlet-class>  
+            nju.iip.servlet.AddCommentServlet  
+        </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCommentServlet</servlet-name>
+    <url-pattern>/AddCommentServlet</url-pattern>
   </servlet-mapping>
   
 </web-app>

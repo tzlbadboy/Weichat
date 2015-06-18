@@ -9,8 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<title>社区问答</title>
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/common.css">
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -19,7 +21,7 @@
 <body>
 	<%
 		List<Post> post_list = PostDaoImpl.getAllPost();
-			for (Post post:post_list) {
+		for (Post post:post_list) {
 	%>
 	<div class="bgfff form ov" id=<%=post.getId()%>>
 		<div class="fb">
@@ -33,8 +35,8 @@
 		<div>
 			<table width="100%">
 				<tr>
-					<td width="50%"><font size="2px" color="#337ab7"><%=post.getAuthor()%></font>&nbsp;&nbsp;<font
-						size="1.5px" color="#C8C6C6"><%=post.getPostTime()%></font></td>
+					<td width="60%"><font size="2px" color="#337ab7"><%=post.getAuthor()%></font>&nbsp;&nbsp;<font
+						size="1.5px" color="#C8C6C6"><%=post.getPostTime().substring(5)%></font></td>
 
 					<td style="text-align: right;"><span
 						class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;

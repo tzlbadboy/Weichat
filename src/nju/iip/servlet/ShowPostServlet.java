@@ -37,6 +37,7 @@ public class ShowPostServlet extends HttpServlet {
 		logger.info("postId="+postId);
 		Post post = PostDaoImpl.getPostById(Integer.valueOf(postId));
 		request.setAttribute("post", post);
+		request.getSession().setAttribute("postId", postId);
 		request.getRequestDispatcher("post.jsp").forward(request, response);
 	}
 

@@ -49,11 +49,39 @@
 				<input type="text" class="form-control" placeholder="评论点什么吧">
 			</td>
 			<td style="text-align:center;">
-				<span>发送</span><span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-			</d>
+				<span id="send">发送</span><span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+			</td>
 			</tr>
 		</table>
 	</div>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$("span#send").click(function() {
+			var comment = $("input.form-control").val();
+			if(comment=="") {
+				$("input.form-control").attr("placeholder","评论内容不能为空！");
+			}
+			else {
+				$.ajax({
+					type : 'POST',
+					url : "AddCommentServlet",
+					data : {
+						"comment" : comment
+					},
+					success : function(msg) {
+						alert(msg);
+					}
+				});
+			}
+		});
+		
+		
+		
+	});
+	
+	</script>
 
 
 </body>

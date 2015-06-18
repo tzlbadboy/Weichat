@@ -1,6 +1,6 @@
 ﻿@charset "utf-8";
 /* CSS Document */
-body{background:#e4e4e4; font-size:14px;font-family:Arial, '微软雅黑', sans-serif;line-height: 0.5;}
+body{background:#e4e4e4; font-size:14px;font-family:Arial, '微软雅黑', sans-serif;}
 a,textarea,button,input,ul,li,div,span,td{ font-size:14px;font-family:Arial, '微软雅黑', sans-serif;-webkit-appearance:none;}
 .container{margin:0 auto;}
 .wrap{max-width:640px; margin:0 auto;}

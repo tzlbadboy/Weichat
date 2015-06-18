@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.iip.dto.Comment;
 import nju.iip.dto.Post;
 import nju.iip.util.DBConnection;
 
@@ -108,6 +109,32 @@ public class PostDaoImpl {
 			closeDB();
 		}
 		return post;
+	}
+	
+	
+	/**
+	 * 增加一条评论
+	 * @param comment
+	 * @return
+	 */
+	public static boolean addComment(Comment comment) {
+		String sql = "insert into weixin_comment(postId,comment,commentTime,author,openId,headImgUrl) values(?,?,?,?,?,?)";
+		try {
+			conn = DBConnection.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, comment.getPostId());
+			ps.setString(2, comment.getComment_content());
+			ps.setString(3, comment.getCommentTime());
+			ps.setString(4, comment.getAuthor());
+			ps.setString(5,comment.getOpenId());
+			ps.setString(6, comment.getHeadImgUrl());
+			return ps.executeUpdate() == 1 ? true : false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeDB();
+		}
 	}
 	
 	
