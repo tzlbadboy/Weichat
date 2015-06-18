@@ -95,6 +95,7 @@ public class PostDaoImpl {
 			sm=conn.createStatement();
 			rs=sm.executeQuery(sql);
 			if(rs.next()) {
+				post.setId(id);
 				post.setAuthor(rs.getString("author"));
 				post.setContent(rs.getString("content"));
 				post.setTitle(rs.getString("title"));
@@ -142,7 +143,7 @@ public class PostDaoImpl {
 	 * @return
 	 */
 	public static boolean addReplyNum(int postId) {
-		String sql = "update weixin_post set reply=reply+1 where id='"+postId+"'";
+		String sql = "update weixin_post set reply=reply+1 where id='"+postId+"' order by id";
 		try {
 			conn = DBConnection.getConn(); 
 			ps = conn.prepareStatement(sql);

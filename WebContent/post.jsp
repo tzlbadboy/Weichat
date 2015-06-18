@@ -59,12 +59,19 @@
 		int i=1;
 			for(Comment comment:comment_list) {
 	%>
-	<div class="bgfff form ov">
-		<%=i%>楼
-		<div>
-			<img src=<%=comment.getHeadImgUrl()%> alt="求真相" class="img-circle"
-				width="15%">&nbsp;&nbsp; <font size="3px" color="#337ab7"><%=comment.getAuthor()%></font>
-		</div>
+	<div class="bgfff form ov" style="line-height: 0.8">
+
+		<table width="100%">
+			<tr>
+				<td width="70%">
+					<div>
+						<img src=<%=comment.getHeadImgUrl()%> alt="求真相" class="img-circle"
+							width="13%">&nbsp;&nbsp; <font size="3px" color="#337ab7"><%=comment.getAuthor()%></font>
+					</div>
+				</td>
+				<td style="text-align: center;"><%=i%>楼</td>
+			</tr>
+		</table>
 		<hr style="border: 0; height: 0.1px;" />
 		<div>
 			<font size="3px"><%=comment.getComment_content()%></font>
@@ -80,6 +87,9 @@
 		i++;
 			}
 	%>
+
+	<div style="margin: 10px 0 60px 0"></div>
+
 	<div class="fix_footer" id="fix_footer"
 		style="padding: 5px; left: 0px; color: rgb(255, 255, 255); height: 45px; width: 100%; position: fixed; bottom: 0%; font-size: 14px; display: block; background-color: #337ab7;">
 		<table width="100%">
@@ -92,32 +102,71 @@
 		</table>
 	</div>
 
-
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content" id="show_reslut"
+				style="text-align: center; margin: 5px auto 5px auto">
+				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><br><br>
+			</div>
+		</div>
+	</div>
 
 
 
 	<script type="text/javascript">
-		$(document).ready(function() {
+		$(document)
+				.ready(
+						function() {
 
-			$("span#send").click(function() {
-				var comment = $("input.form-control").val();
-				if (comment == "") {
-					$("input.form-control").attr("placeholder", "评论内容不能为空！");
-				} else {
-					$.ajax({
-						type : 'POST',
-						url : "AddCommentServlet",
-						data : {
-							"comment" : comment
-						},
-						success : function(msg) {
-							alert(msg);
-						}
-					});
-				}
-			});
+							$("span#send")
+									.click(
+											function() {
+												var comment = $(
+														"input.form-control")
+														.val();
+												if (comment == "") {
+													$("input.form-control")
+															.attr(
+																	"placeholder",
+																	"评论内容不能为空！");
+												} else {
+													$
+															.ajax({
+																type : 'POST',
+																url : "AddCommentServlet",
+																data : {
+																	"comment" : comment
+																},
+																success : function(
+																		msg) {
+																	$(
+																			"span.return_msg")
+																			.html(
+																					"<br>"
+																							+ msg);
+																	$(
+																			".bs-example-modal-sm")
+																			.modal(
+																					'show');
+																	setTimeout(
+																			function() {
+																				$(
+																						".bs-example-modal-sm")
+																						.modal(
+																								'hide');
+																				location.href = "ShowPostServlet?id="
+																						+
+	<%=post.getId()%>
+		;
+																			},
+																			2000);
+																}
+															});
+												}
+											});
 
-		});
+						});
 	</script>
 
 
