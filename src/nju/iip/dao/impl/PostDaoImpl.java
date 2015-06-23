@@ -31,7 +31,7 @@ public class PostDaoImpl {
 	 * @return
 	 */
 	public static boolean addPost(Post post) {
-		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId,headImgUrl) values(?,?,?,?,?,?,?)";
+		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId,headImgUrl,love) values(?,?,?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
@@ -42,6 +42,7 @@ public class PostDaoImpl {
 			ps.setInt(5,post.getReply());
 			ps.setString(6, post.getOpenId());
 			ps.setString(7, post.getHeadImgUrl());
+			ps.setInt(8, post.getLove());
 			return ps.executeUpdate() == 1 ? true : false;
 		}catch (SQLException e) {
 			e.printStackTrace();
