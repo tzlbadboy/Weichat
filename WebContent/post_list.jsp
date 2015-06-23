@@ -38,8 +38,11 @@
 					<td width="60%"><font size="2px" color="#337ab7"><%=post.getAuthor()%></font>&nbsp;&nbsp;<font
 						size="1.5px" color="#C8C6C6"><%=post.getPostTime().substring(5)%></font></td>
 
-					<td style="text-align: right;"><span
-						class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;
+					<td style="text-align: right;">
+					<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;
+					<font size="3px" color="#C8C6C6"><%=post.getLove()%></font>&nbsp;&nbsp;
+					
+					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;
 						<font size="3px" color="#C8C6C6"><%=post.getReply()%></font>&nbsp;&nbsp;
 					</td>
 				</tr>

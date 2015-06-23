@@ -111,4 +111,15 @@
     <url-pattern>/AddCommentServlet</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>AddLikeServlet</servlet-name>
+    <servlet-class>  
+            nju.iip.servlet.AddLikeServlet  
+        </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddLikeServlet</servlet-name>
+    <url-pattern>/AddLikeServlet</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

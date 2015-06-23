@@ -22,7 +22,7 @@
 
 	<%
 		Post post = (Post) request.getAttribute("post");
-		List<Comment> comment_list = PostDaoImpl.getAllComment(post.getId());
+			List<Comment> comment_list = PostDaoImpl.getAllComment(post.getId());
 	%>
 
 	<div class="bgfff form ov">
@@ -46,7 +46,10 @@
 						size="1.5px" color="#C8C6C6"><%=post.getPostTime().substring(5)%></font></td>
 
 					<td style="text-align: right;"><span
-						class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;
+						class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp;
+						<font id="love" size="3px" color="#C8C6C6"><%=post.getLove()%></font>&nbsp;&nbsp;
+
+						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;
 						<font size="3px" color="#C8C6C6"><%=post.getReply()%></font>&nbsp;&nbsp;
 					</td>
 				</tr>
@@ -57,7 +60,7 @@
 
 	<%
 		int i=1;
-			for(Comment comment:comment_list) {
+		for(Comment comment:comment_list) {
 	%>
 	<div class="bgfff form ov" style="line-height: 0.8">
 
@@ -85,7 +88,7 @@
 
 	<%
 		i++;
-			}
+		}
 	%>
 
 	<div style="margin: 10px 0 60px 0"></div>
@@ -107,66 +110,53 @@
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content" id="show_reslut"
 				style="text-align: center; margin: 5px auto 5px auto">
-				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><br><br>
+				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><br>
+				<br>
 			</div>
 		</div>
 	</div>
 
 
 
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-
-							$("span#send")
-									.click(
-											function() {
-												var comment = $(
-														"input.form-control")
-														.val();
-												if (comment == "") {
-													$("input.form-control")
-															.attr(
-																	"placeholder",
-																	"评论内容不能为空！");
-												} else {
-													$
-															.ajax({
-																type : 'POST',
-																url : "AddCommentServlet",
-																data : {
-																	"comment" : comment
-																},
-																success : function(
-																		msg) {
-																	$(
-																			"span.return_msg")
-																			.html(
-																					"<br>"
-																							+ msg);
-																	$(
-																			".bs-example-modal-sm")
-																			.modal(
-																					'show');
-																	setTimeout(
-																			function() {
-																				$(
-																						".bs-example-modal-sm")
-																						.modal(
-																								'hide');
-																				location.href = "ShowPostServlet?id="
-																						+
-	<%=post.getId()%>
-		;
-																			},
-																			2000);
-																}
-															});
-												}
-											});
-
-						});
+	<script type="text/javascript"> 
+	$(document).ready(function() { 
+		
+		$("span.glyphicon").click(function() {
+			if($("span.glyphicon").hasClass("glyphicon-heart-empty")) {
+				$("span.glyphicon").removeClass("glyphicon-heart-empty");
+				$("span.glyphicon").addClass("glyphicon-heart");
+				$.get("AddLikeServlet?id="+<%=post.getId()%>,function(data,status){
+				      //alert("状态：" + status);
+			    });
+				var n=$("font#love").text();
+				$("font#love").text(Number(n)+1);
+			}
+		});
+		
+		
+		
+		$("span#send").click(function() { 
+			var comment = $("input.form-control").val(); 
+			if (comment == "") {
+				$("input.form-control").attr( "placeholder", "评论内容不能为空！"); 
+				} 
+			else { 
+				$.ajax({ 
+					type : 'POST',
+					url : "AddCommentServlet",
+					data : { "comment" : comment }, 
+					success : function( msg) { 
+						$( "span.return_msg").html( "<br>" + msg); 
+						$( ".bs-example-modal-sm").modal( 'show'); 
+						setTimeout( function() { 
+							$( ".bs-example-modal-sm").modal( 'hide');
+							location.href = "ShowPostServlet?id=" + <%=post.getId()%> ; 
+							}, 2000); 
+						} 
+					}); 
+				} 
+			}); 
+		}); 
 	</script>
 
 

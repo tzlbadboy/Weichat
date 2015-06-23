@@ -70,6 +70,7 @@ public class PostDaoImpl {
 				post.setPostTime(rs.getString("postTime"));
 				post.setTitle(rs.getString("title"));
 				post.setReply(rs.getInt("reply"));
+				post.setLove(rs.getInt("love"));
 				post_list.add(post);
 			}
 		}catch(Exception e){
@@ -102,6 +103,7 @@ public class PostDaoImpl {
 				post.setHeadImgUrl(rs.getString("headImgUrl"));
 				post.setPostTime(rs.getString("postTime"));
 				post.setReply(rs.getInt("reply"));
+				post.setLove(rs.getInt("love"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -143,7 +145,26 @@ public class PostDaoImpl {
 	 * @return
 	 */
 	public static boolean addReplyNum(int postId) {
-		String sql = "update weixin_post set reply=reply+1 where id='"+postId+"' order by id";
+		String sql = "update weixin_post set reply=reply+1 where id='"+postId+"'";
+		try {
+			conn = DBConnection.getConn(); 
+			ps = conn.prepareStatement(sql);
+			return ps.executeUpdate() == 1 ? true : false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeDB();
+		}
+	}
+	
+	/**
+	 * 增加一个点赞数
+	 * @param postId
+	 * @return
+	 */
+	public static boolean addLike(int postId) {
+		String sql = "update weixin_post set love=love+1 where id='"+postId+"'";
 		try {
 			conn = DBConnection.getConn(); 
 			ps = conn.prepareStatement(sql);
@@ -163,7 +184,7 @@ public class PostDaoImpl {
 	 */
 	public static List<Comment> getAllComment(int postId) {
 		List<Comment> comment_list = new ArrayList<Comment>(); 
-		String sql = "select * from weixin_comment where postId='"+postId+"'";
+		String sql = "select * from weixin_comment where postId='"+postId+"' order by id";
 		try {
 			conn = DBConnection.getConn();
 			sm=conn.createStatement();

@@ -65,6 +65,7 @@ public class ReceivePostServlet extends HttpServlet {
 		post.setOpenId(user.getOpenId());
 		post.setAuthor(user.getNickname());
 		post.setReply(0);
+		post.setLove(0);
 		post.setPostTime(CommonUtil.getTime());
 		PrintWriter out = response.getWriter();
 		if (PostDaoImpl.addPost(post)) {

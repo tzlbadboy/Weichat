@@ -31,6 +31,17 @@ public class Post {
 
 	// 回复数
 	private int reply;
+	
+	//点赞数
+	private int love;
+
+	public int getLove() {
+		return love;
+	}
+
+	public void setLove(int love) {
+		this.love = love;
+	}
 
 	// 最后回复时间
 	private String lastReplyTime;
