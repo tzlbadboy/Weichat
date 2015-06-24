@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import nju.iip.dao.impl.PostDaoImpl;
+import nju.iip.dto.Love;
+import nju.iip.dto.WeixinUser;
+import nju.iip.util.CommonUtil;
 
 /**
  * Servlet implementation class AddLikeServlet
@@ -32,7 +35,14 @@ public class AddLikeServlet extends HttpServlet {
 	     response.setCharacterEncoding("UTF-8");  
 	     String postId = request.getParameter("id");
 	     PrintWriter out = response.getWriter();
-	     if(PostDaoImpl.addLike(Integer.valueOf(postId))) {
+	     WeixinUser user = (WeixinUser)request.getSession().getAttribute("snsUserInfo");
+	     Love love = new Love();
+	     love.setPostId(Integer.valueOf(postId));
+	     love.setOpenId((String)request.getSession().getAttribute("postId"));
+	     love.setHeadImgUrl(user.getHeadImgUrl());
+	     love.setLoveTime(CommonUtil.getTime());
+	     love.setAuthor(user.getNickname());
+	     if(PostDaoImpl.addLike(love)) {
 	    	 out.write("success!");
 	     }
 	     else {

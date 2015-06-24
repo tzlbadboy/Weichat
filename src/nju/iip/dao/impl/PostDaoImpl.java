@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nju.iip.dto.Comment;
+import nju.iip.dto.Love;
 import nju.iip.dto.Post;
 import nju.iip.util.DBConnection;
 
@@ -150,6 +151,7 @@ public class PostDaoImpl {
 		try {
 			conn = DBConnection.getConn(); 
 			ps = conn.prepareStatement(sql);
+			
 			return ps.executeUpdate() == 1 ? true : false;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -160,23 +162,42 @@ public class PostDaoImpl {
 	}
 	
 	/**
-	 * 增加一个点赞数
+	 * weixin_post和weixin_love表中增加一个点赞数
 	 * @param postId
 	 * @return
 	 */
-	public static boolean addLike(int postId) {
-		String sql = "update weixin_post set love=love+1 where id='"+postId+"'";
+	public static boolean addLike(Love love) {
+		String sql = "update weixin_post set love=love+1 where id='"+love.getPostId()+"'";
+		String sql2 = "insert into weixin_love(postId,loveTime,author,openId,headImgUrl) values(?,?,?,?,?)";
+		PreparedStatement ps2 = null;
 		try {
 			conn = DBConnection.getConn(); 
 			ps = conn.prepareStatement(sql);
-			return ps.executeUpdate() == 1 ? true : false;
+			ps2 = conn.prepareStatement(sql2);
+			ps2.setInt(1, love.getPostId());
+			ps2.setString(2, love.getLoveTime());
+			ps2.setString(3, love.getAuthor());
+			ps2.setString(4, love.getOpenId());
+			ps2.setString(5, love.getHeadImgUrl());
+			return (ps.executeUpdate() == 1)&&(ps2.executeUpdate() == 1) ? true : false;
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		} finally {
 			closeDB();
+			if(ps2!=null) {
+				try {
+					ps2.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
 		}
 	}
+	
+	
+	
 	
 	/**
 	 * 取得帖子的所有评论
