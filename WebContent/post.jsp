@@ -17,13 +17,16 @@
 <link rel="stylesheet" href="css/common.css">
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 
 	<%
 		Post post = (Post) request.getAttribute("post");
 		List<Comment> comment_list = PostDaoImpl.getAllComment(post.getId());
-		String openId = (String)request.getAttribute("openId");
+		String openId = (String)request.getSession().getAttribute("openId");
 		int postId = post.getId();
 		boolean isLoved = PostDaoImpl.isLove(openId, postId);
 	%>
@@ -130,7 +133,6 @@
 		else {
 			$("span.love").addClass("glyphicon-heart");
 		}
-		
 		
 		$("span.glyphicon").click(function() {
 			if($("span.glyphicon").hasClass("glyphicon-heart-empty")) {
