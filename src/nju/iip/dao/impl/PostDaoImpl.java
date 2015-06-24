@@ -196,7 +196,54 @@ public class PostDaoImpl {
 		}
 	}
 	
+	/**
+	 * 判断某个人是否点过赞
+	 * @return
+	 */
+	public static boolean isLove(String openId,int postId) {
+		String sql = "select * from weixin_love where postId='"+postId+"' and openId='"+openId+"'";
+		try {
+			conn = DBConnection.getConn();
+			sm=conn.createStatement();
+			rs=sm.executeQuery(sql);
+			return rs.next();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			closeDB();
+		}
+	}
 	
+	
+	/**
+	 * 将帖子所有赞取出
+	 * @param postId
+	 * @return
+	 */
+	public static List<Love> getAllLove(int postId) {
+		List<Love> love_list = new ArrayList<Love>();
+		String sql = "select * from weixin_love where postId='"+postId+"'";
+		try {
+			conn = DBConnection.getConn();
+			sm=conn.createStatement();
+			rs=sm.executeQuery(sql);
+			while(rs.next()) {
+				Love love = new Love();
+				love.setAuthor(rs.getString("author"));
+				love.setHeadImgUrl(rs.getString("headImgUrl"));
+				love.setOpenId(rs.getString("openId"));
+				love_list.add(love);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			}
+		finally {
+			closeDB();
+		}
+		return love_list;
+	}
 	
 	
 	/**

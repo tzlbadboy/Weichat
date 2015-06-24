@@ -22,7 +22,10 @@
 
 	<%
 		Post post = (Post) request.getAttribute("post");
-			List<Comment> comment_list = PostDaoImpl.getAllComment(post.getId());
+		List<Comment> comment_list = PostDaoImpl.getAllComment(post.getId());
+		String openId = (String)request.getAttribute("openId");
+		int postId = post.getId();
+		boolean isLoved = PostDaoImpl.isLove(openId, postId);
 	%>
 
 	<div class="bgfff form ov">
@@ -46,7 +49,7 @@
 						size="1.5px" color="#C8C6C6"><%=post.getPostTime().substring(5)%></font></td>
 
 					<td style="text-align: right;"><span
-						class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp;
+						class="glyphicon love" aria-hidden="true"></span>&nbsp;
 						<font id="love" size="3px" color="#C8C6C6"><%=post.getLove()%></font>&nbsp;&nbsp;
 
 						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;
@@ -120,6 +123,14 @@
 
 	<script type="text/javascript"> 
 	$(document).ready(function() { 
+		var loved = <%=isLoved%>;
+		if(loved==false) {
+			$("span.love").addClass("glyphicon-heart-empty");
+		}
+		else {
+			$("span.love").addClass("glyphicon-heart");
+		}
+		
 		
 		$("span.glyphicon").click(function() {
 			if($("span.glyphicon").hasClass("glyphicon-heart-empty")) {

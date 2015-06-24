@@ -38,7 +38,7 @@ public class AddLikeServlet extends HttpServlet {
 	     WeixinUser user = (WeixinUser)request.getSession().getAttribute("snsUserInfo");
 	     Love love = new Love();
 	     love.setPostId(Integer.valueOf(postId));
-	     love.setOpenId((String)request.getSession().getAttribute("postId"));
+	     love.setOpenId((String)request.getSession().getAttribute("openId"));
 	     love.setHeadImgUrl(user.getHeadImgUrl());
 	     love.setLoveTime(CommonUtil.getTime());
 	     love.setAuthor(user.getNickname());
