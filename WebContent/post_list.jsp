@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="css/common.css">
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="js/lrz.mobile.min.js"></script>
 </head>
 <body>
 	<%
@@ -79,7 +80,12 @@
 						<label for="message-text" class="control-label">内容:</label>
 						<textarea class="form-control" id="message-text" name="message"></textarea>
 					</div>
-					<font color="red" id="error"></font>
+					<div >
+					<input id="upload" type="file" style="display:none">
+                    <input type="button" class="btn btn-info"  onclick="$('input[id=upload]').click();" value="添加图片"></div>
+                    <hr>
+                    <div><img id="pic"  src="" width="50%"></div>
+                    <div style="margin: 5px"></div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal"
 							value="取消"> <input type="button" class="btn btn-primary"
@@ -128,42 +134,82 @@
 				var postId = $(this).attr("id");
 				location.href = "ShowPostServlet?id=" + postId;
 			});
+			
+			 var reader = new FileReader();
+			    
+			    $('input#upload').change(function(){
+			    	 if (this.files && this.files[0]) {
+			             reader.readAsDataURL(this.files[0]);
+			         }
+			    	// 也可以传入图片路径：lrz('../demo.jpg', ...
+			    	   /*  lrz(this.files[0], {
+			    	        // 压缩开始
+			    	        before: function() {
+			    	            console.log('压缩开始');
+			    	        },
+			    	        // 压缩失败
+			    	        fail: function(err) {
+			    	            console.error(err);
+			    	        },
+			    	        // 压缩结束（不论成功失败）
+			    	        always: function() {
+			    	            console.log('压缩结束');
+			    	        },
+			    	        // 压缩成功
+			    	        done: function (results) {
+			    	              // 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
+			    	              console.log(results); 
+			    	        }
+			    	    }); */
+			    });
+			    reader.onload = function(e){
+			        $("img#pic").attr('src', e.target.result).addClass("img-thumbnail");
+			    };
+			    
+			    
+			    $("input#send").click(function() {
+					var title = $("input#message-title").val();
+					var content = $("textarea#message-text").val();
+					if (title == "") {
+						$("#form-title").addClass("has-error");
+						$("#message-title").attr("placeholder", "请输入标题");
+					}
+					if (content == "") {
+						$("#form-content").addClass("has-error");
+						$("#message-text").attr("placeholder", "请输入内容");
+					}
+					if (title != "" && content != "") {
+						$.ajax({
+							type : 'POST',
+							url : "ReceivePostServlet",
+							data : {
+								"title" : title,
+								"content" : content
+							},
+							success : function(msg) {
+								// alert(msg+"!");
+								$("#myModal").modal('hide');
+								$("span.return_msg").html("<br><br>" + msg);
+								$(".bs-example-modal-sm").modal('show');
+								setTimeout(function() {
+									$(".bs-example-modal-sm").modal('hide');
+									location.href = "post_list.jsp";
+								}, 2000);
 
-			$("input#send").click(function() {
-				var title = $("input#message-title").val();
-				var content = $("textarea#message-text").val();
-				if (title == "") {
-					$("#form-title").addClass("has-error");
-					$("#message-title").attr("placeholder", "请输入标题");
-				}
-				if (content == "") {
-					$("#form-content").addClass("has-error");
-					$("#message-text").attr("placeholder", "请输入内容");
-				}
-				if (title != "" && content != "") {
-					$.ajax({
-						type : 'POST',
-						url : "ReceivePostServlet",
-						data : {
-							"title" : title,
-							"content" : content
-						},
-						success : function(msg) {
-							// alert(msg+"!");
-							$("#myModal").modal('hide');
-							$("span.return_msg").html("<br><br>" + msg);
-							$(".bs-example-modal-sm").modal('show');
-							setTimeout(function() {
-								$(".bs-example-modal-sm").modal('hide');
-								location.href = "post_list.jsp";
-							}, 2000);
-
-						}
-					});
-				}
-			});
+							}
+						});
+					}
+				});
+			
+			
 		});
 	</script>
+	
+	
+	<script>
+   
+   
+</script>
 
 </body>
 </html>

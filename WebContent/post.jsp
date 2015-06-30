@@ -17,9 +17,7 @@
 <link rel="stylesheet" href="css/common.css">
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script type="text/javascript">
 
-</script>
 </head>
 <body>
 
@@ -68,7 +66,7 @@
 		int i=1;
 		for(Comment comment:comment_list) {
 	%>
-	<div class="bgfff form ov" style="line-height: 0.8">
+	<div class="bgfff form ov" style="line-height: 1.2">
 
 		<table width="100%">
 			<tr>
