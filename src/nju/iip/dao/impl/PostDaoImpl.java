@@ -33,7 +33,7 @@ public class PostDaoImpl {
 	 * @return
 	 */
 	public static boolean addPost(Post post) {
-		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId,headImgUrl,love) values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId,headImgUrl,love,pictureUrl) values(?,?,?,?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
@@ -45,6 +45,7 @@ public class PostDaoImpl {
 			ps.setString(6, post.getOpenId());
 			ps.setString(7, post.getHeadImgUrl());
 			ps.setInt(8, post.getLove());
+			ps.setString(9, post.getPictureUrl());
 			return ps.executeUpdate() == 1 ? true : false;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -74,6 +75,7 @@ public class PostDaoImpl {
 				post.setTitle(rs.getString("title"));
 				post.setReply(rs.getInt("reply"));
 				post.setLove(rs.getInt("love"));
+				post.setPictureUrl(rs.getString("pictureUrl"));
 				post_list.add(post);
 			}
 		}catch(Exception e){
@@ -107,6 +109,7 @@ public class PostDaoImpl {
 				post.setPostTime(rs.getString("postTime"));
 				post.setReply(rs.getInt("reply"));
 				post.setLove(rs.getInt("love"));
+				post.setPictureUrl(rs.getString("pictureUrl"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();

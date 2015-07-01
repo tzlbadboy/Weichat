@@ -40,7 +40,12 @@
 		</div>
 		<hr style="border: 0; height: 0.1px;" />
 		<div>
-			<font size="3px"><%=post.getContent()%></font>
+			<font size="3px"><%=post.getContent()%></font><br>
+			<%if(post.getPictureUrl()!=null) {
+				String url = "../Pictures/images/upload/"+post.getPictureUrl();
+			%>
+			<img src=<%=url%> width="80%" />
+			<% }%>
 		</div>
 		<hr />
 		<div>

@@ -30,7 +30,11 @@
 		</div>
 		<hr style="border: 0; height: 0.1px;" />
 		<div>
+		<%if(post.getPictureUrl()!=null) {%>
+		<span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+		<%} %>
 			<font size="3px"><%=post.getContent()%></font>
+	   
 		</div>
 		<hr />
 		<div>
@@ -83,9 +87,15 @@
 					<div >
 					<input id="upload" type="file" style="display:none">
                     <input type="button" class="btn btn-info"  onclick="$('input[id=upload]').click();" value="添加图片"></div>
-                    <hr>
-                    <div><img id="pic"  src="" width="50%"></div>
                     <div style="margin: 5px"></div>
+                    <div><img id="pic"  src="" width="40%"></div>
+                    <div style="margin: 5px"></div>
+                    
+                   <div id="progress" >
+                   <div id="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+                   </div>
+                   </div>
+                    
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal"
 							value="取消"> <input type="button" class="btn btn-primary"
@@ -128,6 +138,7 @@
 
 
 	<script type="text/javascript">
+	
 		$(document).ready(function() {
 
 			$("div.bgfff").click(function() {
@@ -135,16 +146,24 @@
 				location.href = "ShowPostServlet?id=" + postId;
 			});
 			
+			
 			 var reader = new FileReader();
-			    
+			    var picture = null;
 			    $('input#upload').change(function(){
 			    	 if (this.files && this.files[0]) {
-			             reader.readAsDataURL(this.files[0]);
-			         }
+			             //reader.readAsDataURL(this.files[0]);
+			    	// }
+			        
 			    	// 也可以传入图片路径：lrz('../demo.jpg', ...
-			    	   /*  lrz(this.files[0], {
+			    	      lrz(this.files[0], {
+			    	    	  
+			    	    	  //压缩率
+			    	    	  //quality: 0.2,
+			    	    	  width : 500,
+			    	    	  
 			    	        // 压缩开始
 			    	        before: function() {
+			    	        	$("img#pic").attr("src","images/wait.gif");
 			    	            console.log('压缩开始');
 			    	        },
 			    	        // 压缩失败
@@ -159,13 +178,17 @@
 			    	        done: function (results) {
 			    	              // 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
 			    	              console.log(results); 
+			    	              $("img#pic").attr('src', results.base64).addClass("img-thumbnail");
+			    	              picture =  results.base64;
 			    	        }
-			    	    }); */
+			    	    });  
+			         }
 			    });
-			    reader.onload = function(e){
+			/*     reader.onload = function(e){
 			        $("img#pic").attr('src', e.target.result).addClass("img-thumbnail");
-			    };
-			    
+			    };  */
+			    	 
+			    	
 			    
 			    $("input#send").click(function() {
 					var title = $("input#message-title").val();
@@ -179,15 +202,22 @@
 						$("#message-text").attr("placeholder", "请输入内容");
 					}
 					if (title != "" && content != "") {
+						
+						$("div#progress").addClass("progress");
+						$("div#progress-bar").addClass("progress-bar");
+						$("div#progress-bar").html("10%");
+						
 						$.ajax({
 							type : 'POST',
 							url : "ReceivePostServlet",
 							data : {
 								"title" : title,
-								"content" : content
+								"content" : content,
+								"picture" : picture
 							},
 							success : function(msg) {
-								// alert(msg+"!");
+								$("div#progress-bar").html("100%").attr("aria-valuenow","100").attr("style","width:100%;");
+								setTimeout(function() {
 								$("#myModal").modal('hide');
 								$("span.return_msg").html("<br><br>" + msg);
 								$(".bs-example-modal-sm").modal('show');
@@ -195,7 +225,7 @@
 									$(".bs-example-modal-sm").modal('hide');
 									location.href = "post_list.jsp";
 								}, 2000);
-
+								},500);
 							}
 						});
 					}
@@ -205,11 +235,6 @@
 		});
 	</script>
 	
-	
-	<script>
-   
-   
-</script>
 
 </body>
 </html>

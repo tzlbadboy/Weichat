@@ -2,6 +2,8 @@ package nju.iip.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -57,8 +59,15 @@ public class ReceivePostServlet extends HttpServlet {
 
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		logger.info("title=" + title + " content=" + content);
+		String picture = request.getParameter("picture");
+		logger.info(request.getContextPath()+" "+request.getScheme() );
+		logger.info("title=" + title + " content=" + content+" picture="+picture);
 		Post post = new Post();
+		if(picture.length()!=0) {
+			String picPath = CommonUtil.savePicture(picture, user.getOpenId());
+			logger.info(picPath);
+			post.setPictureUrl(picPath);
+		}
 		post.setHeadImgUrl(user.getHeadImgUrl());
 		post.setTitle(title);
 		post.setContent(content);

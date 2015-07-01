@@ -1,7 +1,9 @@
 package nju.iip.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -23,6 +25,8 @@ import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import sun.misc.BASE64Decoder;
 
 public class CommonUtil {
 	
@@ -165,6 +169,45 @@ public class CommonUtil {
     	String time = dateFormat.format(now);
     	return time;
     }
+    
+    /**
+     * 解码图片
+     * @param picture
+     * @return 图片所在路径
+     */
+    public static String savePicture(String picture,String openId) {
+    	if(picture.contains("data:image")) {
+    		int index = picture.indexOf(",");
+    		picture = picture.substring(index+1);
+    	}
+    	String photoPath = System.getProperty("catalina.home")+"\\webapps\\Pictures\\images\\upload\\";
+    	BASE64Decoder decoder = new BASE64Decoder();  
+	        try   
+	        {  
+	            //Base64解码  
+	            byte[] b = decoder.decodeBuffer(picture);  
+	            for(int i=0;i< b.length;++i)  
+	            {  
+	                if(b[i]< 0)  
+	                {//调整异常数据  
+	                    b[i]+=256;  
+	                }  
+	            }  
+	            String picNameString = openId+"_"+getTime().replace(" ", "_").replace(":", "_")+".jpg";
+	            FileOutputStream out = new FileOutputStream(new File(photoPath,picNameString));      
+	            out.write(b);  
+	            out.flush();  
+	            out.close();  
+	            return picNameString;  
+	        }   
+	        catch (Exception e)   
+	        {  
+	           e.printStackTrace();  
+	           return "";
+	        }  
+	    }  
+    
+    
     
     public static void main(String[] args) {
     	

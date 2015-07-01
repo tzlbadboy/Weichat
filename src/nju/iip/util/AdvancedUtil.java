@@ -99,5 +99,9 @@ public class AdvancedUtil {
 		}
 		return snsUserInfo;
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(System.getProperty("catalina.home"));//user.dir指定了当前的路径 
+	}
 
 }
