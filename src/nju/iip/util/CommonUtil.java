@@ -175,12 +175,12 @@ public class CommonUtil {
      * @param picture
      * @return 图片所在路径
      */
-    public static String savePicture(String picture,String openId) {
+    public static String savePicture(String picture,String openId,String path) {
     	if(picture.contains("data:image")) {
     		int index = picture.indexOf(",");
     		picture = picture.substring(index+1);
     	}
-    	String photoPath = System.getProperty("catalina.home")+"\\webapps\\Pictures\\images\\upload\\";
+    	String photoPath = path+"../Pictures/images/upload/";
     	BASE64Decoder decoder = new BASE64Decoder();  
 	        try   
 	        {  

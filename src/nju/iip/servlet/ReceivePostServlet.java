@@ -62,9 +62,11 @@ public class ReceivePostServlet extends HttpServlet {
 		String picture = request.getParameter("picture");
 		logger.info(request.getContextPath()+" "+request.getScheme() );
 		logger.info("title=" + title + " content=" + content+" picture="+picture);
+		String filePath=this.getServletConfig().getServletContext().getRealPath("/");
+		logger.info("filePath="+filePath);
 		Post post = new Post();
 		if(picture.length()!=0) {
-			String picPath = CommonUtil.savePicture(picture, user.getOpenId());
+			String picPath = CommonUtil.savePicture(picture, user.getOpenId(),filePath);
 			logger.info(picPath);
 			post.setPictureUrl(picPath);
 		}
