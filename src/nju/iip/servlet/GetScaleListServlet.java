@@ -35,7 +35,8 @@ public class GetScaleListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("GetScaleListServlet");
-		List<Scale> ScaleList = ScaleDaoImpl.getScaleList();
+		ScaleDaoImpl SDI = new ScaleDaoImpl();
+		List<Scale> ScaleList = SDI.getScaleList();
 		request.setAttribute("ScaleList", ScaleList);
 		request.getRequestDispatcher("ChooseScale.jsp").forward(request, response);
 	}

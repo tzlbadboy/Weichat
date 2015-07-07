@@ -2,8 +2,6 @@ package nju.iip.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -79,7 +77,8 @@ public class ReceivePostServlet extends HttpServlet {
 		post.setLove(0);
 		post.setPostTime(CommonUtil.getTime());
 		PrintWriter out = response.getWriter();
-		if (PostDaoImpl.addPost(post)) {
+		PostDaoImpl PDI = new PostDaoImpl();
+		if (PDI.addPost(post)) {
 			out.write("发帖成功");
 		} else {
 			out.write("发帖失败");

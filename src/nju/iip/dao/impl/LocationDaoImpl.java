@@ -21,10 +21,10 @@ import nju.iip.util.DBConnection;
  */
 public class LocationDaoImpl {
 	
-	 static Connection conn  = null;
-	 static Statement sm = null;
-	 static ResultSet rs = null;
-	 static PreparedStatement ps = null;
+	 private Connection conn  = null;
+	 private Statement sm = null;
+	 private ResultSet rs = null;
+	 private PreparedStatement ps = null;
 	 
 	 
 	 /**
@@ -32,7 +32,7 @@ public class LocationDaoImpl {
 		 * @param openId
 		 * @return
 		 */
-		public static boolean isLocated(String openId) {
+		public  boolean isLocated(String openId) {
 			 String sql = "select * from weixin_location where openId='"+openId+"'";
 			 try{
 				 conn = DBConnection.getConn(); 
@@ -55,7 +55,7 @@ public class LocationDaoImpl {
 		 * @param openId
 		 * @return
 		 */
-		public static boolean updateUserLocation(String Latitude,String Longitude,String openId) {
+		public  boolean updateUserLocation(String Latitude,String Longitude,String openId) {
 			Date now = new Date();
 	    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );//可以方便地修改日期格式
 	    	String time = dateFormat.format(now);
@@ -81,7 +81,7 @@ public class LocationDaoImpl {
 		 * @param openId
 		 * @return
 		 */
-		public static boolean locationUser(String Latitude,String Longitude,String openId) {
+		public  boolean locationUser(String Latitude,String Longitude,String openId) {
 			Date now = new Date();
 	    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );//可以方便地修改日期格式
 	    	String time = dateFormat.format(now);
@@ -107,7 +107,7 @@ public class LocationDaoImpl {
 		 * 取出所有用户的坐标
 		 * @return
 		 */
-		public static List<Map<String, String>> getAllUserLocation() {
+		public  List<Map<String, String>> getAllUserLocation() {
 			List<Map<String, String>> locationMaps = new ArrayList<Map<String,String>>();
 			String sql = "select * from weixin_location";
 			try{
@@ -138,7 +138,7 @@ public class LocationDaoImpl {
 		/**
 		 * 关闭数据库
 		 */
-		public static void closeDB() {
+		public  void closeDB() {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -153,13 +153,6 @@ public class LocationDaoImpl {
 					e.printStackTrace();
 				}
 			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if (ps != null) {
 				try {
 					ps.close();
@@ -167,10 +160,17 @@ public class LocationDaoImpl {
 					e.printStackTrace();
 				}
 			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
 		}
 		
 		public static void main(String[] args) {
-			System.out.println(getAllUserLocation().size());
 		}
 
 }

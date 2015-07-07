@@ -21,7 +21,8 @@
 </head>
 <body>
 	<%
-		List<Post> post_list = PostDaoImpl.getAllPost();
+	    PostDaoImpl PDI = new PostDaoImpl();
+		List<Post> post_list = PDI.getAllPost();
 		for (Post post:post_list) {
 	%>
 	<div class="bgfff form ov" id=<%=post.getId()%>>

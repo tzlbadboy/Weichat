@@ -22,17 +22,17 @@ import nju.iip.util.DBConnection;
  */
 public class PostDaoImpl {
 
-	static Connection conn = null;
-	static Statement sm = null;
-	static ResultSet rs = null;
-	static PreparedStatement ps = null;
+	private Connection conn = null;
+	private Statement sm = null;
+	private ResultSet rs = null;
+	private PreparedStatement ps = null;
 	
 	/**
 	 * 添加一个帖子
 	 * @param post
 	 * @return
 	 */
-	public static boolean addPost(Post post) {
+	public  boolean addPost(Post post) {
 		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId,headImgUrl,love,pictureUrl) values(?,?,?,?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
@@ -59,7 +59,7 @@ public class PostDaoImpl {
 	 * 获得所有帖子
 	 * @return
 	 */
-	public static List<Post> getAllPost() {
+	public  List<Post> getAllPost() {
 		List<Post> post_list = new ArrayList<Post>();
 		String sql = "select * from weixin_post order by id desc";
 		try {
@@ -93,7 +93,7 @@ public class PostDaoImpl {
 	 * @param id
 	 * @return
 	 */
-	public static Post getPostById(int id) {
+	public  Post getPostById(int id) {
 		Post post =new Post();
 		String sql = "select * from weixin_post where id='"+id+"'";
 		try {
@@ -126,7 +126,7 @@ public class PostDaoImpl {
 	 * @param comment
 	 * @return
 	 */
-	public static boolean addComment(Comment comment) {
+	public  boolean addComment(Comment comment) {
 		String sql = "insert into weixin_comment(postId,comment,commentTime,author,openId,headImgUrl) values(?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
@@ -150,7 +150,7 @@ public class PostDaoImpl {
 	 * 评论数+1操作
 	 * @return
 	 */
-	public static boolean addReplyNum(int postId) {
+	public  boolean addReplyNum(int postId) {
 		String sql = "update weixin_post set reply=reply+1 where id='"+postId+"'";
 		try {
 			conn = DBConnection.getConn(); 
@@ -170,7 +170,7 @@ public class PostDaoImpl {
 	 * @param postId
 	 * @return
 	 */
-	public static boolean addLike(Love love) {
+	public  boolean addLike(Love love) {
 		String sql = "update weixin_post set love=love+1 where id='"+love.getPostId()+"'";
 		String sql2 = "insert into weixin_love(postId,loveTime,author,openId,headImgUrl) values(?,?,?,?,?)";
 		PreparedStatement ps2 = null;
@@ -204,7 +204,7 @@ public class PostDaoImpl {
 	 * 判断某个人是否点过赞
 	 * @return
 	 */
-	public static boolean isLove(String openId,int postId) {
+	public  boolean isLove(String openId,int postId) {
 		String sql = "select * from weixin_love where postId='"+postId+"' and openId='"+openId+"'";
 		try {
 			conn = DBConnection.getConn();
@@ -226,7 +226,7 @@ public class PostDaoImpl {
 	 * @param postId
 	 * @return
 	 */
-	public static List<Love> getAllLove(int postId) {
+	public  List<Love> getAllLove(int postId) {
 		List<Love> love_list = new ArrayList<Love>();
 		String sql = "select * from weixin_love where postId='"+postId+"'";
 		try {
@@ -255,7 +255,7 @@ public class PostDaoImpl {
 	 * @param postId
 	 * @return
 	 */
-	public static List<Comment> getAllComment(int postId) {
+	public  List<Comment> getAllComment(int postId) {
 		List<Comment> comment_list = new ArrayList<Comment>(); 
 		String sql = "select * from weixin_comment where postId='"+postId+"' order by id";
 		try {
@@ -284,7 +284,7 @@ public class PostDaoImpl {
 	/**
 	 * 关闭数据库
 	 */
-	public static void closeDB() {
+	public  void closeDB() {
 		if (rs != null) {
 			try {
 				rs.close();
@@ -299,13 +299,6 @@ public class PostDaoImpl {
 				e.printStackTrace();
 			}
 		}
-		if (conn != null) {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		if (ps != null) {
 			try {
 				ps.close();
@@ -313,11 +306,17 @@ public class PostDaoImpl {
 				e.printStackTrace();
 			}
 		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 	public static void main(String[] args) {
-		List<Comment> comment_list = getAllComment(1);
-			System.out.println(comment_list.size());
 		
 	}
 

@@ -34,7 +34,8 @@ public class ScaleRecordServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("doGet");
 		String openId = (String) request.getSession().getAttribute("openId");
-		List<ScaleRecord> record_listList = ScaleDaoImpl.getScaleRecord(openId);
+		ScaleDaoImpl SDI = new ScaleDaoImpl();
+		List<ScaleRecord> record_listList = SDI.getScaleRecord(openId);
 		request.setAttribute("record_listList", record_listList);
 		request.getRequestDispatcher("resultscale.jsp").forward(request, response);
 	}

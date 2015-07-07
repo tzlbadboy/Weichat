@@ -18,17 +18,17 @@ import nju.iip.util.DBConnection;
  */
 public class UserDaoImpl {
 	
-	 static Connection conn  = null;
-	 static Statement sm = null;
-	 static ResultSet rs = null;
-	 static PreparedStatement ps = null;
+	 private Connection conn  = null;
+	 private Statement sm = null;
+	 private ResultSet rs = null;
+	 private PreparedStatement ps = null;
 	
 	/**
 	 * 通过openId判断用户是否绑定微信
 	 * @param openId
 	 * @return
 	 */
-	public static boolean checkBind(String openId) {
+	public  boolean checkBind(String openId) {
 		 boolean flag=false;
 		 String sql = "select * from weixin where openId='"+openId+"'";
 		 try{
@@ -50,7 +50,7 @@ public class UserDaoImpl {
 	 * @param user
 	 * @return
 	 */
-	public static boolean addUser(WeixinUser user) {
+	public  boolean addUser(WeixinUser user) {
 		conn =DBConnection.getConn();
     	ps = null;
     	String sql = "insert into weixin(openId,cardID,name,phone) values(?,?,?,?)";
@@ -69,7 +69,7 @@ public class UserDaoImpl {
 		}
 	}
 	
-	public static boolean addUserInfo(WeixinUser user) {
+	public  boolean addUserInfo(WeixinUser user) {
 		Date now = new Date();
     	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );//可以方便地修改日期格式
     	String time = dateFormat.format(now);
@@ -105,7 +105,7 @@ public class UserDaoImpl {
 	 * @param openId
 	 * @return
 	 */
-	public static WeixinUser getUser(String openId) {
+	public  WeixinUser getUser(String openId) {
 		WeixinUser user = new WeixinUser();
 		String sql = "select * from weixin where openId='"+openId+"'";
 		try{
@@ -135,7 +135,7 @@ public class UserDaoImpl {
 	 * @param openId
 	 * @return
 	 */
-	public static boolean deleteUser(String openId) {
+	public  boolean deleteUser(String openId) {
 		conn =DBConnection.getConn();
     	ps = null;
     	String sql = "delete from weixin where openId=?";
@@ -156,7 +156,7 @@ public class UserDaoImpl {
 	/**
 	 * 关闭数据库
 	 */
-	public static void closeDB() {
+	public  void closeDB() {
 		if (rs != null) {
 			try {
 				rs.close();
@@ -171,16 +171,16 @@ public class UserDaoImpl {
 				e.printStackTrace();
 			}
 		}
-		if (conn != null) {
+		if (ps != null) {
 			try {
-				conn.close();
+				ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		if (ps != null) {
+		if (conn != null) {
 			try {
-				ps.close();
+				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

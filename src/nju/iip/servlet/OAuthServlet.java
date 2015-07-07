@@ -60,13 +60,15 @@ public class OAuthServlet extends HttpServlet {
 			
 			logger.info("openId="+openId);
 			
+			UserDaoImpl UDI = new UserDaoImpl();
+			
 			//检查用户是否已绑定
-			flag = UserDaoImpl.checkBind(openId);
+			flag = UDI.checkBind(openId);
 			
 			// 获取用户信息
 			WeixinUser snsUserInfo = AdvancedUtil.getWeixinUserInfo(accessToken, openId);
 			
-			WeixinUser user = UserDaoImpl.getUser(openId);
+			WeixinUser user = UDI.getUser(openId);
 			
 			snsUserInfo.setName(user.getName());
 			snsUserInfo.setCardID(user.getCardID());
@@ -94,7 +96,8 @@ public class OAuthServlet extends HttpServlet {
 			}
 			
 			else if(state.equals("nearby")) {
-				List<Map<String, String>> location_list = LocationDaoImpl.getAllUserLocation();
+				LocationDaoImpl LD = new LocationDaoImpl();
+				List<Map<String, String>> location_list = LD.getAllUserLocation();
 				JSONObject json = new JSONObject();
 				json.put("location", location_list);
 				logger.info(json.toString());

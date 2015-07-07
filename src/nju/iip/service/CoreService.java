@@ -105,7 +105,8 @@ public class CoreService {
                     // 自定义菜单点击事件  
                     if(eventKey.equals("menu_3_3")) {
                     	//fromUserName就是openid
-                    	if(UserDaoImpl.deleteUser(fromUserName)) {
+                    	UserDaoImpl UDI = new UserDaoImpl();
+                    	if(UDI.deleteUser(fromUserName)) {
                     		respContent = "解绑成功！"; 
                     	}
                     	else {
@@ -117,11 +118,12 @@ public class CoreService {
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_LOCATION)){
                 	String Latitude = requestMap.get("Latitude");
                 	String Longitude = requestMap.get("Longitude");
-                	if(!LocationDaoImpl.isLocated(fromUserName)) {
-                		LocationDaoImpl.locationUser(Latitude, Longitude, fromUserName);
+                	LocationDaoImpl LD = new LocationDaoImpl();
+                	if(!LD.isLocated(fromUserName)) {
+                		LD.locationUser(Latitude, Longitude, fromUserName);
                 	}
                 	else {
-                		LocationDaoImpl.updateUserLocation(Latitude, Longitude, fromUserName);
+                		LD.updateUserLocation(Latitude, Longitude, fromUserName);
 					}
                 	//respContent = "您的坐标为："+Latitude+"\n"+Longitude;
                 }

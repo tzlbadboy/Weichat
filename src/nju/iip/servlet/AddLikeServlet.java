@@ -42,7 +42,8 @@ public class AddLikeServlet extends HttpServlet {
 	     love.setHeadImgUrl(user.getHeadImgUrl());
 	     love.setLoveTime(CommonUtil.getTime());
 	     love.setAuthor(user.getNickname());
-	     if(PostDaoImpl.addLike(love)) {
+	     PostDaoImpl PDI = new PostDaoImpl();
+	     if(PDI.addLike(love)) {
 	    	 out.write("success!");
 	     }
 	     else {

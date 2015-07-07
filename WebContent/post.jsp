@@ -23,10 +23,11 @@
 
 	<%
 		Post post = (Post) request.getAttribute("post");
-		List<Comment> comment_list = PostDaoImpl.getAllComment(post.getId());
+	    PostDaoImpl PDI = new PostDaoImpl();
+		List<Comment> comment_list = PDI.getAllComment(post.getId());
 		String openId = (String)request.getSession().getAttribute("openId");
 		int postId = post.getId();
-		boolean isLoved = PostDaoImpl.isLove(openId, postId);
+		boolean isLoved = PDI.isLove(openId, postId);
 	%>
 
 	<div class="bgfff form ov">

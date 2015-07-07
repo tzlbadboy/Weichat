@@ -1,6 +1,5 @@
 package nju.iip.dto;
 
-import java.util.List;
 
 /**
  * 帖子类

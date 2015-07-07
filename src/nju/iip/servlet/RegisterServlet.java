@@ -54,8 +54,9 @@ public class RegisterServlet extends HttpServlet {
 	     user.setCardID(cardId);
 	     user.setOpenId(openId);
 	     user.setPhone(phone);
-	     UserDaoImpl.addUserInfo(user);
-	     if(UserDaoImpl.addUser(user)){
+	     UserDaoImpl UDI = new UserDaoImpl();
+	     UDI.addUserInfo(user);
+	     if(UDI.addUser(user)){
 	    	 request.getRequestDispatcher("registerOK.jsp").forward(request, response);
 	     }
 	     else {

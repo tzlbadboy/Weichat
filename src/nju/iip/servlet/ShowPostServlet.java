@@ -35,7 +35,8 @@ public class ShowPostServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String postId = request.getParameter("id");
 		logger.info("postId="+postId);
-		Post post = PostDaoImpl.getPostById(Integer.valueOf(postId));
+		PostDaoImpl PDI = new PostDaoImpl();
+		Post post = PDI.getPostById(Integer.valueOf(postId));
 		request.setAttribute("post", post);
 		request.getSession().setAttribute("postId", postId);
 		request.getRequestDispatcher("post.jsp").forward(request, response);

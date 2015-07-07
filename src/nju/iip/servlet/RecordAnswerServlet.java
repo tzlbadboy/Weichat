@@ -55,7 +55,8 @@ public class RecordAnswerServlet extends HttpServlet {
 	        String score = request.getParameter("score");
 	        logger.info("answers="+answers);
 	        logger.info("score="+score);
-	        if(ScaleDaoImpl.storeResult(openId, scale, score)) {
+	        ScaleDaoImpl SDI = new ScaleDaoImpl();
+	        if(SDI.storeResult(openId, scale, score)) {
 	        	out.print("success");
 	        }
 	        else {

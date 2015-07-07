@@ -42,8 +42,9 @@ public class GetScaleServlet extends HttpServlet {
 		String totalScaleId = request.getParameter("totalScaleId");
 		logger.info("totalScaleId="+totalScaleId);
 		String jsonStr = "";
-		Scale scale = ScaleDaoImpl.getScale(Integer.valueOf(totalScaleId));	
-	    List<Questions> list = ScaleDaoImpl.getQuestions(ScaleDaoImpl.getQuestionId(Integer.valueOf(totalScaleId)));
+		ScaleDaoImpl SDI = new ScaleDaoImpl();
+		Scale scale = SDI.getScale(Integer.valueOf(totalScaleId));	
+	    List<Questions> list = SDI.getQuestions(SDI.getQuestionId(Integer.valueOf(totalScaleId)));
 	    JSONObject json = new JSONObject();
 	    try {
 			json.put("questions", list);

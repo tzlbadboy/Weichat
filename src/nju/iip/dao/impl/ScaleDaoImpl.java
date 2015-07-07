@@ -24,10 +24,10 @@ import nju.iip.util.DBConnection;
  */
 public class ScaleDaoImpl {
 	
-	 static Connection conn  = null;
-	 static Statement sm = null;
-	 static ResultSet rs = null;
-	 static PreparedStatement ps = null;
+	 private Connection conn  = null;
+	 private Statement sm = null;
+	 private ResultSet rs = null;
+	 private PreparedStatement ps = null;
 	
 	
 	/**
@@ -35,7 +35,7 @@ public class ScaleDaoImpl {
 	 * @param totalScaleId
 	 * @return
 	 */
-	public static List<Integer> getQuestionId(int totalScaleId) {
+	public  List<Integer> getQuestionId(int totalScaleId) {
 		List<Integer> questionId_list = new ArrayList<Integer>();
 		conn = DBConnection.getConn();
 		String sql = "select * from parkinsonscale where totalScaleId='"+totalScaleId+"'";
@@ -67,7 +67,7 @@ public class ScaleDaoImpl {
 	 * @param questionId_list
 	 * @return List<Questions> question_list
 	 */
-	public static List<Questions> getQuestions(List<Integer> questionId_list) {
+	public  List<Questions> getQuestions(List<Integer> questionId_list) {
 		List<Questions> question_list = new ArrayList<Questions>();
 		conn = DBConnection.getConn();
 		try {
@@ -114,7 +114,7 @@ public class ScaleDaoImpl {
 	 * @param totalScaleId
 	 * @return scale
 	 */
-	public static Scale getScale(int totalScaleId) {
+	public  Scale getScale(int totalScaleId) {
 		Scale scale = new Scale();
 		conn = DBConnection.getConn();
 		String sql = "select * from parkinsontotalscale where id='"+totalScaleId+"'";
@@ -144,7 +144,7 @@ public class ScaleDaoImpl {
 	 * @param score
 	 * @return
 	 */
-	public static boolean storeResult(String openId,Scale scale,String score) {
+	public  boolean storeResult(String openId,Scale scale,String score) {
 		Date now = new Date();
     	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );//可以方便地修改日期格式
     	String time = dateFormat.format(now);
@@ -171,7 +171,7 @@ public class ScaleDaoImpl {
 	 * @param openId
 	 * @return
 	 */
-	public static List<ScaleRecord> getScaleRecord(String openId) {
+	public  List<ScaleRecord> getScaleRecord(String openId) {
 		List<ScaleRecord> record_listList = new ArrayList<ScaleRecord>();
 		String sql = "select * from weixin_scaleresult where openId='"+openId+"'";
 		try {
@@ -198,7 +198,7 @@ public class ScaleDaoImpl {
 	 * 取出所有量表
 	 * @return
 	 */
-	public static List<Scale> getScaleList() {
+	public  List<Scale> getScaleList() {
 		List<Scale> ScaleList = new ArrayList<Scale>();
 		String sql = "select * from parkinsontotalscale";
 		try {
@@ -226,7 +226,7 @@ public class ScaleDaoImpl {
 	/**
 	 * 关闭数据库
 	 */
-	public static void closeDB() {
+	public  void closeDB() {
 		if (rs != null) {
 			try {
 				rs.close();
@@ -241,13 +241,6 @@ public class ScaleDaoImpl {
 				e.printStackTrace();
 			}
 		}
-		if (conn != null) {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		if (ps != null) {
 			try {
 				ps.close();
@@ -255,10 +248,16 @@ public class ScaleDaoImpl {
 				e.printStackTrace();
 			}
 		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(getQuestions(getQuestionId(109)).size());
 	}
 
 }
