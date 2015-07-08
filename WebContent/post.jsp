@@ -29,9 +29,10 @@
 		int postId = post.getId();
 		boolean isLoved = PDI.isLove(openId, postId);
 	%>
+	
 
 	<div class="bgfff form ov">
-		<div>
+		<div class="send_message" id=<%=post.getOpenId() %>>
 			<img src=<%=post.getHeadImgUrl()%> alt="求真相" class="img-circle"
 				width="15%">&nbsp;&nbsp; <font size="3px" color="#337ab7"><%=post.getAuthor()%></font>
 		</div>
@@ -67,6 +68,37 @@
 		</div>
 	</div>
 	<hr />
+	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel"></h4>
+				</div>
+				<div class="modal-body">
+
+					<div class="form-group" id="form-content">
+						<label for="message-text" class="control-label">内容:</label>
+						<textarea class="form-control" id="message-text" name="message"></textarea>
+					</div>
+                    
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal"
+							value="取消"> <input type="button" class="btn btn-primary"
+							id="send" value="确认">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	
 
 	<%
 		int i=1;
@@ -173,6 +205,11 @@
 					}); 
 				} 
 			}); 
+		
+		$("div.send_message").click(function{
+			alert(this.attr("id"));
+		});
+		
 		}); 
 	</script>
 
