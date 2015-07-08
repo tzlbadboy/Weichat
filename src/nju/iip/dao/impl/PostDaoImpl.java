@@ -110,6 +110,7 @@ public class PostDaoImpl {
 				post.setReply(rs.getInt("reply"));
 				post.setLove(rs.getInt("love"));
 				post.setPictureUrl(rs.getString("pictureUrl"));
+				post.setOpenId(rs.getString("openId"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -268,6 +269,7 @@ public class PostDaoImpl {
 				comment.setComment_content(rs.getString("comment"));
 				comment.setCommentTime(rs.getString("commentTime"));
 				comment.setHeadImgUrl(rs.getString("headImgUrl"));
+				comment.setOpenId(rs.getString("openId"));
 				comment_list.add(comment);
 			}
 		}catch(Exception e){

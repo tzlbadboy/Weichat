@@ -31,7 +31,7 @@
 	%>
 
 	<div class="bgfff form ov">
-		<div>
+		<div class="sendMessageToHim" id=<%=post.getOpenId()%>>
 			<img src=<%=post.getHeadImgUrl()%> alt="求真相" class="img-circle"
 				width="15%">&nbsp;&nbsp; <font size="3px" color="#337ab7"><%=post.getAuthor()%></font>
 		</div>
@@ -77,7 +77,7 @@
 		<table width="100%">
 			<tr>
 				<td width="70%">
-					<div>
+					<div class="sendMessageToHim" id=<%=comment.getOpenId() %>>
 						<img src=<%=comment.getHeadImgUrl()%> alt="求真相" class="img-circle"
 							width="13%">&nbsp;&nbsp; <font size="3px" color="#337ab7"><%=comment.getAuthor()%></font>
 					</div>
@@ -100,6 +100,49 @@
 		i++;
 		}
 	%>
+	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel"></h4>
+				</div>
+				<div class="modal-body">
+
+					<div class="form-group" id="form-content">
+						<label for="message-text" class="control-label">内容:</label>
+						<textarea class="form-control" id="message-text" name="message"></textarea>
+					</div>
+                    
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal"
+							value="取消"> <input type="button" class="btn btn-primary"
+							id="send" value="确认">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- end -->
+	
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content" id="show_reslut"
+				style="text-align: center; margin: 5px auto 5px auto">
+				<br>
+				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><br>
+				<br>
+			</div>
+		</div>
+	</div>
+
 
 	<div style="margin: 10px 0 60px 0"></div>
 
@@ -115,20 +158,10 @@
 		</table>
 	</div>
 
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content" id="show_reslut"
-				style="text-align: center; margin: 5px auto 5px auto">
-				<span class="return_msg"></span><span class="glyphicon glyphicon-ok"></span><br>
-				<br>
-			</div>
-		</div>
-	</div>
 
+</body>
 
-
-	<script type="text/javascript"> 
+<script type="text/javascript"> 
 	$(document).ready(function() { 
 		var loved = <%=isLoved%>;
 		if(loved==false) {
@@ -137,7 +170,41 @@
 		else {
 			$("span.love").addClass("glyphicon-heart");
 		}
-		
+		//模态框发送按钮响应函数 
+		$("div.sendMessageToHim").click(function() {
+			$("#myModal").modal("show");
+			var ToOpenId =  $(this).attr("id");
+			var ToNickname = $(this).children("font").text();
+			$("h4.modal-title").html("发送消息给:"+ToNickname);
+			$("input#send").click(function() {
+				var message = $("textarea#message-text").val();
+				if(message == "") {
+					$("textarea#message-text").attr("placeholder","消息内容不能为空!");
+				}
+				else {
+					$.ajax({
+						type : 'POST',
+						url : "MessageServlet",
+						data : {
+							"message" : message,
+							"ToOpenId" : ToOpenId,
+							"ToNickname" : ToNickname
+						},
+						success : function(msg) {
+							$("#myModal").modal("hide");
+							$("span.return_msg").html(msg); 
+							$(".bs-example-modal-sm").modal('show');
+							setTimeout(function() {
+								$(".bs-example-modal-sm").modal('hide');
+							}, 2000);
+						}
+					});
+				}
+			});
+			
+			
+		});
+		//点赞处理逻辑 
 		$("span.glyphicon").click(function() {
 			if($("span.glyphicon").hasClass("glyphicon-heart-empty")) {
 				$("span.glyphicon").removeClass("glyphicon-heart-empty");
@@ -151,7 +218,7 @@
 		});
 		
 		
-		
+		//回复帖子处理 
 		$("span#send").click(function() { 
 			var comment = $("input.form-control").val(); 
 			if (comment == "") {
@@ -173,9 +240,10 @@
 					}); 
 				} 
 			}); 
+		
+		
+		
 		}); 
 	</script>
 
-
-</body>
 </html>

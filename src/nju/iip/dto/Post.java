@@ -36,9 +36,6 @@ public class Post {
 	//点赞数
 	private int love;
 	
-	//是否有图片0没有，1有
-	private int hasPicture;
-	
 	//帖子所包含的图片
 	private String pictureUrl;
 
@@ -48,14 +45,6 @@ public class Post {
 
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
-	}
-
-	public int getHasPicture() {
-		return hasPicture;
-	}
-
-	public void setHasPicture(int hasPicture) {
-		this.hasPicture = hasPicture;
 	}
 
 	public int getLove() {

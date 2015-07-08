@@ -99,7 +99,6 @@
     <servlet-name>ShowPostServlet</servlet-name>
     <url-pattern>/ShowPostServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AddCommentServlet</servlet-name>
     <servlet-class>  
@@ -110,8 +109,7 @@
     <servlet-name>AddCommentServlet</servlet-name>
     <url-pattern>/AddCommentServlet</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>AddLikeServlet</servlet-name>
     <servlet-class>  
             nju.iip.servlet.AddLikeServlet  
@@ -120,6 +118,17 @@
   <servlet-mapping>
     <servlet-name>AddLikeServlet</servlet-name>
     <url-pattern>/AddLikeServlet</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>MessageServlet</servlet-name>
+    <servlet-class>  
+            nju.iip.servlet.MessageServlet  
+        </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageServlet</servlet-name>
+    <url-pattern>/MessageServlet</url-pattern>
   </servlet-mapping>
   
 </web-app>
