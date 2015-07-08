@@ -84,7 +84,7 @@ public class OAuthServlet extends HttpServlet {
 			
 			if(state.equals("weixin")) {
 				// 跳转到index.jsp
-				request.getRequestDispatcher("userInfo.jsp").forward(request, response);
+				request.getRequestDispatcher("MessageBox.jsp").forward(request, response);
 			}
 			
 			else if(state.equals("liangbiao")){

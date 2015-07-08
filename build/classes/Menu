@@ -62,7 +62,7 @@
    
                 {
                     "type": "view", 
-                    "name": "我的信息", 
+                    "name": "消息盒子", 
                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4bb093136ffd648&redirect_uri=http://114.212.80.14/Weichat/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=weixin#wechat_redirect"
                 },
                 
