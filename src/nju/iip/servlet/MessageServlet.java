@@ -47,15 +47,16 @@ public class MessageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		String sendToOpenId = request.getParameter("sendToOpenId");
+		String ToOpenId = request.getParameter("ToOpenId");
 		String message = request.getParameter("message");
 		String ToNickname = request.getParameter("ToNickname");
-		logger.info("sendToOpenId="+sendToOpenId+" message="+message+" ToNickname="+ToNickname);
+		logger.info("ToOpenId="+ToOpenId+" message="+message+" ToNickname="+ToNickname);
 		
 		WeixinUser user = (WeixinUser)request.getSession().getAttribute("snsUserInfo");
 		Message msg = new Message();
 		msg.setContent(message);
 		msg.setToNickname(ToNickname);
+		msg.setToOpenId(ToOpenId);
 		msg.setFromNickname(user.getNickname());
 		msg.setFromOpenId(user.getOpenId());
 		msg.setFromHeadImgUrl(user.getHeadImgUrl());

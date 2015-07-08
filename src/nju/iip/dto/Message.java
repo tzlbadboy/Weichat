@@ -25,7 +25,7 @@ public class Message extends BaseMessage {
     //发送者的微信头像
     private String fromHeadImgUrl;
     
-    //消息是否被读过
+    //消息是否被读过  0:未读过          1：读过
     private int isRead;
     
     //发送时间

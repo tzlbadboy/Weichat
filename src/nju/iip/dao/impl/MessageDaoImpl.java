@@ -25,7 +25,7 @@ public class MessageDaoImpl {
 	 private PreparedStatement ps = null;
 	 
 	 public boolean addMessage(Message message) {
-		 String sql = "insert into weixin_message(Content,fromOpenId,toOpenId,fromNickname,toNickname,fromHeadImgUrl,isRead) values(?,?,?,?,?,?,?)";
+		 String sql = "insert into weixin_message(content,fromOpenId,toOpenId,fromNickname,toNickname,fromHeadImgUrl,isRead,sendTime) values(?,?,?,?,?,?,?,?)";
 		 try {
 			 conn =DBConnection.getConn();
 			 ps = conn.prepareStatement(sql);
@@ -36,6 +36,7 @@ public class MessageDaoImpl {
 			 ps.setString(5, message.getToNickname());
 			 ps.setString(6, message.getFromHeadImgUrl());
 			 ps.setInt(7, message.getIsRead());
+			 ps.setString(8, message.getSendTime());
 			 return ps.executeUpdate() == 1 ? true : false;
 		 }catch (SQLException e) {
 			    logger.error("MessageDaoImpl-------->",e);
