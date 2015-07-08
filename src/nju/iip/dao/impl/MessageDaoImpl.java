@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,7 @@ public class MessageDaoImpl {
 	 private ResultSet rs = null;
 	 private PreparedStatement ps = null;
 	 
+	 //将新的私信消息插入数据库
 	 public boolean addMessage(Message message) {
 		 String sql = "insert into weixin_message(content,fromOpenId,toOpenId,fromNickname,toNickname,fromHeadImgUrl,isRead,sendTime) values(?,?,?,?,?,?,?,?)";
 		 try {
@@ -44,6 +47,32 @@ public class MessageDaoImpl {
 			} finally {
 				closeDB();
 			}
+	 }
+	 
+	 //读取用户的私信消息
+	 public List<Message> getMessage(String openId) {
+		 List<Message> messages = new ArrayList<Message>();
+		 String sql = "select * from weixin_message where toOpenId='"+openId+"' order by id desc";
+		 try {
+			 conn = DBConnection.getConn();
+			 sm=conn.createStatement();
+			 rs=sm.executeQuery(sql);
+			 while(rs.next()) {
+				 Message message = new Message();
+				 message.setContent(rs.getString("content"));
+				 message.setFromHeadImgUrl(rs.getString("fromHeadImgUrl"));
+				 message.setFromNickname(rs.getString("fromNickname"));
+				 message.setSendTime(rs.getString("sendTime"));
+				 message.setIsRead(rs.getInt("isRead"));
+				 messages.add(message);
+			 }
+		 }catch(Exception e){
+				logger.error("MessageDaoImpl-getMessage---->",e);
+				}
+			finally {
+				closeDB();
+			}
+		 return messages;
 	 }
 	 
 		/**
@@ -79,6 +108,11 @@ public class MessageDaoImpl {
 				}
 			}
 			
+		}
+		
+		public static void main(String[] args) {
+			MessageDaoImpl MDI = new MessageDaoImpl();
+			System.out.println(MDI.getMessage("om8TAt9-24UvwsTBRhK48pPMrcBg").get(0).getFromHeadImgUrl());
 		}
 
 }

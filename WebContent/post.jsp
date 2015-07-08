@@ -110,7 +110,7 @@
 					<button type="button" class="close" data-dismiss="modal">
 						<span>&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel"></h4>
+					<h4 class="modal-title" id="myModalLabel">发送消息给:<font color="#337ab7"></font></h4>
 				</div>
 				<div class="modal-body">
 
@@ -175,7 +175,7 @@
 			$("#myModal").modal("show");
 			var ToOpenId =  $(this).attr("id");
 			var ToNickname = $(this).children("font").text();
-			$("h4.modal-title").html("发送消息给:"+ToNickname);
+			$("h4.modal-title").children("font").html(ToNickname);
 			$("input#send").click(function() {
 				var message = $("textarea#message-text").val();
 				if(message == "") {
