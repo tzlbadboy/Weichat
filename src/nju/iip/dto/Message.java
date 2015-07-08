@@ -6,6 +6,9 @@ package nju.iip.dto;
  * @author mrpod2g 
  */  
 public class Message extends BaseMessage {  
+	
+	//消息id
+	private int id;
 
 	// 消息内容  
     private String Content;  
@@ -30,6 +33,14 @@ public class Message extends BaseMessage {
     
     //发送时间
     private String sendTime;
+    
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
     
     public String getSendTime() {
 		return sendTime;

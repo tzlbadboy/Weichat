@@ -64,6 +64,8 @@ public class MessageDaoImpl {
 				 message.setFromNickname(rs.getString("fromNickname"));
 				 message.setSendTime(rs.getString("sendTime"));
 				 message.setIsRead(rs.getInt("isRead"));
+				 message.setId(rs.getInt("id"));
+				 message.setFromOpenId(rs.getString("fromOpenId"));
 				 messages.add(message);
 			 }
 		 }catch(Exception e){
@@ -73,6 +75,24 @@ public class MessageDaoImpl {
 				closeDB();
 			}
 		 return messages;
+	 }
+	 
+	 /**
+	  * 标记私信消息已读过
+	  * @return
+	  */
+	 public boolean updateIsRead(int id) {
+		 String sql = "update weixin_message set isRead=1 where id='"+id+"'";
+		 try {
+				conn = DBConnection.getConn(); 
+				ps = conn.prepareStatement(sql);
+				return ps.executeUpdate() == 1 ? true : false;
+			}catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			} finally {
+				closeDB();
+			}
 	 }
 	 
 		/**

@@ -57,7 +57,7 @@ public class RegisterServlet extends HttpServlet {
 	     UserDaoImpl UDI = new UserDaoImpl();
 	     UDI.addUserInfo(user);
 	     if(UDI.addUser(user)){
-	    	 request.getRequestDispatcher("registerOK.jsp").forward(request, response);
+	    	 request.getRequestDispatcher("post_list.jsp").forward(request, response);
 	     }
 	     else {
 	    	 request.getRequestDispatcher("register.jsp").forward(request, response);

@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
-	content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+	content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>帖子详情</title>
 <link rel="stylesheet"
 	href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -170,40 +170,45 @@
 		else {
 			$("span.love").addClass("glyphicon-heart");
 		}
+		
+		var ToOpenId,ToNickname;
+	
 		//模态框发送按钮响应函数 
 		$("div.sendMessageToHim").click(function() {
 			$("#myModal").modal("show");
-			var ToOpenId =  $(this).attr("id");
-			var ToNickname = $(this).children("font").text();
+			ToOpenId =  $(this).attr("id");
+			ToNickname = $(this).children("font").text();
 			$("h4.modal-title").children("font").html(ToNickname);
-			$("input#send").click(function() {
-				var message = $("textarea#message-text").val();
-				if(message == "") {
-					$("textarea#message-text").attr("placeholder","消息内容不能为空!");
-				}
-				else {
-					$.ajax({
-						type : 'POST',
-						url : "MessageServlet",
-						data : {
-							"message" : message,
-							"ToOpenId" : ToOpenId,
-							"ToNickname" : ToNickname
-						},
-						success : function(msg) {
-							$("#myModal").modal("hide");
-							$("span.return_msg").html(msg); 
-							$(".bs-example-modal-sm").modal('show');
-							setTimeout(function() {
-								$(".bs-example-modal-sm").modal('hide');
-							}, 2000);
-						}
-					});
-				}
-			});
-			
-			
 		});
+		
+		
+		$("input#send").click(function() {
+			var message = $("textarea#message-text").val();
+			if(message == "") {
+				$("textarea#message-text").attr("placeholder","消息内容不能为空!");
+			}
+			else {
+				$.ajax({
+					type : 'POST',
+					url : "MessageServlet",
+					data : {
+						"message" : message,
+						"ToOpenId" : ToOpenId,
+						"ToNickname" : ToNickname
+					},
+					success : function(msg) {
+						$("#myModal").modal("hide");
+						$("span.return_msg").html(msg); 
+						$(".bs-example-modal-sm").modal('show');
+						setTimeout(function() {
+							$(".bs-example-modal-sm").modal('hide');
+						}, 2000);
+					}
+				});
+			}
+		});
+		
+		
 		//点赞处理逻辑 
 		$("span.glyphicon").click(function() {
 			if($("span.glyphicon").hasClass("glyphicon-heart-empty")) {

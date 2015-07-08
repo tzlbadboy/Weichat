@@ -38,7 +38,18 @@ public class MessageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		String id = request.getParameter("id");
+		logger.info("MessageId="+id);
+		MessageDaoImpl MDI = new MessageDaoImpl();
+		PrintWriter out = response.getWriter();
+		if(MDI.updateIsRead(Integer.valueOf(id))) {
+			out.write("OK!");
+		}
+		else {
+			out.write("failed!");
+		}
 	}
 
 	/**
