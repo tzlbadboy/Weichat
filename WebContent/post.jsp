@@ -26,6 +26,7 @@
 	    PostDaoImpl PDI = new PostDaoImpl();
 		List<Comment> comment_list = PDI.getAllComment(post.getId());
 		String openId = (String)request.getSession().getAttribute("openId");
+		System.out.println("openId-------->"+openId);
 		int postId = post.getId();
 		boolean isLoved = PDI.isLove(openId, postId);
 	%>
@@ -158,7 +159,6 @@
 		</table>
 	</div>
 
-
 </body>
 
 <script type="text/javascript"> 
@@ -175,10 +175,14 @@
 	
 		//模态框发送按钮响应函数 
 		$("div.sendMessageToHim").click(function() {
-			$("#myModal").modal("show");
+			var userOpenId = "<%=openId%>";
 			ToOpenId =  $(this).attr("id");
-			ToNickname = $(this).children("font").text();
-			$("h4.modal-title").children("font").html(ToNickname);
+			if(ToOpenId!=userOpenId) {
+				$("#myModal").modal("show");
+				ToNickname = $(this).children("font").text();
+				$("h4.modal-title").children("font").html(ToNickname);
+			}
+			
 		});
 		
 		

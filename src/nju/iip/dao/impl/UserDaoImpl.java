@@ -129,6 +129,39 @@ public class UserDaoImpl {
 		return user;
 	}
 	
+	/**
+	 * 根据openId获得用户的信息
+	 * @param openId
+	 * @return
+	 */
+	public  WeixinUser getUserInfo(String openId) {
+		WeixinUser user = new WeixinUser();
+		String sql = "select * from weixin_userinfo where openId='"+openId+"'";
+		try{
+			conn = DBConnection.getConn(); 
+			sm=conn.createStatement();
+			rs=sm.executeQuery(sql);
+			if(rs.next()){
+				String name = rs.getString("name");
+    			String cardID = rs.getString("cardID");
+    			String phone = rs.getString("phone");
+    			String nickname = rs.getString("nickname");
+    			String headImgUrl = rs.getString("headImgUrl");
+    			user.setName(name);
+    			user.setCardID(cardID);
+    		    user.setPhone(phone);
+    		    user.setNickname(nickname);
+    		    user.setHeadImgUrl(headImgUrl);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			}
+		finally {
+			closeDB();
+		}
+		return user;
+	}
+	
 	
 	/**
 	 * 根据openId删除用户即解绑

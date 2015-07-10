@@ -28,7 +28,7 @@
 			int isRead = message.getIsRead();
 	%>
 	<div class="bgfff form ov" style="line-height: 1.2;width: 98%;border-radius:3px;margin-top:6px;" id=<%=message.getId()%>>
-	<input id="content" type="text" style="display:none" value=<%=message.getContent()%>>
+	<div id="content" style="display:none"><%=message.getContent()%></div>
 	<input id="fromOpenId" type="text" style="display:none" value=<%=message.getFromOpenId()%>>
 	
 		<table width="100%">
@@ -117,7 +117,7 @@ $(document).ready(function() {
 		var id = $(this).attr("id");
 		ReadMessage(id);
 		var fromNickname = $(this).find("font#nickname").text();
-		var content = $(this).find("input#content").val();
+		var content = $(this).find("div#content").text();
 		var fromOpenId = $(this).find("input#fromOpenId").val();
 		$("h4.modal-title").children("font").html(fromNickname);
 		$("div#form-content").html(content);

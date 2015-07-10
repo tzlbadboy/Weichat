@@ -58,7 +58,6 @@ public class OAuthServlet extends HttpServlet {
 			// 用户标识
 			String openId = weixinOauth2Token.getOpenId();
 			
-			logger.info("openId="+openId);
 			
 			UserDaoImpl UDI = new UserDaoImpl();
 			
@@ -97,7 +96,14 @@ public class OAuthServlet extends HttpServlet {
 			
 			else if(state.equals("nearby")) {
 				LocationDaoImpl LD = new LocationDaoImpl();
+				UserDaoImpl UDI = new UserDaoImpl();
 				List<Map<String, String>> location_list = LD.getAllUserLocation();
+				for(Map<String, String> map:location_list) {
+					String openId = map.get("openId");
+					WeixinUser user = UDI.getUserInfo(openId);
+					map.put("nickname", user.getNickname());
+					map.put("headImgUrl", user.getHeadImgUrl());
+				}
 				JSONObject json = new JSONObject();
 				json.put("location", location_list);
 				logger.info(json.toString());
