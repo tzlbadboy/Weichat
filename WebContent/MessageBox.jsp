@@ -33,11 +33,11 @@
 	
 		<table width="100%">
 			<tr>
-				<td width="40%">
+				<td width="60%">
 					<div class="sendMessageToHim">
 						<img
 							src=<%=message.getFromHeadImgUrl()%>
-							alt="求真相" class="img-circle" width="40%">&nbsp;&nbsp; 
+							alt="求真相" class="img-circle" width="30%">&nbsp;&nbsp; 
 							<font id="nickname" color="#337ab7"><%=message.getFromNickname()%></font>
 					</div>
 				</td>
