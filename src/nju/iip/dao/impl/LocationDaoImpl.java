@@ -27,7 +27,7 @@ public class LocationDaoImpl {
 	 private PreparedStatement ps = null;
 	 
 	 
-	 /**
+	    /**
 		 * 判断用户位置是否被记录过
 		 * @param openId
 		 * @return
