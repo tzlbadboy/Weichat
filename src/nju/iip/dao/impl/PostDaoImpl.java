@@ -33,7 +33,7 @@ public class PostDaoImpl {
 	 * @return
 	 */
 	public  boolean addPost(Post post) {
-		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId,headImgUrl,love,pictureUrl) values(?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId,headImgUrl,love,pictureUrl,isUp) values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
@@ -46,6 +46,7 @@ public class PostDaoImpl {
 			ps.setString(7, post.getHeadImgUrl());
 			ps.setInt(8, post.getLove());
 			ps.setString(9, post.getPictureUrl());
+			ps.setInt(10, 0);
 			return ps.executeUpdate() == 1 ? true : false;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -56,12 +57,12 @@ public class PostDaoImpl {
 	}
 	
 	/**
-	 * 获得所有帖子
+	 * 获得所有非置顶帖子
 	 * @return
 	 */
 	public  List<Post> getAllPost() {
 		List<Post> post_list = new ArrayList<Post>();
-		String sql = "select * from weixin_post order by id desc";
+		String sql = "select * from weixin_post where isUp=0 order by id desc";
 		try {
 			conn = DBConnection.getConn();
 			sm=conn.createStatement();
@@ -87,6 +88,40 @@ public class PostDaoImpl {
 		
 		return post_list;
 	}
+	
+	/**
+	 * 获得所有置顶帖子
+	 * @return
+	 */
+	public  List<Post> getAllUpPost() {
+		List<Post> post_list = new ArrayList<Post>();
+		String sql = "select * from weixin_post where isUp=1 order by id desc";
+		try {
+			conn = DBConnection.getConn();
+			sm=conn.createStatement();
+			rs=sm.executeQuery(sql);
+			while(rs.next()) {
+				Post post = new Post();
+				post.setAuthor(rs.getString("author"));
+				post.setContent(rs.getString("content"));
+				post.setId(rs.getInt("id"));
+				post.setPostTime(rs.getString("postTime"));
+				post.setTitle(rs.getString("title"));
+				post.setReply(rs.getInt("reply"));
+				post.setLove(rs.getInt("love"));
+				post.setPictureUrl(rs.getString("pictureUrl"));
+				post_list.add(post);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			}
+		finally {
+			closeDB();
+		}
+		
+		return post_list;
+	}
+	
 	
 	/**
 	 * 根据帖子id取出帖子
@@ -319,7 +354,8 @@ public class PostDaoImpl {
 	}
 	
 	public static void main(String[] args) {
-		
+		PostDaoImpl PDI = new PostDaoImpl();
+		System.out.println(PDI.getAllUpPost().size());
 	}
 
 }

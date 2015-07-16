@@ -22,8 +22,10 @@
 <body>
 	<%
 	    PostDaoImpl PDI = new PostDaoImpl();
+	    List<Post> upPost_list = PDI.getAllUpPost();
 		List<Post> post_list = PDI.getAllPost();
-		for (Post post:post_list) {
+		upPost_list.addAll(post_list);
+		for (Post post:upPost_list) {
 	%>
 	<div class="bgfff form ov" id=<%=post.getId()%>>
 		<div class="fb">
