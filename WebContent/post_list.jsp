@@ -67,7 +67,7 @@
 		}
 	%>
 </div>
-<div id="refresh" style="margin:0 auto 0 40%"><i class="fa fa-spinner fa-spin"></i>正在加载...</div>
+<div id="refresh" style="margin:5px auto 0 40%"><i class="fa fa-spinner fa-spin"></i>正在加载...</div>
 	<div style="margin: 10px 0 60px 0"></div>
 
 	<!-- Modal -->
