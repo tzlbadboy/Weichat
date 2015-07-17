@@ -13,6 +13,7 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <link rel="stylesheet"
 	href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/common.css">
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -21,12 +22,12 @@
 <script src="js/post.js"></script>
 </head>
 <body>
-<div id="contain" style="overflow-y:auto;">
+<div id="contain">
 
 	<%
 	    PostDaoImpl PDI = new PostDaoImpl();
 	    List<Post> upPost_list = PDI.getAllUpPost();
-		List<Post> post_list = PDI.getAllPost();
+		List<Post> post_list = PDI.getAllPostLimit(0);
 		upPost_list.addAll(post_list);
 		for (Post post:upPost_list) {
 	%>
@@ -66,6 +67,7 @@
 		}
 	%>
 </div>
+<div id="refresh" style="margin:0 auto 0 40%"><i class="fa fa-spinner fa-spin"></i>正在加载...</div>
 	<div style="margin: 10px 0 60px 0"></div>
 
 	<!-- Modal -->

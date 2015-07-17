@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import nju.iip.dto.Comment;
 import nju.iip.dto.Love;
 import nju.iip.dto.Post;
@@ -26,13 +25,14 @@ public class PostDaoImpl {
 	private Statement sm = null;
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
-	
+
 	/**
 	 * 添加一个帖子
+	 * 
 	 * @param post
 	 * @return
 	 */
-	public  boolean addPost(Post post) {
+	public boolean addPost(Post post) {
 		String sql = "insert into weixin_post(title,content,postTime,author,reply,openId,headImgUrl,love,pictureUrl,isUp) values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
@@ -41,33 +41,67 @@ public class PostDaoImpl {
 			ps.setString(2, post.getContent());
 			ps.setString(3, post.getPostTime());
 			ps.setString(4, post.getAuthor());
-			ps.setInt(5,post.getReply());
+			ps.setInt(5, post.getReply());
 			ps.setString(6, post.getOpenId());
 			ps.setString(7, post.getHeadImgUrl());
 			ps.setInt(8, post.getLove());
 			ps.setString(9, post.getPictureUrl());
 			ps.setInt(10, 0);
 			return ps.executeUpdate() == 1 ? true : false;
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		} finally {
 			closeDB();
 		}
 	}
-	
+
 	/**
 	 * 获得所有非置顶帖子
+	 * 
 	 * @return
 	 */
-	public  List<Post> getAllPost() {
+	public List<Post> getAllPostLimit(int n) {
+		List<Post> post_list = new ArrayList<Post>();
+		String sql = "select * from weixin_post where isUp=0 order by id desc limit "+n+",10";
+		try {
+			conn = DBConnection.getConn();
+			sm = conn.createStatement();
+			rs = sm.executeQuery(sql);
+			while (rs.next()) {
+				Post post = new Post();
+				post.setAuthor(rs.getString("author"));
+				post.setContent(rs.getString("content"));
+				post.setId(rs.getInt("id"));
+				post.setPostTime(rs.getString("postTime"));
+				post.setTitle(rs.getString("title"));
+				post.setReply(rs.getInt("reply"));
+				post.setLove(rs.getInt("love"));
+				post.setPictureUrl(rs.getString("pictureUrl"));
+				post_list.add(post);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+
+		return post_list;
+	}
+
+	/**
+	 * 获得所有非置顶帖子
+	 * 
+	 * @return
+	 */
+	public List<Post> getAllPost() {
 		List<Post> post_list = new ArrayList<Post>();
 		String sql = "select * from weixin_post where isUp=0 order by id desc";
 		try {
 			conn = DBConnection.getConn();
-			sm=conn.createStatement();
-			rs=sm.executeQuery(sql);
-			while(rs.next()) {
+			sm = conn.createStatement();
+			rs = sm.executeQuery(sql);
+			while (rs.next()) {
 				Post post = new Post();
 				post.setAuthor(rs.getString("author"));
 				post.setContent(rs.getString("content"));
@@ -79,28 +113,28 @@ public class PostDaoImpl {
 				post.setPictureUrl(rs.getString("pictureUrl"));
 				post_list.add(post);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			}
-		finally {
+		} finally {
 			closeDB();
 		}
-		
+
 		return post_list;
 	}
-	
+
 	/**
 	 * 获得所有置顶帖子
+	 * 
 	 * @return
 	 */
-	public  List<Post> getAllUpPost() {
+	public List<Post> getAllUpPost() {
 		List<Post> post_list = new ArrayList<Post>();
 		String sql = "select * from weixin_post where isUp=1 order by id desc";
 		try {
 			conn = DBConnection.getConn();
-			sm=conn.createStatement();
-			rs=sm.executeQuery(sql);
-			while(rs.next()) {
+			sm = conn.createStatement();
+			rs = sm.executeQuery(sql);
+			while (rs.next()) {
 				Post post = new Post();
 				post.setAuthor(rs.getString("author"));
 				post.setContent(rs.getString("content"));
@@ -112,30 +146,29 @@ public class PostDaoImpl {
 				post.setPictureUrl(rs.getString("pictureUrl"));
 				post_list.add(post);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			}
-		finally {
+		} finally {
 			closeDB();
 		}
-		
+
 		return post_list;
 	}
-	
-	
+
 	/**
 	 * 根据帖子id取出帖子
+	 * 
 	 * @param id
 	 * @return
 	 */
-	public  Post getPostById(int id) {
-		Post post =new Post();
-		String sql = "select * from weixin_post where id='"+id+"'";
+	public Post getPostById(int id) {
+		Post post = new Post();
+		String sql = "select * from weixin_post where id='" + id + "'";
 		try {
 			conn = DBConnection.getConn();
-			sm=conn.createStatement();
-			rs=sm.executeQuery(sql);
-			if(rs.next()) {
+			sm = conn.createStatement();
+			rs = sm.executeQuery(sql);
+			if (rs.next()) {
 				post.setId(id);
 				post.setAuthor(rs.getString("author"));
 				post.setContent(rs.getString("content"));
@@ -147,22 +180,21 @@ public class PostDaoImpl {
 				post.setPictureUrl(rs.getString("pictureUrl"));
 				post.setOpenId(rs.getString("openId"));
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			}
-		finally {
+		} finally {
 			closeDB();
 		}
 		return post;
 	}
-	
-	
+
 	/**
 	 * 增加一条评论
+	 * 
 	 * @param comment
 	 * @return
 	 */
-	public  boolean addComment(Comment comment) {
+	public boolean addComment(Comment comment) {
 		String sql = "insert into weixin_comment(postId,comment,commentTime,author,openId,headImgUrl) values(?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
@@ -171,47 +203,51 @@ public class PostDaoImpl {
 			ps.setString(2, comment.getComment_content());
 			ps.setString(3, comment.getCommentTime());
 			ps.setString(4, comment.getAuthor());
-			ps.setString(5,comment.getOpenId());
+			ps.setString(5, comment.getOpenId());
 			ps.setString(6, comment.getHeadImgUrl());
 			return ps.executeUpdate() == 1 ? true : false;
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		} finally {
 			closeDB();
 		}
 	}
-	
+
 	/**
 	 * 评论数+1操作
+	 * 
 	 * @return
 	 */
-	public  boolean addReplyNum(int postId) {
-		String sql = "update weixin_post set reply=reply+1 where id='"+postId+"'";
+	public boolean addReplyNum(int postId) {
+		String sql = "update weixin_post set reply=reply+1 where id='" + postId
+				+ "'";
 		try {
-			conn = DBConnection.getConn(); 
+			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
-			
+
 			return ps.executeUpdate() == 1 ? true : false;
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		} finally {
 			closeDB();
 		}
 	}
-	
+
 	/**
 	 * weixin_post和weixin_love表中增加一个点赞数
+	 * 
 	 * @param postId
 	 * @return
 	 */
-	public  boolean addLike(Love love) {
-		String sql = "update weixin_post set love=love+1 where id='"+love.getPostId()+"'";
+	public boolean addLike(Love love) {
+		String sql = "update weixin_post set love=love+1 where id='"
+				+ love.getPostId() + "'";
 		String sql2 = "insert into weixin_love(postId,loveTime,author,openId,headImgUrl) values(?,?,?,?,?)";
 		PreparedStatement ps2 = null;
 		try {
-			conn = DBConnection.getConn(); 
+			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
 			ps2 = conn.prepareStatement(sql2);
 			ps2.setInt(1, love.getPostId());
@@ -219,86 +255,88 @@ public class PostDaoImpl {
 			ps2.setString(3, love.getAuthor());
 			ps2.setString(4, love.getOpenId());
 			ps2.setString(5, love.getHeadImgUrl());
-			return (ps.executeUpdate() == 1)&&(ps2.executeUpdate() == 1) ? true : false;
-		}catch (SQLException e) {
+			return (ps.executeUpdate() == 1) && (ps2.executeUpdate() == 1) ? true
+					: false;
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		} finally {
 			closeDB();
-			if(ps2!=null) {
+			if (ps2 != null) {
 				try {
 					ps2.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
-			
+
 		}
 	}
-	
+
 	/**
 	 * 判断某个人是否点过赞
+	 * 
 	 * @return
 	 */
-	public  boolean isLove(String openId,int postId) {
-		String sql = "select * from weixin_love where postId='"+postId+"' and openId='"+openId+"'";
+	public boolean isLove(String openId, int postId) {
+		String sql = "select * from weixin_love where postId='" + postId
+				+ "' and openId='" + openId + "'";
 		try {
 			conn = DBConnection.getConn();
-			sm=conn.createStatement();
-			rs=sm.executeQuery(sql);
+			sm = conn.createStatement();
+			rs = sm.executeQuery(sql);
 			return rs.next();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		}
-		finally {
+		} finally {
 			closeDB();
 		}
 	}
-	
-	
+
 	/**
 	 * 将帖子所有赞取出
+	 * 
 	 * @param postId
 	 * @return
 	 */
-	public  List<Love> getAllLove(int postId) {
+	public List<Love> getAllLove(int postId) {
 		List<Love> love_list = new ArrayList<Love>();
-		String sql = "select * from weixin_love where postId='"+postId+"'";
+		String sql = "select * from weixin_love where postId='" + postId + "'";
 		try {
 			conn = DBConnection.getConn();
-			sm=conn.createStatement();
-			rs=sm.executeQuery(sql);
-			while(rs.next()) {
+			sm = conn.createStatement();
+			rs = sm.executeQuery(sql);
+			while (rs.next()) {
 				Love love = new Love();
 				love.setAuthor(rs.getString("author"));
 				love.setHeadImgUrl(rs.getString("headImgUrl"));
 				love.setOpenId(rs.getString("openId"));
 				love_list.add(love);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			}
-		finally {
+		} finally {
 			closeDB();
 		}
 		return love_list;
 	}
-	
-	
+
 	/**
 	 * 取得帖子的所有评论
+	 * 
 	 * @param postId
 	 * @return
 	 */
-	public  List<Comment> getAllComment(int postId) {
-		List<Comment> comment_list = new ArrayList<Comment>(); 
-		String sql = "select * from weixin_comment where postId='"+postId+"' order by id";
+	public List<Comment> getAllComment(int postId) {
+		List<Comment> comment_list = new ArrayList<Comment>();
+		String sql = "select * from weixin_comment where postId='" + postId
+				+ "' order by id";
 		try {
 			conn = DBConnection.getConn();
-			sm=conn.createStatement();
-			rs=sm.executeQuery(sql);
-			while(rs.next()) {
+			sm = conn.createStatement();
+			rs = sm.executeQuery(sql);
+			while (rs.next()) {
 				Comment comment = new Comment();
 				comment.setAuthor(rs.getString("author"));
 				comment.setComment_content(rs.getString("comment"));
@@ -307,21 +345,18 @@ public class PostDaoImpl {
 				comment.setOpenId(rs.getString("openId"));
 				comment_list.add(comment);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			}
-		finally {
+		} finally {
 			closeDB();
 		}
 		return comment_list;
 	}
-	
-	
 
 	/**
 	 * 关闭数据库
 	 */
-	public  void closeDB() {
+	public void closeDB() {
 		if (rs != null) {
 			try {
 				rs.close();
@@ -350,12 +385,15 @@ public class PostDaoImpl {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
+
 	public static void main(String[] args) {
 		PostDaoImpl PDI = new PostDaoImpl();
-		System.out.println(PDI.getAllUpPost().size());
+		System.out.println("size="+PDI.getAllPostLimit(30).size());
+//		for (Post post : PDI.getAllPostLimit(5)) {
+//			System.out.println(post.getId());
+//		}
 	}
 
 }

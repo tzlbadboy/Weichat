@@ -1,16 +1,71 @@
 $(document).ready(function() {
 			
-			var n = 0;
+			var count = 1;
 			
 			var winHeight = $(window).height();
-			var docHeight = $(document).height();
-			 //alert(winHeight);
-		        var nScrollTop = 0;   //滚动到的当前位置
+			 // alert(winHeight);
+		        var nScrollTop = 0;   // 滚动到的当前位置
 		        $(document).scroll(function(){
+		          var docHeight = $(document).height();
 		          nScrollTop = $(this).scrollTop();
-		          if(nScrollTop==docHeight-winHeight)
-		            alert("滚动条到底部了");
+		          if(nScrollTop==docHeight-winHeight) {
+		        	  $.ajax({
+							type : 'POST',
+							url : "GetMorePostsServlet",
+							data : {
+								"count" : count
+							},
+							success : function(msg) {
+								setTimeout(function() {
+								count++;
+								var obj = JSON.parse(msg); // 由JSON字符串转换为JSON对象
+								addPost(obj.post);
+								},1000);
+							}
+		        	  });
+		          }
+		          
+
+		           
 		          });
+		        
+		        // 将新获取的帖子添加到页面中
+		        function addPost(post_list) {
+		        	var length = post_list.length;
+		        	if(length===0) {
+		        		$("div#refresh").text("帖子已全部加载");
+		        	}
+		        	var content = "";
+		        	for(var i=0;i<length;i++) {
+		        		var postHtml = '<div class="bgfff form ov" id='+post_list[i].id+'>';
+		        		postHtml = postHtml+'<div class="fb"><font size="3.5px">'+post_list[i].title+'</font></div>';
+		        		postHtml = postHtml+'<hr style="border: 0; height: 0.1px;" /><div>';
+		        		if(post_list[i].pictureUrl.length!=0) {
+		        			postHtml = postHtml+'<span class="glyphicon glyphicon-picture" aria-hidden="true"></span>';
+		        		}
+		        		postHtml = postHtml+'<font size="3px">'+post_list[i].content+'</font></div><hr/>';
+		        		
+		        		postHtml = postHtml+'<div><table width="100%"><tr>';
+		        		
+		        		postHtml = postHtml+'<td width="60%"><font size="2px" color="#337ab7">'+post_list[i].author+'</font>&nbsp;&nbsp;<fontsize="1.5px" color="#C8C6C6">'+post_list[i].postTime.substr(5)+'</font></td>'
+		        		
+		        		postHtml = postHtml+'<td style="text-align: right;"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;';
+		        		
+		        		postHtml = postHtml+'<font size="3px" color="#C8C6C6">'+post_list[i].love+'</font>&nbsp;&nbsp;';
+		        		
+		        		postHtml = postHtml+'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;';
+		        		
+		        		postHtml = postHtml+'<font size="3px" color="#C8C6C6">'+post_list[i].reply+'</font>&nbsp;&nbsp;';
+		        		postHtml = postHtml+'</td></tr></table></div></div>';
+		        		content = content+postHtml;
+		        	}
+		        	$("div#contain").append(content);
+		        	 $("div.bgfff").click(function() {
+			  				var postId = $(this).attr("id");
+			  				location.href = "ShowPostServlet?id=" + postId;
+			  		});
+		        	
+		        }
 			
 
 			$("div.bgfff").click(function() {
@@ -23,14 +78,14 @@ $(document).ready(function() {
 			    var picture = null;
 			    $('input#upload').change(function(){
 			    	 if (this.files && this.files[0]) {
-			             //reader.readAsDataURL(this.files[0]);
+			             // reader.readAsDataURL(this.files[0]);
 			    	// }
 			        
 			    	// 也可以传入图片路径：lrz('../demo.jpg', ...
 			    	      lrz(this.files[0], {
 			    	    	  
-			    	    	  //压缩率
-			    	    	  //quality: 0.2,
+			    	    	  // 压缩率
+			    	    	  // quality: 0.2,
 			    	    	  width : 500,
 			    	    	  
 			    	        // 压缩开始
@@ -56,9 +111,10 @@ $(document).ready(function() {
 			    	    });  
 			         }
 			    });
-			/*     reader.onload = function(e){
-			        $("img#pic").attr('src', e.target.result).addClass("img-thumbnail");
-			    };  */
+			/*
+			 * reader.onload = function(e){ $("img#pic").attr('src',
+			 * e.target.result).addClass("img-thumbnail"); };
+			 */
 			    	 
 			    	
 			    
