@@ -8,7 +8,7 @@ $(document).ready(function() {
 		        $(document).scroll(function(){
 		          var docHeight = $(document).height();
 		          nScrollTop = $(this).scrollTop();
-		          if(nScrollTop==docHeight-winHeight) {
+		          if(nScrollTop>=docHeight-winHeight) {
 		        	  $.ajax({
 							type : 'POST',
 							url : "GetMorePostsServlet",
