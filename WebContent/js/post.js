@@ -16,11 +16,9 @@ $(document).ready(function() {
 								"count" : count
 							},
 							success : function(msg) {
-								setTimeout(function() {
 								count++;
 								var obj = JSON.parse(msg); // 由JSON字符串转换为JSON对象
 								addPost(obj.post);
-								},500);
 							}
 		        	  });
 		          }
