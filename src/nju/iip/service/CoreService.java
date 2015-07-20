@@ -32,7 +32,7 @@ public class CoreService {
     public static String processRequest(HttpServletRequest request) {  
         String respMessage = null;  
         try {  
-            // 默认返回的文本消息内容  
+            // 默认返回的文本消息内容 改了一点点 
             String respContent = "";  
   
             // xml请求解析  
